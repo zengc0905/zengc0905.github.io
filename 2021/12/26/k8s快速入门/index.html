@@ -17,14 +17,14 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k8s快速入门">
 <meta property="og:url" content="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
-<meta property="og:site_name" content="zengc的博客">
+<meta property="og:site_name" content="落叶且随风の博客">
 <meta property="og:description" content="kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/container_evolution.svg">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>k8s快速入门 | zengc的博客</title>
+  <title>k8s快速入门 | 落叶且随风の博客</title>
   
 
 
@@ -132,10 +132,10 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">zengc的博客</h1>
+      <h1 class="site-title">落叶且随风の博客</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">记录学习与生活</p>
+      <p class="site-subtitle" itemprop="description">记录日常的学习与生活</p>
   </div>
 
   <div class="site-nav-right">
@@ -211,7 +211,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zengc的博客">
+      <meta itemprop="name" content="落叶且随风の博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -828,6 +828,55 @@
     
     
     
+        <div class="reward-container">
+  <div>感谢您的支持，这将鼓励我继续努力创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="曾超 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="曾超 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>曾超
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="k8s快速入门">http://example.com/2021/12/26/k8s快速入门/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -902,7 +951,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81K8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">1、K8s快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1）简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">2）架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%95%B4%E4%BD%93%E4%B8%BB%E4%BB%8E%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）整体主从方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89master%E8%8A%82%E7%82%B9%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）master节点架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Node%E8%8A%82%E7%82%B9%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.3.</span> <span class="nav-text">（3）Node节点架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.</span> <span class="nav-text">3）概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C"><span class="nav-number">1.4.</span> <span class="nav-text">4）快速体验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AE%89%E8%A3%85minikube"><span class="nav-number">1.4.1.</span> <span class="nav-text">（1）安装minikube</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BD%93%E9%AA%8Cnginx%E9%83%A8%E7%BD%B2%E5%8D%87%E7%BA%A7"><span class="nav-number">1.4.2.</span> <span class="nav-text">（2）体验nginx部署升级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81K8s%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">2、K8s集群安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89kubeadm"><span class="nav-number">2.1.</span> <span class="nav-text">1）kubeadm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E5%89%8D%E7%BD%AE%E8%A6%81%E6%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">2）前置要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.3.</span> <span class="nav-text">3）部署步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.4.</span> <span class="nav-text">4）环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.4.1.</span> <span class="nav-text">（1）准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%90%AF%E5%8A%A8%E4%B8%89%E4%B8%AA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">2.4.2.</span> <span class="nav-text">（2）启动三个虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%AE%BE%E7%BD%AELinux%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">2.4.3.</span> <span class="nav-text">（3）设置Linux环境（三个节点都执行）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%89%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85docker%E3%80%81kubeadm%E3%80%81kubelet%E3%80%81kubectl"><span class="nav-number">2.5.</span> <span class="nav-text">5）所有节点安装docker、kubeadm、kubelet、kubectl</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AE%89%E8%A3%85Docker"><span class="nav-number">2.5.1.</span> <span class="nav-text">（1）安装Docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%B8%8EYum%E6%BA%90"><span class="nav-number">2.5.2.</span> <span class="nav-text">（2）添加阿里与Yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%AE%89%E8%A3%85kubeadm%EF%BC%8Ckubelet%E5%92%8Ckubectl"><span class="nav-number">2.5.3.</span> <span class="nav-text">（3）安装kubeadm，kubelet和kubectl</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%89%E9%83%A8%E7%BD%B2k8s-master"><span class="nav-number">2.6.</span> <span class="nav-text">6）部署k8s-master</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89master%E8%8A%82%E7%82%B9%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.6.1.</span> <span class="nav-text">（1）master节点初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B5%8B%E8%AF%95Kubectl%EF%BC%88%E4%B8%BB%E8%8A%82%E7%82%B9%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">2.6.2.</span> <span class="nav-text">（2）测试Kubectl（主节点执行）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%EF%BC%89%E5%AE%89%E8%A3%85POD%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6%EF%BC%88CNI%EF%BC%89"><span class="nav-number">2.7.</span> <span class="nav-text">7）安装POD网络插件（CNI）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%EF%BC%89%E5%8A%A0%E5%85%A5kubenetes%E7%9A%84Node%E8%8A%82%E7%82%B9"><span class="nav-number">2.8.</span> <span class="nav-text">8）加入kubenetes的Node节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%EF%BC%89%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9Ckubernetes%E9%9B%86%E7%BE%A4"><span class="nav-number">2.9.</span> <span class="nav-text">9）入门操作kubernetes集群</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81K8s%E7%BB%86%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">3、K8s细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81kubectl%E6%96%87%E6%A1%A3"><span class="nav-number">3.1.</span> <span class="nav-text">1、kubectl文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">2、资源类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="nav-number">3.3.</span> <span class="nav-text">3、格式化输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">3.3.1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E5%8F%82%E8%80%83"><span class="nav-number">3.4.</span> <span class="nav-text">命令参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#service%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">3.5.</span> <span class="nav-text">service的意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ingress"><span class="nav-number">3.6.</span> <span class="nav-text">Ingress</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85kubernetes%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2%E2%80%94%E2%80%94DashBoard"><span class="nav-number">4.</span> <span class="nav-text">安装kubernetes可视化界面——DashBoard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubesphere"><span class="nav-number">5.</span> <span class="nav-text">kubesphere</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E6%B4%81"><span class="nav-number">5.1.</span> <span class="nav-text">1、简洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90%E6%8F%90%E4%BA%A4"><span class="nav-number">5.2.</span> <span class="nav-text">2、安装前提提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85helm%EF%BC%88master%E8%8A%82%E7%82%B9%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">5.2.1.</span> <span class="nav-text">1、安装helm（master节点执行）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85Tilller%EF%BC%88Master%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">5.2.2.</span> <span class="nav-text">2、安装Tilller（Master执行）</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81K8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-text">1、K8s快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89%E7%AE%80%E4%BB%8B"><span class="nav-text">1）简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E6%9E%B6%E6%9E%84"><span class="nav-text">2）架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%95%B4%E4%BD%93%E4%B8%BB%E4%BB%8E%E6%96%B9%E5%BC%8F"><span class="nav-text">（1）整体主从方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89master%E8%8A%82%E7%82%B9%E6%9E%B6%E6%9E%84"><span class="nav-text">（2）master节点架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Node%E8%8A%82%E7%82%B9%E6%9E%B6%E6%9E%84"><span class="nav-text">（3）Node节点架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E6%A6%82%E5%BF%B5"><span class="nav-text">3）概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C"><span class="nav-text">4）快速体验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AE%89%E8%A3%85minikube"><span class="nav-text">（1）安装minikube</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BD%93%E9%AA%8Cnginx%E9%83%A8%E7%BD%B2%E5%8D%87%E7%BA%A7"><span class="nav-text">（2）体验nginx部署升级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81K8s%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85"><span class="nav-text">2、K8s集群安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89kubeadm"><span class="nav-text">1）kubeadm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E5%89%8D%E7%BD%AE%E8%A6%81%E6%B1%82"><span class="nav-text">2）前置要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4"><span class="nav-text">3）部署步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-text">4）环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">（1）准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%90%AF%E5%8A%A8%E4%B8%89%E4%B8%AA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">（2）启动三个虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%AE%BE%E7%BD%AELinux%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-text">（3）设置Linux环境（三个节点都执行）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%89%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85docker%E3%80%81kubeadm%E3%80%81kubelet%E3%80%81kubectl"><span class="nav-text">5）所有节点安装docker、kubeadm、kubelet、kubectl</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AE%89%E8%A3%85Docker"><span class="nav-text">（1）安装Docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%B8%8EYum%E6%BA%90"><span class="nav-text">（2）添加阿里与Yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%AE%89%E8%A3%85kubeadm%EF%BC%8Ckubelet%E5%92%8Ckubectl"><span class="nav-text">（3）安装kubeadm，kubelet和kubectl</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%89%E9%83%A8%E7%BD%B2k8s-master"><span class="nav-text">6）部署k8s-master</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89master%E8%8A%82%E7%82%B9%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">（1）master节点初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B5%8B%E8%AF%95Kubectl%EF%BC%88%E4%B8%BB%E8%8A%82%E7%82%B9%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-text">（2）测试Kubectl（主节点执行）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%EF%BC%89%E5%AE%89%E8%A3%85POD%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6%EF%BC%88CNI%EF%BC%89"><span class="nav-text">7）安装POD网络插件（CNI）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%EF%BC%89%E5%8A%A0%E5%85%A5kubenetes%E7%9A%84Node%E8%8A%82%E7%82%B9"><span class="nav-text">8）加入kubenetes的Node节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%EF%BC%89%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9Ckubernetes%E9%9B%86%E7%BE%A4"><span class="nav-text">9）入门操作kubernetes集群</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81K8s%E7%BB%86%E8%8A%82"><span class="nav-text">3、K8s细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81kubectl%E6%96%87%E6%A1%A3"><span class="nav-text">1、kubectl文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-text">2、资源类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="nav-text">3、格式化输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E5%8F%82%E8%80%83"><span class="nav-text">命令参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#service%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-text">service的意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ingress"><span class="nav-text">Ingress</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85kubernetes%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2%E2%80%94%E2%80%94DashBoard"><span class="nav-text">安装kubernetes可视化界面——DashBoard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubesphere"><span class="nav-text">kubesphere</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E6%B4%81"><span class="nav-text">1、简洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90%E6%8F%90%E4%BA%A4"><span class="nav-text">2、安装前提提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85helm%EF%BC%88master%E8%8A%82%E7%82%B9%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-text">1、安装helm（master节点执行）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85Tilller%EF%BC%88Master%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-text">2、安装Tilller（Master执行）</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -936,6 +985,17 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zengc0905" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zengc0905" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42403109" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42403109" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
@@ -964,8 +1024,6 @@
   </span>
   <span class="author" itemprop="copyrightHolder">曾超</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
 
         
 
@@ -981,8 +1039,6 @@
   </div>
 
   
-  
-  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -998,6 +1054,10 @@
 <script src="/js/next-boot.js"></script>
 
 
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
 
 
   
@@ -1027,7 +1087,7 @@
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <!--<script type="text/javascript" src="/js/src/clicklove.js"></script>-->
