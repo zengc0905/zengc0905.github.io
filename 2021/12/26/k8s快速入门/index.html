@@ -86,6 +86,15 @@
 
   <title>k8s快速入门 | 曾超の博客</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLK3B9Z0FG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PLK3B9Z0FG');
+      }
+    </script>
 
 
 
@@ -119,6 +128,12 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
+
+  <link rel="stylesheet" href="/dist/APlayer.min.css">
+  <div id="aplayer"></div>
+  <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+  <script type="text/javascript" src="/dist/music.js"></script>
+
   <div class="container use-motion">
     <div class="headband"></div>
 
@@ -234,7 +249,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/zc.png">
+      <meta itemprop="image" content="/images/zc1.jpg">
       <meta itemprop="name" content="曾超">
       <meta itemprop="description" content="天天经过小巷，乱花漫了高墙，贪看蜂狂蝶舞，忘了世态炎凉">
     </span>
@@ -286,7 +301,21 @@
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
-            </span><br>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -313,7 +342,7 @@
 
       
         <h2 id="1、K8s快速入门"><a href="#1、K8s快速入门" class="headerlink" title="1、K8s快速入门"></a>1、K8s快速入门</h2><h3 id="1）简介"><a href="#1）简介" class="headerlink" title="1）简介"></a>1）简介</h3><p>kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。</p>
-<p>中文官网：<a target="_blank" rel="noopener" href="https://kubernetes.io/Zh/">https://kubernetes.io/Zh/</a><br>中文社区：<a target="_blank" rel="noopener" href="https://www.kubernetes.org.cn/">https://www.kubernetes.org.cn/</a><br>官方文档：<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/home/">https://kubernetes.io/zh/docs/home/</a><br>社区文档：<a target="_blank" rel="noopener" href="https://docs.kubernetes.org.cn/">https://docs.kubernetes.org.cn/</a></p>
+<p>中文官网：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/Zh/">https://kubernetes.io/Zh/</a><br>中文社区：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.kubernetes.org.cn/">https://www.kubernetes.org.cn/</a><br>官方文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/zh/docs/home/">https://kubernetes.io/zh/docs/home/</a><br>社区文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.kubernetes.org.cn/">https://docs.kubernetes.org.cn/</a></p>
 <p>部署方式的进化：</p>
 <p> <img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/container_evolution.svg" alt="部署演进"> </p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200503105948619.png" alt="image-20200503105948619"></p>
@@ -332,11 +361,11 @@
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200503113055314.png" alt="image-20200503113055314"></p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200503113619233.png" alt="image-20200503113619233"></p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200503113701902.png" alt="image-20200503113701902"></p>
-<h3 id="4）快速体验"><a href="#4）快速体验" class="headerlink" title="4）快速体验"></a>4）快速体验</h3><h4 id="（1）安装minikube"><a href="#（1）安装minikube" class="headerlink" title="（1）安装minikube"></a>（1）安装minikube</h4><p><a target="_blank" rel="noopener" href="https://github.com/kubernetes/minikube/releases">https://github.com/kubernetes/minikube/releases</a><br>下载minikuber-windows-amd64.exe 改名为minikube.exe<br>打开virtualBox，打开cmd<br>运行<br>minikube start –vm-driver=virtualbox –registry-mirror=<a target="_blank" rel="noopener" href="https://registry.docker-cn.com/">https://registry.docker-cn.com</a><br>等待20分钟即可。</p>
+<h3 id="4）快速体验"><a href="#4）快速体验" class="headerlink" title="4）快速体验"></a>4）快速体验</h3><h4 id="（1）安装minikube"><a href="#（1）安装minikube" class="headerlink" title="（1）安装minikube"></a>（1）安装minikube</h4><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/kubernetes/minikube/releases">https://github.com/kubernetes/minikube/releases</a><br>下载minikuber-windows-amd64.exe 改名为minikube.exe<br>打开virtualBox，打开cmd<br>运行<br>minikube start –vm-driver=virtualbox –registry-mirror=<a target="_blank" rel="noopener external nofollow noreferrer" href="https://registry.docker-cn.com/">https://registry.docker-cn.com</a><br>等待20分钟即可。</p>
 <h4 id="（2）体验nginx部署升级"><a href="#（2）体验nginx部署升级" class="headerlink" title="（2）体验nginx部署升级"></a>（2）体验nginx部署升级</h4><ol>
-<li><p>提交一个nginx deployment<br>kubectl apply -f <a target="_blank" rel="noopener" href="https://k8s.io/examples/application/deployment.yaml">https://k8s.io/examples/application/deployment.yaml</a></p>
+<li><p>提交一个nginx deployment<br>kubectl apply -f <a target="_blank" rel="noopener external nofollow noreferrer" href="https://k8s.io/examples/application/deployment.yaml">https://k8s.io/examples/application/deployment.yaml</a></p>
 </li>
-<li><p>升级 nginx deployment<br>kubectl apply -f <a target="_blank" rel="noopener" href="https://k8s.io/examples/application/deployment-update.yaml">https://k8s.io/examples/application/deployment-update.yaml</a></p>
+<li><p>升级 nginx deployment<br>kubectl apply -f <a target="_blank" rel="noopener external nofollow noreferrer" href="https://k8s.io/examples/application/deployment-update.yaml">https://k8s.io/examples/application/deployment-update.yaml</a></p>
 </li>
 <li><p>扩容 nginx deployment</p>
 </li>
@@ -368,7 +397,7 @@
 </ul>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200503180202640.png" alt="image-20200503180202640"></p>
 <h4 id="（2）启动三个虚拟机"><a href="#（2）启动三个虚拟机" class="headerlink" title="（2）启动三个虚拟机"></a>（2）启动三个虚拟机</h4><ul>
-<li>使用我们提供的vagrant文件，复制到非中文无空格目录下，运行vagrant up启动三个虚拟机。其实vagrant完全可以一键部署全部K8s集群<br><a target="_blank" rel="noopener" href="https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster">https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster</a><br><a target="_blank" rel="noopener" href="http://github.com/davidkbainbridge/k8s-playground">http://github.com/davidkbainbridge/k8s-playground</a></li>
+<li>使用我们提供的vagrant文件，复制到非中文无空格目录下，运行vagrant up启动三个虚拟机。其实vagrant完全可以一键部署全部K8s集群<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster">https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="http://github.com/davidkbainbridge/k8s-playground">http://github.com/davidkbainbridge/k8s-playground</a></li>
 </ul>
 <p>下面是vagrantfile，使用它来创建三个虚拟机，分别为k8s-node1，k8s-node2和k8s-node3.</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Vagrant.configure(&quot;2&quot;)</span> <span class="string">do</span> <span class="string">|config|</span></span><br><span class="line">   <span class="string">(1..3).each</span> <span class="string">do</span> <span class="string">|i|</span></span><br><span class="line">        <span class="string">config.vm.define</span> <span class="string">&quot;k8s-node#&#123;i&#125;&quot;</span> <span class="string">do</span> <span class="string">|node|</span></span><br><span class="line">            <span class="comment"># 设置虚拟机的Box</span></span><br><span class="line">            <span class="string">node.vm.box</span> <span class="string">=</span> <span class="string">&quot;centos/7&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 设置虚拟机的主机名</span></span><br><span class="line">            <span class="string">node.vm.hostname=&quot;k8s-node#&#123;i&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 设置虚拟机的IP</span></span><br><span class="line">            <span class="string">node.vm.network</span> <span class="string">&quot;private_network&quot;</span><span class="string">,</span> <span class="attr">ip:</span> <span class="string">&quot;192.168.56.#&#123;99+i&#125;&quot;</span><span class="string">,</span> <span class="attr">netmask:</span> <span class="string">&quot;255.255.255.0&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 设置主机与虚拟机的共享目录</span></span><br><span class="line">            <span class="comment"># node.vm.synced_folder &quot;~/Documents/vagrant/share&quot;, &quot;/home/vagrant/share&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># VirtaulBox相关配置</span></span><br><span class="line">            <span class="string">node.vm.provider</span> <span class="string">&quot;virtualbox&quot;</span> <span class="string">do</span> <span class="string">|v|</span></span><br><span class="line">                <span class="comment"># 设置虚拟机的名称</span></span><br><span class="line">                <span class="string">v.name</span> <span class="string">=</span> <span class="string">&quot;k8s-node#&#123;i&#125;&quot;</span></span><br><span class="line">                <span class="comment"># 设置虚拟机的内存大小</span></span><br><span class="line">                <span class="string">v.memory</span> <span class="string">=</span> <span class="number">4096</span></span><br><span class="line">                <span class="comment"># 设置虚拟机的CPU个数</span></span><br><span class="line">                <span class="string">v.cpus</span> <span class="string">=</span> <span class="number">4</span></span><br><span class="line">            <span class="string">end</span></span><br><span class="line">        <span class="string">end</span></span><br><span class="line">   <span class="string">end</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure>
@@ -480,7 +509,7 @@
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200503192940651.png" alt="image-20200503192940651"></p>
 <h4 id="（2）添加阿里与Yum源"><a href="#（2）添加阿里与Yum源" class="headerlink" title="（2）添加阿里与Yum源"></a>（2）添加阿里与Yum源</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 
-<p>更多详情见： <a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/kubernetes">https://developer.aliyun.com/mirror/kubernetes</a> </p>
+<p>更多详情见： <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.aliyun.com/mirror/kubernetes">https://developer.aliyun.com/mirror/kubernetes</a> </p>
 <h4 id="（3）安装kubeadm，kubelet和kubectl"><a href="#（3）安装kubeadm，kubelet和kubectl" class="headerlink" title="（3）安装kubeadm，kubelet和kubectl"></a>（3）安装kubeadm，kubelet和kubectl</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list<span class="string">|grep kube</span></span><br></pre></td></tr></table></figure>
 
 <p>安装</p>
@@ -525,7 +554,7 @@
 <p>运行完成提前复制：加入集群的令牌。</p>
 <h4 id="（2）测试Kubectl（主节点执行）"><a href="#（2）测试Kubectl（主节点执行）" class="headerlink" title="（2）测试Kubectl（主节点执行）"></a>（2）测试Kubectl（主节点执行）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br></pre></td></tr></table></figure>
 
-<p>详细部署文档：<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/cluster-administration/addons/">https://kubernetes.io/docs/concepts/cluster-administration/addons/</a></p>
+<p>详细部署文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/concepts/cluster-administration/addons/">https://kubernetes.io/docs/concepts/cluster-administration/addons/</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get nodes <span class="comment">#获取所有节点</span></span></span><br></pre></td></tr></table></figure>
 
 <p>目前Master状态为notready。等待网络加入完成即可。</p>
@@ -623,7 +652,7 @@
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-node1 ~]# kubectl get svc -o wide</span><br><span class="line">NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE     SELECTOR</span><br><span class="line">kubernetes   ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP        12h     &lt;none&gt;</span><br><span class="line">tomcat6      NodePort    10.96.24.191   &lt;none&gt;        80:30526/TCP   3m30s   app=tomcat6</span><br><span class="line">[root@k8s-node1 ~]# </span><br></pre></td></tr></table></figure>
 
-<p> <a target="_blank" rel="noopener" href="http://192.168.56.100:30526/">http://192.168.56.100:30526/</a> </p>
+<p> <a target="_blank" rel="noopener external nofollow noreferrer" href="http://192.168.56.100:30526/">http://192.168.56.100:30526/</a> </p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%5Cimage-20200504105723874.png" alt="image-20200504105723874"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-node1 ~]# kubectl get all</span><br><span class="line">NAME                           READY   STATUS    RESTARTS   AGE</span><br><span class="line">pod/tomcat6-7b84fb5fdc-qt5jm   1/1     Running   0          13m</span><br><span class="line"></span><br><span class="line">NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE</span><br><span class="line">service/kubernetes   ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP        12h</span><br><span class="line">service/tomcat6      NodePort    10.96.24.191   &lt;none&gt;        80:30526/TCP   9m50s</span><br><span class="line"></span><br><span class="line">NAME                      READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">deployment.apps/tomcat6   1/1     1            1           11h</span><br><span class="line"></span><br><span class="line">NAME                                 DESIRED   CURRENT   READY   AGE</span><br><span class="line">replicaset.apps/tomcat6-7b84fb5fdc   1         1         1       11h</span><br><span class="line">[root@k8s-node1 ~]#</span><br></pre></td></tr></table></figure>
 
@@ -642,9 +671,9 @@
 
 
 <p>扩容了多份，所有无论访问哪个node的指定端口，都可以访问到tomcat6</p>
-<p> <a target="_blank" rel="noopener" href="http://192.168.56.101:30526/">http://192.168.56.101:30526/</a> </p>
+<p> <a target="_blank" rel="noopener external nofollow noreferrer" href="http://192.168.56.101:30526/">http://192.168.56.101:30526/</a> </p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200504111008668.png" alt="image-20200504111008668"></p>
-<p> <a target="_blank" rel="noopener" href="http://192.168.56.102:30526/">http://192.168.56.102:30526/</a> </p>
+<p> <a target="_blank" rel="noopener external nofollow noreferrer" href="http://192.168.56.102:30526/">http://192.168.56.102:30526/</a> </p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200504111028496.png" alt="image-20200504111028496"></p>
 <p>缩容：kubectl scale –replicas=2 deployment tomcat6</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@k8s</span><span class="operator">-</span>node1 <span class="operator">~</span>]#  kubectl scale <span class="comment">--replicas=2 deployment tomcat6</span></span><br><span class="line">deployment.apps<span class="operator">/</span>tomcat6 scaled</span><br><span class="line">[root<span class="variable">@k8s</span><span class="operator">-</span>node1 <span class="operator">~</span>]# kubectl <span class="keyword">get</span> pods <span class="operator">-</span>o wide                       </span><br><span class="line">NAME                       READY   STATUS        RESTARTS   AGE     IP           NODE        NOMINATED NODE   READINESS GATES</span><br><span class="line">tomcat6<span class="number">-7</span>b84fb5fdc<span class="operator">-</span>hdgmc   <span class="number">0</span><span class="operator">/</span><span class="number">1</span>     Terminating   <span class="number">0</span>          <span class="number">4</span>m47s   <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span>       k8s<span class="operator">-</span>node2   <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span>           <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span></span><br><span class="line">tomcat6<span class="number">-7</span>b84fb5fdc<span class="operator">-</span>qt5jm   <span class="number">1</span><span class="operator">/</span><span class="number">1</span>     <span class="keyword">Running</span>       <span class="number">0</span>          <span class="number">22</span>m     <span class="number">10.244</span><span class="number">.1</span><span class="number">.2</span>   k8s<span class="operator">-</span>node3   <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span>           <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span></span><br><span class="line">tomcat6<span class="number">-7</span>b84fb5fdc<span class="operator">-</span>vlrh6   <span class="number">1</span><span class="operator">/</span><span class="number">1</span>     <span class="keyword">Running</span>       <span class="number">0</span>          <span class="number">4</span>m47s   <span class="number">10.244</span><span class="number">.2</span><span class="number">.4</span>   k8s<span class="operator">-</span>node2   <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span>           <span class="operator">&lt;</span><span class="keyword">none</span><span class="operator">&gt;</span></span><br><span class="line">[root<span class="variable">@k8s</span><span class="operator">-</span>node1 <span class="operator">~</span>]# </span><br></pre></td></tr></table></figure>
@@ -660,9 +689,9 @@
 
 
 <p>kubectl delete deploye/nginx<br>kubectl delete service/nginx-service</p>
-<h2 id="3、K8s细节"><a href="#3、K8s细节" class="headerlink" title="3、K8s细节"></a>3、K8s细节</h2><h3 id="1、kubectl文档"><a href="#1、kubectl文档" class="headerlink" title="1、kubectl文档"></a>1、kubectl文档</h3><p>​    <a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/">https://kubernetes.io/zh/docs/reference/kubectl/overview/</a></p>
-<h3 id="2、资源类型"><a href="#2、资源类型" class="headerlink" title="2、资源类型"></a>2、资源类型</h3><p>   <a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/#%e8%b5%84%e6%ba%90%e7%b1%bb%e5%9e%8b">https://kubernetes.io/zh/docs/reference/kubectl/overview/#%e8%b5%84%e6%ba%90%e7%b1%bb%e5%9e%8b</a></p>
-<h3 id="3、格式化输出"><a href="#3、格式化输出" class="headerlink" title="3、格式化输出"></a>3、格式化输出</h3><p> <a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/">https://kubernetes.io/zh/docs/reference/kubectl/overview/</a> </p>
+<h2 id="3、K8s细节"><a href="#3、K8s细节" class="headerlink" title="3、K8s细节"></a>3、K8s细节</h2><h3 id="1、kubectl文档"><a href="#1、kubectl文档" class="headerlink" title="1、kubectl文档"></a>1、kubectl文档</h3><p>​    <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/">https://kubernetes.io/zh/docs/reference/kubectl/overview/</a></p>
+<h3 id="2、资源类型"><a href="#2、资源类型" class="headerlink" title="2、资源类型"></a>2、资源类型</h3><p>   <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/#%e8%b5%84%e6%ba%90%e7%b1%bb%e5%9e%8b">https://kubernetes.io/zh/docs/reference/kubectl/overview/#%e8%b5%84%e6%ba%90%e7%b1%bb%e5%9e%8b</a></p>
+<h3 id="3、格式化输出"><a href="#3、格式化输出" class="headerlink" title="3、格式化输出"></a>3、格式化输出</h3><p> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/">https://kubernetes.io/zh/docs/reference/kubectl/overview/</a> </p>
 <blockquote>
 <p>所有 <code>kubectl</code> 命令的默认输出格式都是人类可读的纯文本格式。要以特定格式向终端窗口输出详细信息，可以将 <code>-o</code> 或 <code>--output</code> 参数添加到受支持的 <code>kubectl</code> 命令中。</p>
 <h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">kubectl [<span class="built_in">command</span>] [TYPE] [NAME] -o=&lt;output_format&gt;</span></span><br></pre></td></tr></table></figure>
@@ -677,11 +706,11 @@
 </thead>
 <tbody><tr>
 <td align="left"><code>-o custom-columns=</code></td>
-<td align="left">使用逗号分隔的<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/#custom-columns">自定义列</a>列表打印表。</td>
+<td align="left">使用逗号分隔的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/#custom-columns">自定义列</a>列表打印表。</td>
 </tr>
 <tr>
 <td align="left"><code>-o custom-columns-file=</code></td>
-<td align="left">使用 `` 文件中的<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/#custom-columns">自定义列</a>模板打印表。</td>
+<td align="left">使用 `` 文件中的<a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/zh/docs/reference/kubectl/overview/#custom-columns">自定义列</a>模板打印表。</td>
 </tr>
 <tr>
 <td align="left"><code>-o json</code></td>
@@ -689,11 +718,11 @@
 </tr>
 <tr>
 <td align="left">`-o jsonpath=</td>
-<td align="left">打印 <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/kubectl/jsonpath/">jsonpath</a> 表达式定义的字段</td>
+<td align="left">打印 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/reference/kubectl/jsonpath/">jsonpath</a> 表达式定义的字段</td>
 </tr>
 <tr>
 <td align="left"><code>-o jsonpath-file=</code></td>
-<td align="left">打印 `` 文件中 <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/kubectl/jsonpath/">jsonpath</a> 表达式定义的字段。</td>
+<td align="left">打印 `` 文件中 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/reference/kubectl/jsonpath/">jsonpath</a> 表达式定义的字段。</td>
 </tr>
 <tr>
 <td align="left"><code>-o name</code></td>
@@ -711,7 +740,7 @@
 <h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><p>在此示例中，以下命令将单个 pod 的详细信息输出为 YAML 格式的对象：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">kubectl get pod web-pod-13je7 -o yaml</span></span><br></pre></td></tr></table></figure>
 
-<p>请记住：有关每个命令支持哪种输出格式的详细信息，请参阅 <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/user-guide/kubectl/">kubectl</a> 参考文档。</p>
+<p>请记住：有关每个命令支持哪种输出格式的详细信息，请参阅 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/user-guide/kubectl/">kubectl</a> 参考文档。</p>
 </blockquote>
 <p>–dry-run：</p>
 <blockquote>
@@ -804,7 +833,7 @@
 
 
 
-<p>测试: <a target="_blank" rel="noopener" href="http://tomcat6.kubenetes.com/">http://tomcat6.kubenetes.com/</a> </p>
+<p>测试: <a target="_blank" rel="noopener external nofollow noreferrer" href="http://tomcat6.kubenetes.com/">http://tomcat6.kubenetes.com/</a> </p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200504131325267.png" alt="image-20200504131325267"></p>
 <p>并且集群中即便有一个节点不可用，也不影响整体的运行。</p>
 <h2 id="安装kubernetes可视化界面——DashBoard"><a href="#安装kubernetes可视化界面——DashBoard" class="headerlink" title="安装kubernetes可视化界面——DashBoard"></a>安装kubernetes可视化界面——DashBoard</h2><p>1、部署DashBoard</p>
@@ -815,7 +844,7 @@
 <p>默认DashBoard只能集群内部访问，修改Service为NodePort类型，暴露到外部</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">k8s-app:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kubernetes-dashboard</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">NodePort</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">      <span class="attr">targetPort:</span> <span class="number">8443</span></span><br><span class="line">      <span class="attr">nodePort:</span> <span class="number">3001</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">k8s-app:</span> <span class="string">kubernetes-dashboard</span></span><br></pre></td></tr></table></figure>
 
-<p>访问地址：<a target="_blank" rel="noopener" href="http://nodeip:30001/">http://NodeIP:30001</a></p>
+<p>访问地址：<a target="_blank" rel="noopener external nofollow noreferrer" href="http://nodeip:30001/">http://NodeIP:30001</a></p>
 <p>3、创建授权账号</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="keyword">create</span> serviceaccount dashboar-<span class="keyword">admin</span> -n kube-sysem</span><br></pre></td></tr></table></figure>
 
@@ -825,8 +854,8 @@
 
 <p>使用输出的token登录dashboard</p>
 <p><img src="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/image-20200504153630775.png" alt="image-20200504153630775"></p>
-<h2 id="kubesphere"><a href="#kubesphere" class="headerlink" title="kubesphere"></a>kubesphere</h2><p>默认的dashboard没啥用，我们用kubesphere可以打通全部的devops链路，kubesphere集成了很多套件，集群要求比较高<br><a target="_blank" rel="noopener" href="https://kubesphere.io/">https://kubesphere.io</a></p>
-<p>kuboard也很不错，集群要求不高<br><a target="_blank" rel="noopener" href="https://kuboard.cn/support/">https://kuboard.cn/support/</a></p>
+<h2 id="kubesphere"><a href="#kubesphere" class="headerlink" title="kubesphere"></a>kubesphere</h2><p>默认的dashboard没啥用，我们用kubesphere可以打通全部的devops链路，kubesphere集成了很多套件，集群要求比较高<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubesphere.io/">https://kubesphere.io</a></p>
+<p>kuboard也很不错，集群要求不高<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://kuboard.cn/support/">https://kuboard.cn/support/</a></p>
 <h3 id="1、简洁"><a href="#1、简洁" class="headerlink" title="1、简洁"></a>1、简洁</h3><p>kubesphere是一款面向云原声设计的开源项目，在目前主流容器调度平台kubernets智商构建的分布式多用户容器管理平台，提供简单易用的操作界面以及向导式操作方式，在降低用户使用容器调度平台学习成本的同时，极大降低开发、测试、运维的日常工作的复杂度。</p>
 <h3 id="2、安装前提提交"><a href="#2、安装前提提交" class="headerlink" title="2、安装前提提交"></a>2、安装前提提交</h3><h4 id="1、安装helm（master节点执行）"><a href="#1、安装helm（master节点执行）" class="headerlink" title="1、安装helm（master节点执行）"></a>1、安装helm（master节点执行）</h4><p>helm是kubernetes的包管理器。包管理器类似于在Ubuntu中使用的apt，centos中的yum或者python中的pip一样，能够快速查找，下载和安装软件包。Helm有客户端组件helm和服务端组件Tiller组成，能够将一组K8S资源打包统一管理，是查找、共享和使用为Kubernetes构建的软件的最佳方式。</p>
 <p>1）安装</p>
@@ -875,7 +904,7 @@
 <p>若集群可用 CPU &gt; 1 Core 且可用内存 &gt; 2 G，可以使用以下命令最小化安装 KubeSphere：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">https://raw.githubusercontent.com/kubesphere/ks-installer/master/kubesphere-minimal.yaml</span></span><br></pre></td></tr></table></figure>
 
-<p> <strong>提示：若您的服务器提示无法访问 GitHub，可将</strong> <a target="_blank" rel="noopener" href="https://github.com/kubesphere/ks-installer/blob/master/kubesphere-minimal.yaml">kubesphere-minimal.yaml</a> <strong>或</strong> <a target="_blank" rel="noopener" href="https://github.com/kubesphere/ks-installer/blob/master/kubesphere-complete-setup.yaml">kubesphere-complete-setup.yaml</a> <strong>文件保存到本地作为本地的静态文件，再参考上述命令进行安装。</strong> </p>
+<p> <strong>提示：若您的服务器提示无法访问 GitHub，可将</strong> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/kubesphere/ks-installer/blob/master/kubesphere-minimal.yaml">kubesphere-minimal.yaml</a> <strong>或</strong> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/kubesphere/ks-installer/blob/master/kubesphere-complete-setup.yaml">kubesphere-complete-setup.yaml</a> <strong>文件保存到本地作为本地的静态文件，再参考上述命令进行安装。</strong> </p>
 <ol>
 <li>查看滚动刷新的安装日志，请耐心等待安装成功。</li>
 </ol>
@@ -924,7 +953,7 @@
     <a href="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="k8s快速入门">http://example.com/2021/12/26/k8s快速入门/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -988,6 +1017,7 @@
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1041,7 +1071,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="曾超"
-      src="/images/zc.png">
+      src="/images/zc1.jpg">
   <p class="site-author-name" itemprop="name">曾超</p>
   <div class="site-description" itemprop="description">天天经过小巷，乱花漫了高墙，贪看蜂狂蝶舞，忘了世态炎凉</div>
 </div>
@@ -1070,14 +1100,14 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/zengc0905" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zengc0905" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/zengc0905" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zengc0905" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/weixin_42403109" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42403109" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+        <a href="https://blog.csdn.net/weixin_42403109" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42403109" rel="noopener external nofollow noreferrer" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener external nofollow noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 
@@ -1499,6 +1529,36 @@ if(canvas.getContext){
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'DaPWqMMMhvWr1vm4g7PhVmOg-gzGzoHsz',
+      appKey     : 'n6bU0IPWvniadHKWAeJcNV43',
+      placeholder: "欢迎大家各抒己见!",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
 <span style="color:#333333">
 
   
