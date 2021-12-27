@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>曾超の博客</title>
+  <icon>http://example.com/icon.png</icon>
+  <subtitle>记录日常的学习与生活</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2021-12-27T03:12:26.555Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>曾超</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>k8s快速入门</title>
+    <link href="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
+    <id>http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</id>
+    <published>2021-12-26T02:52:18.000Z</published>
+    <updated>2021-12-27T03:12:26.555Z</updated>
+    
+    
+    <summary type="html">kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。</summary>
+    
+    
+    
+    <category term="技术学习" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="k8s" scheme="http://example.com/tags/k8s/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的博客</title>
+    <link href="http://example.com/2021/12/25/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://example.com/2021/12/25/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</id>
+    <published>2021-12-25T09:47:19.000Z</published>
+    <updated>2021-12-27T03:12:19.888Z</updated>
+    
+    
+    <summary type="html">我的博客搭建之路</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2021/12/24/hello-world/"/>
+    <id>http://example.com/2021/12/24/hello-world/</id>
+    <published>2021-12-24T13:45:00.607Z</published>
+    <updated>2021-12-26T05:32:40.514Z</updated>
+    
+    
+    <summary type="html">Hello World</summary>
+    
+    
+    
+    
+  </entry>
+  
+</feed>
