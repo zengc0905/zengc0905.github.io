@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-27T03:12:26.555Z</updated>
+  <updated>2021-12-28T05:09:53.160Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
     <id>http://example.com/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</id>
     <published>2021-12-26T02:52:18.000Z</published>
-    <updated>2021-12-27T03:12:26.555Z</updated>
+    <updated>2021-12-28T05:09:53.160Z</updated>
     
     
-    <summary type="html">kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。</summary>
+    <summary type="html">kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。本博客来源于尚硅谷k8s课程笔记</summary>
     
     
     
