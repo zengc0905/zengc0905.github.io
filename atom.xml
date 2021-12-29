@@ -6,7 +6,7 @@
   <link href="http://zengc0905.github.io/atom.xml" rel="self"/>
   
   <link href="http://zengc0905.github.io/"/>
-  <updated>2021-12-28T05:09:53.160Z</updated>
+  <updated>2021-12-29T04:20:19.826Z</updated>
   <id>http://zengc0905.github.io/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>java基础</title>
+    <link href="http://zengc0905.github.io/2021/12/29/java%E5%9F%BA%E7%A1%80/"/>
+    <id>http://zengc0905.github.io/2021/12/29/java%E5%9F%BA%E7%A1%80/</id>
+    <published>2021-12-29T01:14:16.000Z</published>
+    <updated>2021-12-29T04:20:19.826Z</updated>
+    
+    
+    <summary type="html">主要介绍一些java的基础知识</summary>
+    
+    
+    
+    <category term="java" scheme="http://zengc0905.github.io/categories/java/"/>
+    
+    
+    <category term="java基础" scheme="http://zengc0905.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>k8s快速入门</title>
     <link href="http://zengc0905.github.io/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
     <id>http://zengc0905.github.io/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</id>
     <published>2021-12-26T02:52:18.000Z</published>
-    <updated>2021-12-28T05:09:53.160Z</updated>
+    <updated>2021-12-29T04:08:47.537Z</updated>
     
     
     <summary type="html">kubernetes简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。本博客来源于尚硅谷k8s课程笔记</summary>
