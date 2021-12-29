@@ -7,16 +7,16 @@
 <li>面向过程：⾯向过程性能⽐⾯向对象⾼。 因为类调⽤时需要实例化，开销⽐᫾⼤，⽐᫾消耗资 源，所以当性能是最重要的考量因素的时候，⽐如单⽚机、嵌⼊式开发、Linux/Unix 等⼀般采 ⽤⾯向过程开发。但是，⾯向过程没有⾯向对象易维护、易复⽤、易扩展。</li>
 <li>⾯向对象 ：⾯向对象易维护、易复⽤、易扩展。 因为⾯向对象有封装、继承、多态性的特性， 所以可以设计出低耦合的系统，使系统更加灵活、更加易于维护。但是，⾯向对象性能⽐⾯向过 程低。</li>
 </ul>
-<p>⾯向过程语⾔⼤多都是直接编译成机械码在电脑上执⾏，⽽ Java 是半编译语⾔，最终的执⾏代码并不是可以直接被 CPU 执⾏的 ⼆进制机械码。</p>
+<p>⾯向过程语⾔⼤多都是直接编译成机械码在电脑上执⾏，⽽ Java 是半编译语⾔，最终的执⾏代码并不是可以直接被 CPU 执⾏的 ⼆进制机器码。</p>
 <h2 id="1-2-Java语言编译与解释共存"><a href="#1-2-Java语言编译与解释共存" class="headerlink" title="1.2 Java语言编译与解释共存"></a>1.2 Java语言编译与解释共存</h2><p>我们可以将高级编程语言按照程序的执行方式分为两种：</p>
 <ul>
 <li><strong>编译型</strong> ：编译型语言会通过编译器将源代码一次性翻译成可被该平台执行的机器码。一般情况下，编译语言的执行速度比较快，开发效率比较低。常见的编译性语言有 C、C++、Go、Rust 等等。</li>
 <li><strong>解释型</strong> ：解释型语言会通过解释器一句一句的将代码解释（interpret）为机器代码后再执行。解释型语言开发效率比较快，执行速度比较慢。常见的解释性语言有 Python、JavaScript、PHP 等等。</li>
 </ul>
 <p>Java 语言既具有编译型语言的特征，也具有解释型语言的特征。因为 Java 程序要经过先编译，后解释两个步骤，由 Java 编写的程序需要先经过编译步骤，生成字节码（.class 文件），这种字节码必须由 Java 解释器来解释执行。</p>
-<h2 id="1-3-什么是字节码"><a href="#1-3-什么是字节码" class="headerlink" title="1.3 什么是字节码"></a>1.3 什么是字节码</h2><p>在 Java 中，JVM 可以理解的代码就叫做 字节码 （即扩展名为 .class 的⽂件），它不⾯向任何 特定的处理器，只⾯向虚拟机。Java 语⾔通过字节码的⽅式，在⼀定程度上解决了传统编译型语⾔执⾏效率低的问题，同时⼜保留了解释型语⾔可移植的特点。所以 Java 程序运⾏时⽐较⾼效，⽽ 且，由于字节码并不针对⼀种特定的机器，因此，Java 程序⽆须重新编译便可在多种不同操作系统 的计算机上运⾏。</p>
+<h2 id="1-3-什么是字节码"><a href="#1-3-什么是字节码" class="headerlink" title="1.3 什么是字节码"></a>1.3 什么是字节码</h2><p>​        在 Java 中，JVM 可以理解的代码就叫做 字节码 （即扩展名为 .class 的⽂件），它不⾯向任何 特定的处理器，只⾯向虚拟机。Java 语⾔通过字节码的⽅式，在⼀定程度上解决了传统编译型语⾔执⾏效率低的问题，同时⼜保留了解释型语⾔可移植的特点。所以 Java 程序运⾏时⽐较⾼效，⽽ 且，由于字节码并不针对⼀种特定的机器，因此，Java 程序⽆须重新编译便可在多种不同操作系统 的计算机上运⾏。</p>
 <p>java程序的运行步骤：</p>
-<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_095023.png" alt="snipaste_20211229_095023"></p>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_095023.png"></p>
 <p>在class到机器码这一步，JVM 类加载器⾸先加载字节码⽂件，然后 通过解释器逐⾏解释执⾏，这种⽅式的执⾏速度会相对⽐较慢。⽽且，有些⽅法和代码块是经常需要被 调⽤的(也就是所谓的热点代码)，所以后⾯引进了 JIT 编译器，⽽ JIT 属于运⾏时编译。当 JIT 编 译器完成第⼀次编译后，其会将字节码对应的机器码保存下来，下次可以直接使⽤。⽽我们知道，机器 码的运⾏效率肯定是⾼于 Java 解释器的。这也解释了我们为什么经常会说 Java 是编译与解释共存的 语⾔</p>
 <h2 id="1-4-JVM-JDK-JRE的区别与联系"><a href="#1-4-JVM-JDK-JRE的区别与联系" class="headerlink" title="1.4 JVM,JDK,JRE的区别与联系"></a>1.4 JVM,JDK,JRE的区别与联系</h2><ul>
 <li>java虚拟机（JVM）Java 字节码的虚拟机。JVM 有针对不同系统的特定实现（Windows， Linux，macOS），⽬的是使⽤相同的字节码，它们都会给出相同的结果。（一次编译，到处运行）</li>
@@ -95,7 +95,7 @@
 </tbody></table>
 <p>Java 里使用 <code>long</code> 类型的数据一定要在数值后面加上 <strong>L</strong>，否则将作为整型解析。</p>
 <p>java编程思想第四版：2.2.2节</p>
-<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_100713.png" alt="snipaste_20211229_100713"></p>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_100713.png"></p>
 <p>这八种基本类型都有对应的包装类分别为：<code>Byte</code>、<code>Short</code>、<code>Integer</code>、<code>Long</code>、<code>Float</code>、<code>Double</code>、<code>Character</code>、<code>Boolean</code> 。</p>
 <p><code>Byte</code>,<code>Short</code>,<code>Integer</code>,<code>Long</code> 这 4 种包装类默认创建了数值 <strong>[-128，127]</strong> 的相应类型的缓存数据，<code>Character</code> 创建了数值在 <strong>[0,127]</strong> 范围的缓存数据，<code>Boolean</code> 直接返回 <code>True</code> or <code>False</code>。</p>
 <p>如果超出对应范围仍然会去创建新的对象，缓存的范围区间的大小只是在性能和资源之间的权衡。</p>
@@ -105,7 +105,7 @@
 <p><code>Integer i1=40</code> 这一行代码会发生装箱，也就是说这行代码等价于 <code>Integer i1=Integer.valueOf(40)</code> 。因此，<code>i1</code> 直接使用的是常量池中的对象。而<code>Integer i1 = new Integer(40)</code> 会直接创建新的对象。</p>
 <p>两种浮点数类型的包装类 <code>Float</code>,<code>Double</code> 并没有实现常量池技术。</p>
 <p><em><strong>所有整型包装类对象之间值的比较，全部使用 equals 方法比较</strong>。</em></p>
-<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%5Csnipaste_20211229_111337.png" alt="snipaste_20211229_111337"></p>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_111337.png"></p>
 <p><strong>自动装箱与拆箱：</strong></p>
 <ul>
 <li><strong>装箱</strong>：将基本类型用它们对应的引用类型包装起来；</li>
@@ -115,7 +115,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Integer i = <span class="number">10</span>;  <span class="comment">//装箱</span></span><br><span class="line"><span class="keyword">int</span> n = i;   <span class="comment">//拆箱</span></span><br></pre></td></tr></table></figure>
 
 <p>上面这两行代码对应的字节码为：</p>
-<div><div class="fold_hider"><div class="close hider_title">点击</div></div><div class="fold">
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
 <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">L1</span><br><span class="line"></span><br><span class="line"> LINENUMBER <span class="number">8</span> L1</span><br><span class="line"></span><br><span class="line"> ALOAD <span class="number">0</span></span><br><span class="line"></span><br><span class="line"> BIPUSH <span class="number">10</span></span><br><span class="line"></span><br><span class="line"> INVOKESTATIC java<span class="regexp">/lang/I</span>nteger.valueOf (I)Ljava<span class="regexp">/lang/I</span>nteger;</span><br><span class="line"></span><br><span class="line"> PUTFIELD AutoBoxTest.i : Ljava<span class="regexp">/lang/I</span>nteger;</span><br><span class="line"></span><br><span class="line">L2</span><br><span class="line"></span><br><span class="line"> LINENUMBER <span class="number">9</span> L2</span><br><span class="line"></span><br><span class="line"> ALOAD <span class="number">0</span></span><br><span class="line"></span><br><span class="line"> ALOAD <span class="number">0</span></span><br><span class="line"></span><br><span class="line"> GETFIELD AutoBoxTest.i : Ljava<span class="regexp">/lang/I</span>nteger;</span><br><span class="line"></span><br><span class="line"> INVOKEVIRTUAL java<span class="regexp">/lang/I</span>nteger.intValue ()I</span><br><span class="line"></span><br><span class="line"> PUTFIELD AutoBoxTest.n : I</span><br><span class="line"></span><br><span class="line"> <span class="keyword">RETURN</span></span><br></pre></td></tr></table></figure>
 
 
@@ -249,6 +249,164 @@
 
 </div></div>
 
+<h2 id="2-9-深拷贝和浅拷贝及引用拷贝"><a href="#2-9-深拷贝和浅拷贝及引用拷贝" class="headerlink" title="2.9 深拷贝和浅拷贝及引用拷贝"></a>2.9 深拷贝和浅拷贝及引用拷贝</h2><ul>
+<li><p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p>
+</li>
+<li><p><strong>深拷贝</strong> ：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。</p>
+</li>
+</ul>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>​        浅拷贝的示例代码如下，这里实现了 <code>Cloneable</code> 接口，并重写了 <code>clone()</code> 方法。</p>
+<p><code>clone()</code> 方法的实现很简单，直接调用的是父类 <code>Object</code> 的 <code>clone()</code> 方法。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="comment">// 省略构造函数、Getter&amp;Setter方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Address <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Address) <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">    <span class="comment">// 省略构造函数、Getter&amp;Setter方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Person person = (Person) <span class="keyword">super</span>.clone();</span><br><span class="line">            <span class="keyword">return</span> person;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>测试 ：</p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person(<span class="keyword">new</span> Address(<span class="string">&quot;武汉&quot;</span>));</span><br><span class="line">Person person1Copy = person1.clone();</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line">System.out.println(person1.getAddress() == person1Copy.getAddress());</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>这里我们简单对 <code>Person</code> 类的 <code>clone()</code> 方法进行修改，连带着要把 <code>Person</code> 对象内部的 <code>Address</code> 对象一起复制。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Person person = (Person) <span class="keyword">super</span>.clone();</span><br><span class="line">        person.setAddress(person.getAddress().clone());</span><br><span class="line">        <span class="keyword">return</span> person;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>测试 ：</p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person(<span class="keyword">new</span> Address(<span class="string">&quot;武汉&quot;</span>));</span><br><span class="line">Person person1Copy = person1.clone();</span><br><span class="line"><span class="comment">// false</span></span><br><span class="line">System.out.println(person1.getAddress() == person1Copy.getAddress());</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>从输出结构就可以看出， <code>person1</code> 的克隆对象和 <code>person1</code> 包含的 <code>Address</code> 对象已经是不同的了。</p>
+<p><strong>通过对象序列化实现深拷贝</strong></p>
+<p>将对象序列化为字节序列后，默认会将该对象的整个对象图进行序列化，再通过反序列即可完美地实现深拷贝。</p>
+<p><strong>那什么是引用拷贝呢？</strong> 简单来说，引用拷贝就是两个不同的引用指向同一个对象。</p>
+<p>二者的引用是同一个对象，并没有创建出一个新的对象</p>
+<p>因为是同一个对象的引用，所以两者改一个，另一个对象的值也随之改变</p>
+<h2 id="2-11-反射"><a href="#2-11-反射" class="headerlink" title="2.11 反射"></a>2.11 反射</h2><h3 id="反射的概述"><a href="#反射的概述" class="headerlink" title="反射的概述"></a>反射的概述</h3><p>​        JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。<br>​        要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象.</p>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_202647.png" alt="从jvm层面理解反射"></p>
+<p>参考链接：<a href="https://blog.csdn.net/sinat_38259539/article/details/71799078?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param">Java基础之—反射（非常重要）</a></p>
+<h3 id="反射机制优缺点"><a href="#反射机制优缺点" class="headerlink" title="反射机制优缺点"></a>反射机制优缺点</h3><ul>
+<li><strong>优点</strong> ： 可以让咱们的代码更加灵活、为各种框架提供开箱即用的功能提供了便利</li>
+<li><strong>缺点</strong> ：让我们在运行时有了分析操作类的能力，这同样也增加了安全问题。比如可以无视泛型参数的安全检查（泛型参数的安全检查发生在编译时）。另外，反射的性能也要稍差点，不过，对于框架来说实际是影响不大的</li>
+</ul>
+<h3 id="反射的应用场景"><a href="#反射的应用场景" class="headerlink" title="反射的应用场景"></a>反射的应用场景</h3><p>​        像咱们平时大部分时候都是在写业务代码，很少会接触到直接使用反射机制的场景。</p>
+<p>但是，这并不代表反射没有用。相反，正是因为反射，你才能这么轻松地使用各种框架。像 Spring/Spring Boot、MyBatis 等等框架中都大量使用了反射机制。</p>
+<p><strong>这些框架中也大量使用了动态代理，而动态代理的实现也依赖反射。</strong></p>
+<p>比如下面是通过 JDK 实现动态代理的示例代码，其中就使用了反射类 <code>Method</code> 来调用指定的方法。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DebugInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代理类中的真实对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DebugInvocationHandler</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;before method &quot;</span> + method.getName());</span><br><span class="line">        Object result = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;after method &quot;</span> + method.getName());</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>另外，像 Java 中的一大利器 <strong>注解</strong> 的实现也用到了反射。</p>
+<p>为什么你使用 Spring 的时候 ，一个<code>@Component</code>注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 <code>@Value</code>注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？</p>
+<p>这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。</p>
+<h2 id="2-12-异常"><a href="#2-12-异常" class="headerlink" title="2.12 异常"></a>2.12 异常</h2><h3 id="Java-异常类层次结构图"><a href="#Java-异常类层次结构图" class="headerlink" title="Java 异常类层次结构图"></a>Java 异常类层次结构图</h3><p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_204101.png"></p>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_204202.png"></p>
+<p>在 Java 中，所有的异常都有一个共同的祖先 <code>java.lang</code> 包中的 <code>Throwable</code> 类。<code>Throwable</code> 类有两个重要的子类 <code>Exception</code>（异常）和 <code>Error</code>（错误）。<code>Exception</code> 能被程序本身处理(<code>try-catch</code>)， <code>Error</code> 是无法处理的(只能尽量避免)。</p>
+<p><code>Exception</code> 和 <code>Error</code> 二者都是 Java 异常处理的重要子类，各自都包含大量子类。</p>
+<ul>
+<li><strong><code>Exception</code></strong> :程序本身可以处理的异常，可以通过 <code>catch</code> 来进行捕获。<code>Exception</code> 又可以分为 受检查异常(必须处理) 和 不受检查异常(可以不处理)。</li>
+<li><strong><code>Error</code></strong> ：<code>Error</code> 属于程序无法处理的错误 ，我们没办法通过 <code>catch</code> 来进行捕获 。例如，Java 虚拟机运行错误（<code>Virtual MachineError</code>）、虚拟机内存不够错误(<code>OutOfMemoryError</code>)、类定义错误（<code>NoClassDefFoundError</code>）等 。这些异常发生时，Java 虚拟机（JVM）一般会选择线程终止。</li>
+</ul>
+<h3 id="受检查异常"><a href="#受检查异常" class="headerlink" title="受检查异常"></a>受检查异常</h3><p>Java 代码在编译过程中，如果受检查异常没有被 <code>catch</code>/<code>throw</code> 处理的话，就没办法通过编译 。比如下面这段 IO 操作的代码。</p>
+<p>除了<code>RuntimeException</code>及其子类以外，其他的<code>Exception</code>类及其子类都属于受检查异常 。常见的受检查异常有： IO 相关的异常、<code>ClassNotFoundException</code> 、<code>SQLException</code>…。</p>
+<h3 id="不受检查异常"><a href="#不受检查异常" class="headerlink" title="不受检查异常"></a><strong>不受检查异常</strong></h3><p>Java 代码在编译过程中 ，我们即使不处理不受检查异常也可以正常通过编译。</p>
+<p><code>RuntimeException</code> 及其子类都统称为非受检查异常，例如：<code>NullPointerException</code>、<code>NumberFormatException</code>（字符串转换为数字）、<code>ArrayIndexOutOfBoundsException</code>（数组越界）、<code>ClassCastException</code>（类型转换错误）、<code>ArithmeticException</code>（算术错误）等。</p>
+<h3 id="Throwable-类常用方法"><a href="#Throwable-类常用方法" class="headerlink" title="Throwable 类常用方法"></a>Throwable 类常用方法</h3><ul>
+<li><strong><code>public String getMessage()</code></strong>:返回异常发生时的简要描述</li>
+<li><strong><code>public String toString()</code></strong>:返回异常发生时的详细信息</li>
+<li><strong><code>public String getLocalizedMessage()</code></strong>:返回异常对象的本地化信息。使用 <code>Throwable</code> 的子类覆盖这个方法，可以生成本地化信息。如果子类没有覆盖该方法，则该方法返回的信息与 <code>getMessage()</code>返回的结果相同</li>
+<li><strong><code>public void printStackTrace()</code></strong>:在控制台上打印 <code>Throwable</code> 对象封装的异常信息</li>
+</ul>
+<h3 id="try-catch-finally"><a href="#try-catch-finally" class="headerlink" title="try-catch-finally"></a>try-catch-finally</h3><ul>
+<li><strong><code>try</code>块：</strong> 用于捕获异常。其后可接零个或多个 <code>catch</code> 块，如果没有 <code>catch</code> 块，则必须跟一个 <code>finally</code> 块。</li>
+<li><strong><code>catch</code>块：</strong> 用于处理 try 捕获到的异常。</li>
+<li><strong><code>finally</code> 块：</strong> 无论是否捕获或处理异常，<code>finally</code> 块里的语句都会被执行。当在 <code>try</code> 块或 <code>catch</code> 块中遇到 <code>return</code> 语句时，<code>finally</code> 语句块将在方法返回之前被执行。</li>
+</ul>
+<p><strong>在以下 3 种特殊情况下，<code>finally</code> 块不会被执行：</strong></p>
+<ol>
+<li>在 <code>try</code> 或 <code>finally</code>块中用了 <code>System.exit(int)</code>退出程序。但是，如果 <code>System.exit(int)</code> 在异常语句之后，<code>finally</code> 还是会被执行</li>
+<li>程序所在的线程死亡。</li>
+<li>关闭 CPU。</li>
+</ol>
+<p><strong>注意：</strong> 当 try 语句和 finally 语句中都有 return 语句时，在方法返回之前，finally 语句的内容将被执行，并且 finally 语句的返回值将会覆盖原始的返回值。如下：</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> value * value;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (value == <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>如果调用 <code>f(2)</code>，返回值将是 0，因为 finally 语句的返回值覆盖了 try 语句块的返回值。</p>
+<h3 id="使用-try-with-resources-来代替try-catch-finally"><a href="#使用-try-with-resources-来代替try-catch-finally" class="headerlink" title="使用 try-with-resources 来代替try-catch-finally"></a>使用 <code>try-with-resources</code> 来代替<code>try-catch-finally</code></h3><ol>
+<li><strong>适用范围（资源的定义）：</strong> 任何实现 <code>java.lang.AutoCloseable</code>或者 <code>java.io.Closeable</code> 的对象</li>
+<li><strong>关闭资源和 finally 块的执行顺序：</strong> 在 <code>try-with-resources</code> 语句中，任何 catch 或 finally 块在声明的资源关闭后运行</li>
+</ol>
+<p>《Effecitve Java》中明确指出：</p>
+<blockquote>
+<p>面对必须要关闭的资源，我们总是应该优先使用 <code>try-with-resources</code> 而不是<code>try-finally</code>。随之产生的代码更简短，更清晰，产生的异常对我们也更有用。<code>try-with-resources</code>语句让我们更容易编写必须要关闭的资源的代码，若采用<code>try-finally</code>则几乎做不到这点。</p>
+</blockquote>
+<p>Java 中类似于<code>InputStream</code>、<code>OutputStream</code> 、<code>Scanner</code> 、<code>PrintWriter</code>等的资源都需要我们调用<code>close()</code>方法来手动关闭，一般情况下我们都是通过<code>try-catch-finally</code>语句来实现这个需求，如下：</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//读取文本文件的内容</span></span><br><span class="line">Scanner scanner = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    scanner = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> File(<span class="string">&quot;D://read.txt&quot;</span>));</span><br><span class="line">    <span class="keyword">while</span> (scanner.hasNext()) &#123;</span><br><span class="line">        System.out.println(scanner.nextLine());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (scanner != <span class="keyword">null</span>) &#123;</span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>使用 Java 7 之后的 <code>try-with-resources</code> 语句改造上面的代码:</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (Scanner scanner = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> File(<span class="string">&quot;test.txt&quot;</span>))) &#123;</span><br><span class="line">    <span class="keyword">while</span> (scanner.hasNext()) &#123;</span><br><span class="line">        System.out.println(scanner.nextLine());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException fnfe) &#123;</span><br><span class="line">    fnfe.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>当然多个资源需要关闭的时候，使用 <code>try-with-resources</code> 实现起来也非常简单，如果你还是用<code>try-catch-finally</code>可能会带来很多问题。</p>
+<p>通过使用分号分隔，可以在<code>try-with-resources</code>块中声明多个资源。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (BufferedInputStream bin = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">&quot;test.txt&quot;</span>)));</span><br><span class="line">             BufferedOutputStream bout = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">&quot;out.txt&quot;</span>)))) &#123;</span><br><span class="line">            <span class="keyword">int</span> b;</span><br><span class="line">            <span class="keyword">while</span> ((b = bin.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">                bout.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+
+
+<h2 id="I-O-流"><a href="#I-O-流" class="headerlink" title="I/O 流"></a>I/O 流</h2><h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h3><p>如果我们需要持久化 Java 对象比如将 Java 对象保存在文件中，或者在网络传输 Java 对象，这些场景都需要用到序列化。</p>
+<p>简单来说：</p>
+<ul>
+<li><strong>序列化</strong>： 将数据结构或对象转换成二进制字节流的过程</li>
+<li><strong>反序列化</strong>：将在序列化过程中所生成的二进制字节流转换成数据结构或者对象的过程</li>
+</ul>
+<p>对于 Java 这种面向对象编程语言来说，我们序列化的都是对象（Object）也就是实例化后的类(Class)，但是在 C++这种半面向对象的语言中，struct(结构体)定义的是数据结构类型，而 class 对应的是对象类型。</p>
+<p><strong>序列化的主要目的是通过网络传输对象或者说是将对象存储到文件系统、数据库、内存中。</strong></p>
+<h3 id="Java-序列化中如果有些字段不想进行序列化，怎么办？"><a href="#Java-序列化中如果有些字段不想进行序列化，怎么办？" class="headerlink" title="Java 序列化中如果有些字段不想进行序列化，怎么办？"></a>Java 序列化中如果有些字段不想进行序列化，怎么办？</h3><p>对于不想进行序列化的变量，使用 <code>transient</code> 关键字修饰。</p>
+<p><code>transient</code> 关键字的作用是：阻止实例中那些用此关键字修饰的的变量序列化；当对象被反序列化时，被 <code>transient</code> 修饰的变量值不会被持久化和恢复。</p>
+<p>关于 <code>transient</code> 还有几点注意：</p>
+<ul>
+<li><code>transient</code> 只能修饰变量，不能修饰类和方法。</li>
+<li><code>transient</code> 修饰的变量，在反序列化后变量值将会被置成类型的默认值。例如，如果是修饰 <code>int</code> 类型，那么反序列后结果就是 <code>0</code>。</li>
+<li><code>static</code> 变量因为不属于任何对象(Object)，所以无论有没有 <code>transient</code> 关键字修饰，均不会被序列化。</li>
+</ul>
+<h3 id="获取用键盘输入常用的两种方法"><a href="#获取用键盘输入常用的两种方法" class="headerlink" title="获取用键盘输入常用的两种方法"></a>获取用键盘输入常用的两种方法</h3><p>方法 1：通过 <code>Scanner</code></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">Scanner input = <span class="built_in">new</span> Scanner(<span class="keyword">System</span>.<span class="keyword">in</span>);</span><br><span class="line">String s  = <span class="keyword">input</span>.nextLine();</span><br><span class="line"><span class="keyword">input</span>.<span class="keyword">close</span>();</span><br></pre></td></tr></table></figure>
+
+<p>方法 2：通过 <code>BufferedReader</code></p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">BufferedReader input = <span class="keyword">new</span> <span class="type">BufferedReader</span>(<span class="keyword">new</span> <span class="type">InputStreamReader</span>(System.<span class="keyword">in</span>));</span><br><span class="line"><span class="keyword">String</span> s = input.readLine();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java-中-IO-流分为几种"><a href="#Java-中-IO-流分为几种" class="headerlink" title="Java 中 IO 流分为几种?"></a>Java 中 IO 流分为几种?</h3><ul>
+<li>按照流的流向分，可以分为输入流和输出流；</li>
+<li>按照操作单元划分，可以划分为字节流和字符流；</li>
+<li>按照流的角色划分为节点流和处理流。</li>
+</ul>
+<p>Java IO 流共涉及 40 多个类，这些类看上去很杂乱，但实际上很有规则，而且彼此之间存在非常紧密的联系， Java IO 流的 40 多个类都是从如下 4 个抽象类基类中派生出来的。</p>
+<ul>
+<li>InputStream/Reader: 所有的输入流的基类，前者是字节输入流，后者是字符输入流。</li>
+<li>OutputStream/Writer: 所有输出流的基类，前者是字节输出流，后者是字符输出流。</li>
+</ul>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_210112.png" alt="按操作方式分类结构图"></p>
+<p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_210138.png" alt="按操作对象分类结构图"></p>
+<h3 id="既然有了字节流-为什么还要有字符流"><a href="#既然有了字节流-为什么还要有字符流" class="headerlink" title="既然有了字节流,为什么还要有字符流?"></a>既然有了字节流,为什么还要有字符流?</h3><p>问题本质想问：<strong>不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么 I/O 流操作要分为字节流操作和字符流操作呢？</strong></p>
+<p>回答：字符流是由 Java 虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以， I/O 流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</p>
+<p>参考：<a href="https://github.com/Snailclimb/JavaGuide/blob/main/docs/java/basis/java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93.md#java-%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%9B%E5%AD%97%E6%AE%B5%E4%B8%8D%E6%83%B3%E8%BF%9B%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8C%96%E6%80%8E%E4%B9%88%E5%8A%9E">JavaGuide/java基础知识总结.md at main · Snailclimb/JavaGuide (github.com)</a></p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -841,11 +999,48 @@
       </tags>
   </entry>
   <entry>
+    <title>深度学习</title>
+    <url>/2021/12/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="人工智能、模式识别、机器学习、深度学习？"><a href="#人工智能、模式识别、机器学习、深度学习？" class="headerlink" title="人工智能、模式识别、机器学习、深度学习？"></a><strong>人工智能、模式识别、机器学习、深度学习？</strong></h1><p>​        后三者都是实现人工智能的途径，其中我们需要把深度学习与模式识别、机器学习这两个领域区分开来。</p>
+<h2 id="1-模式识别："><a href="#1-模式识别：" class="headerlink" title="1. 模式识别："></a>1. 模式识别：</h2><p>​        模式识别是指对表征事物或现象的各种形式的(数值的、文字的和逻辑关系的)信息进行处理和分析，以对事物或现象进行<strong>描述、辨认、分类和解释</strong>的过程，是信息科学和人工智能的重要组成部分。我们把环境与客体统称为“模式”。随着计算机技术的发展，人类会研究复杂的信息处理过程，一个重要形式是生命体对环境及客体的识别。以光学字符识别之“汉字识别”为例：首先将汉字图像进行处理，抽取主要表达特征并将特征与汉字的代码存在计算机中。就像老师教我们“这个字叫什么、如何写”记在大脑中。这一过程叫做“训练”。识别过程就是将输入的汉字图像经处理后与计算机中的所有字进行比较，找出最相近的字就是识别结果，这一过程叫做“匹配”。</p>
+<h2 id="2-机器学习："><a href="#2-机器学习：" class="headerlink" title="2. 机器学习："></a>2. 机器学习：</h2><p>​        计算机程序可以在给定某种类别的任务 T 和性能度量 P 下学习经验 E ，如果其在任务 T 中的性能恰好可以用 P 度量，则随着经验 E 而提高。机器从已知的经验数据（样本）中，通过某种特定的方法（算法），自己去寻找提炼（训练/学习）出一些规律（模型）；提炼出的规律就可以用来判断一些未知的事情（预测）。</p>
+<p>​        机器学习(Machine Learning，ML)是人工智能的子领域，也是人工智能的核心。它囊括了几乎所有对世界影响最大的方法(包括深度学习)。机器学习理论主要是设计和分析一些让计算机可以自动学习的算法。</p>
+<p>​        举个例子，假设要构建一个识别猫的程序。传统上如果我们想让计算机进行识别，需要输入一串指令，例如猫长着毛茸茸的毛、顶着一对三角形的的耳朵等，然后计算机根据这些指令执行下去。但是如果我们对程序展示一只老虎的照片，程序应该如何反应呢？更何况通过传统方式要制定全部所需的规则，而且在此过程中必然会涉及到一些困难的概念，比如对毛茸茸的定义。因此，更好的方式是让机器自学。</p>
+<p>​        我们可以为计算机提供大量的猫的照片，系统将以自己特有的方式查看这些照片。随着实验的反复进行，系统会不断学习更新，最终能够准确地判断出哪些是猫，哪些不是猫。</p>
+<p>模式识别与机器学习的区别是：前者喂给机器的是各种<strong>特征描述</strong>，从而让机器对未知的事物进行判断；后者喂给机器的是某一事物的<strong>海量样本</strong>，让机器通过样本来自己发现特征，最后去判断某些未知的事物。</p>
+<h2 id="3-深度学习"><a href="#3-深度学习" class="headerlink" title="3. 深度学习"></a>3. 深度学习</h2><p>​        深度学习是一种特殊的机器学习。深度学习是机器学习研究中的一个新的领域，其动机在于建立、模拟人脑进行分析学习的神经网络，它模仿人脑的机制来解释数据，例如图像，声音和文本。它的最终目标是让机器能够像人一样具有分析学习能力，能够识别文字、图像和声音等数据。 深度学习是一个复杂的机器学习算法，在语音和图像识别方面取得的效果，远远超过先前相关技术。<br>​        深度学习的灵感来源于人类大脑的工作方式，是利用深度神经网络来解决特征表达的一种学习过程。深度神经网络本身并非是一个全新的概念，可理解为包含多个隐含层的神经网络结构。为了提高深层神经网络的训练效果，人们对神经元的连接方法以及激活函数等方面做出了调整。其目的在于建立、模拟人脑进行分析学习的神经网络，模仿人脑的机制来解释数据，如文本、图像、声音。</p>
+<h3 id="机器学习与深度学习的比较"><a href="#机器学习与深度学习的比较" class="headerlink" title="机器学习与深度学习的比较"></a><strong>机器学习与深度学习的比较</strong></h3><p><strong>1、应用场景</strong></p>
+<p>​        机器学习在指纹识别、特征物体检测等领域的应用基本达到了商业化的要求。深度学习主要应用于文字识别、人脸技术、语义分析、智能监控等领域。目前在智能硬件、教育、医疗等行业也在快速布局。</p>
+<p><strong>2、所需数据量</strong></p>
+<p>​        机器学习能够适应各种数据量，特别是数据量较小的场景。如果数据量迅速增加，那么深度学习的效果将更加突出，这是因为深度学习算法需要大量数据才能完美理解。</p>
+<p><strong>3、执行时间</strong></p>
+<p>​        执行时间是指训练算法所需要的时间量。一般来说，深度学习算法需要大量时间进行训练。这是因为该算法包含有很多参数，因此训练它们需要比平时更长的时间。相对而言，机器学习算法的执行时间更少。</p>
+<p><strong>4、解决问题的方法</strong></p>
+<p>​        机器学习算法遵循标准程序以解决问题。它将问题拆分成数个部分，对其进行分别解决，而后再将结果结合起来以获得所需的答案。深度学习则以集中方式解决问题，而不必进行问题拆分。</p>
+<p><img src="/2021/12/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%5C20180830211736920.png" alt="三者关系图"></p>
+<p>​        深度学习的优点在于学习能力强、覆盖范围广、数据驱动，其缺点在于计算量大、硬件需求高、模型设计复杂。这是事实，但是作为安全研究人员，我们更需要关注的不是怎么搭房子（怎么设计深度学习系统），而是怎么拆房子（如何对其进行攻击）以及如果搭更坚固的房子（如何进行针对性防御）。</p>
+<p>​        这里非常关键的一点，就是模型的可解释性问题：深度学习存在所谓的黑箱问题，由此带来了不可解释性，而这一点如果不能解决（事实上目前为止还没有很好解决）将会导致在深度学习在对安全性很敏感的领域中应用的受限。比如将其应用在医疗领域时，深度学习系统根据医学影像判断病人为癌症，但是不能解释为什么给出这个判断，而人类医学专家认为不是癌症，那么这时存在两种情况，一种是深度学习系统错了；第二种则是专家错了，可是由于系统无法给出解释，所以专家未必采纳系统意见，则造成病人的损失。无论是哪种情况，都可以看到不解决深度学习的可解释性问题，其未来的应用发展是一定会受到限制的。</p>
+<h2 id="深度学习典型模型"><a href="#深度学习典型模型" class="headerlink" title="深度学习典型模型"></a>深度学习典型模型</h2><p>典型的深度学习模型有卷积神经网络( convolutional neural network)、DBN和堆栈自编码网络(stacked auto-encoder network)模型等，</p>
+<h3 id="卷积神经网络模型"><a href="#卷积神经网络模型" class="headerlink" title="卷积神经网络模型"></a>卷积神经网络模型</h3><p>​        在无监督预训练出现之前，训练深度神经网络通常非常困难，而其中一个特例是卷积神经网络。卷积神经网络受视觉系统的结构启发而产生。第一个卷积神经网络计算模型是在Fukushima(D的神经认知机中提出的，基于神经元之间的局部连接和分层组织图像转换，将有相同参数的神经元应用于前一层神经网络的不同位置，得到一种平移不变神经网络结构形式。后来，Le Cun等人在该思想的基础上，用误差梯度设计并训练卷积神经网络，在一些模式识别任务上得到优越的性能。至今，基于卷积神经网络的模式识别系统是最好的实现系统之一，尤其在手写体字符识别任务上表现出非凡的性能。</p>
+<h3 id="深度信任网络模型"><a href="#深度信任网络模型" class="headerlink" title="深度信任网络模型"></a>深度信任网络模型</h3><p>​        DBN可以解释为贝叶斯概率生成模型，由多层随机隐变量组成，上面的两层具有无向对称连接，下面的层得到来自上一层的自顶向下的有向连接，最底层单元的状态为可见输入数据向量。DBN由若2F结构单元堆栈组成，结构单元通常为RBM（RestIlcted Boltzmann Machine，受限玻尔兹曼机）。堆栈中每个RBM单元的可视层神经元数量等于前一RBM单元的隐层神经元数量。根据深度学习机制，采用输入样例训练第一层RBM单元，并利用其输出训练第二层RBM模型，将RBM模型进行堆栈通过增加层来改善模型性能。在无监督预训练过程中，DBN编码输入到顶层RBM后，解码顶层的状态到最底层的单元，实现输入的重构。RBM作为DBN的结构单元，与每一层DBN共享参数。</p>
+<h3 id="堆栈自编码网络模型"><a href="#堆栈自编码网络模型" class="headerlink" title="堆栈自编码网络模型"></a>堆栈自编码网络模型</h3><p>​        堆栈自编码网络的结构与DBN类似，由若干结构单元堆栈组成，不同之处在于其结构单元为自编码模型( auto-en-coder)而不是RBM。自编码模型是一个两层的神经网络，第一层称为编码层，第二层称为解码层。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="计算机视觉"><a href="#计算机视觉" class="headerlink" title="计算机视觉"></a>计算机视觉</h3><p>​        香港中文大学的多媒体实验室是最早应用深度学习进行计算机视觉研究的华人团队。在世界级人工智能竞赛LFW（大规模人脸识别竞赛）上，该实验室曾力压FaceBook夺得冠军，使得人工智能在该领域的识别能力首次超越真人。 </p>
+<h3 id="语音识别"><a href="#语音识别" class="headerlink" title="语音识别"></a>语音识别</h3><p>​        微软研究人员通过与hinton合作，首先将RBM和DBN引入到语音识别声学模型训练中，并且在大词汇量语音识别系统中获得巨大成功，使得语音识别的错误率相对减低30%。但是，DNN还没有有效的并行快速算法，很多研究机构都是在利用大规模数据语料通过GPU平台提高DNN声学模型的训练效率。 在国际上，IBM、google等公司都快速进行了DNN语音识别的研究，并且速度飞快。国内方面，阿里巴巴、科大讯飞、百度、中科院自动化所等公司或研究单位，也在进行深度学习在语音识别上的研究。</p>
+<h3 id="自然语言处理等其他领域"><a href="#自然语言处理等其他领域" class="headerlink" title="自然语言处理等其他领域"></a>自然语言处理等其他领域</h3><p>​        很多机构在开展研究，2013年，Tomas Mikolov，Kai Chen，Greg Corrado，Jeffrey Dean发表论文Efficient Estimation of Word Representations in Vector Space建立word2vector模型，与传统的词袋模型（bag of words）相比，word2vector能够更好地表达语法信息。深度学习在自然语言处理等领域主要应用于机器翻译以及语义挖掘等方面。</p>
+<p>参考链接: <a href="https://blog.csdn.net/yalecaltech/article/details/117249408">如何攻击深度学习系统？–可解释性及鲁棒性研究</a></p>
+<p>​                <a href="https://baike.baidu.com/item/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/3729729?fr=aladdin">深度学习（人工神经网络的研究的概念）_百度百科 (baidu.com)</a></p>
+]]></content>
+      <categories>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的博客</title>
     <url>/2021/12/25/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p><img src="/2021/12/25/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/weixin.jpg"></p>
-<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级目录"><a href="#这是三级目录" class="headerlink" title="这是三级目录"></a>这是三级目录</h3><h4 id="这是四级目录"><a href="#这是四级目录" class="headerlink" title="这是四级目录"></a>这是四级目录</h4><h5 id="这是五级目录"><a href="#这是五级目录" class="headerlink" title="这是五级目录"></a>这是五级目录</h5><p>这是正文</p>
-<div><div class="fold_hider"><div class="close hider_title">显/隐</div></div><div class="fold">
+    <content><![CDATA[<div><div class="fold_hider"><div class="close hider_title">显/隐</div></div><div class="fold">
 <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">something</span> you want to fold, <span class="meta">include</span> <span class="meta">code</span> block.</span><br></pre></td></tr></table></figure>
 
 </div></div>
@@ -857,6 +1052,9 @@
 
 <p>hello</p>
 ]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>

@@ -6,7 +6,7 @@
   <link href="http://zengc0905.github.io/atom.xml" rel="self"/>
   
   <link href="http://zengc0905.github.io/"/>
-  <updated>2021-12-29T04:20:19.826Z</updated>
+  <updated>2021-12-29T11:07:42.669Z</updated>
   <id>http://zengc0905.github.io/</id>
   
   <author>
@@ -17,14 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>深度学习</title>
+    <link href="http://zengc0905.github.io/2021/12/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://zengc0905.github.io/2021/12/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-12-29T07:47:44.000Z</published>
+    <updated>2021-12-29T11:07:42.669Z</updated>
+    
+    
+    <summary type="html">人工智能广泛渗透于我们的生活场景中，随处可见。比如人脸识别解锁、人脸识别支付、语音输入，输入法自动联想等等，不过这些场景其实传统的模式识别或者机器学习方法就可以解决，目前来看真正能代表人工智能最前沿发展的莫过于深度学习，尤其是深度学习在无人驾驶、医疗决策（如通过识别拍片结果诊断是否有相应疾病）领域的应用。</summary>
+    
+    
+    
+    <category term="人工智能" scheme="http://zengc0905.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+    <category term="深度学习" scheme="http://zengc0905.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>java基础</title>
     <link href="http://zengc0905.github.io/2021/12/29/java%E5%9F%BA%E7%A1%80/"/>
     <id>http://zengc0905.github.io/2021/12/29/java%E5%9F%BA%E7%A1%80/</id>
     <published>2021-12-29T01:14:16.000Z</published>
-    <updated>2021-12-29T04:20:19.826Z</updated>
+    <updated>2021-12-29T13:05:25.414Z</updated>
     
     
-    <summary type="html">主要介绍一些java的基础知识</summary>
+    <summary type="html">java相关基础知识</summary>
     
     
     
@@ -59,13 +78,15 @@
     <link href="http://zengc0905.github.io/2021/12/25/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
     <id>http://zengc0905.github.io/2021/12/25/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</id>
     <published>2021-12-25T09:47:19.000Z</published>
-    <updated>2021-12-28T06:23:58.956Z</updated>
+    <updated>2021-12-29T07:44:51.441Z</updated>
     
     
-    <summary type="html">我的博客搭建之路</summary>
+    <summary type="html">主要介绍我的博客网站搭建过程（有空慢慢更新）</summary>
     
     
     
+    
+    <category term="hexo" scheme="http://zengc0905.github.io/tags/hexo/"/>
     
   </entry>
   
