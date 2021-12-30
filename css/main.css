@@ -1197,7 +1197,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #afffff;
+  background: #12ffd1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2791,7 +2791,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 body {
-  background: url("/images/setting1.png");
+  background: url("/images/setting5.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 100% 100%;
@@ -2806,7 +2806,7 @@ body {
   opacity: 0.9;
 }
 .content-wrap {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .header-inner {
   border-radius: 20px;
