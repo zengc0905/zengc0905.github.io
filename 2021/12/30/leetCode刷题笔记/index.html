@@ -31,7 +31,7 @@
 <meta property="og:description" content="记录在力扣上的刷题历程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-30T06:14:17.000Z">
-<meta property="article:modified_time" content="2021-12-30T14:28:47.121Z">
+<meta property="article:modified_time" content="2022-01-12T16:32:43.314Z">
 <meta property="article:author" content="曾超">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -148,17 +148,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -241,10 +241,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-30 14:14:17 / 修改时间：22:28:47" itemprop="dateCreated datePublished" datetime="2021-12-30T14:14:17+08:00">2021-12-30</time>
+              <time title="创建时间：2021-12-30 14:14:17" itemprop="dateCreated datePublished" datetime="2021-12-30T14:14:17+08:00">2021-12-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-13 00:32:43" itemprop="dateModified" datetime="2022-01-13T00:32:43+08:00">2022-01-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -282,14 +288,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>6 分钟</span>
             </span>
             <div class="post-description">记录在力扣上的刷题历程</div>
 
@@ -359,7 +365,86 @@
 
 
 
+</div></div> 
+
+<hr>
+<h2 id="461-汉明距离"><a href="#461-汉明距离" class="headerlink" title="#461 汉明距离"></a>#461 汉明距离</h2><p>&emsp;&emsp;两个整数之间的 汉明距离 指的是这两个数字对应二进制位不同的位置的数目。</p>
+<p>给你两个整数 <code>x</code> 和 <code>y</code>，计算并返回它们之间的汉明距离。</p>
+<p>2^31^</p>
+<ul>
+<li>0 &lt;= x, y &lt;= 2^31^ - 1</li>
+</ul>
+<p>解题思路：</p>
+<p>方法一：将x和y进行异或运算，统计异或后的数中1的个数</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = x ^ y;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(temp != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>((temp &amp; <span class="number">1</span>) != <span class="number">0</span>)&#123;</span><br><span class="line">                res++;</span><br><span class="line">            &#125;</span><br><span class="line">            temp &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </div></div> <br>
+
+<p>方法二：Brian Kernighan 算法</p>
+<p>记 f(x) 表示 x 和 x−1 进行与运算所得的结果（即f(x)=x &amp; (x−1)），那么f(x) 恰为 x 删去其二进制表示中最右侧的 1 的结果。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = x ^ y;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(temp != <span class="number">0</span>)&#123;</span><br><span class="line">            res++;</span><br><span class="line">            temp &amp;= temp - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div> 
+
+<hr>
+<h2 id="494-目标和"><a href="#494-目标和" class="headerlink" title="#494 目标和"></a>#494 目标和</h2><p>给你一个整数数组 nums 和一个整数 target 。</p>
+<p>向数组中的<strong>每个整数前</strong>添加 ‘+’ 或 ‘-‘ ，然后串联起所有整数，可以构造一个 表达式 ：</p>
+<p>例如，nums = [2, 1] ，可以在 2 之前添加 ‘+’ ，在 1 之前添加 ‘-‘ ，然后串联起来得到表达式 “+2-1” 。<br>返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。</p>
+<ul>
+<li>1 &lt;= nums.length &lt;= 20</li>
+<li>0 &lt;= nums[i] &lt;= 1000</li>
+<li>0 &lt;= sum(nums[i]) &lt;= 1000</li>
+<li>-1000 &lt;= target &lt;= 1000</li>
+</ul>
+<p>解题思路：</p>
+<p>f(i,target) = f(i - 1,target + nums[i]) + f(i - 1,target - nums[i])</p>
+<h3 id="方法一：递归"><a href="#方法一：递归" class="headerlink" title="方法一：递归"></a>方法一：递归</h3><div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> findTargetSumWays(nums,target,nums.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> target,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == target || nums[i] == -target)&#123;</span><br><span class="line">                <span class="keyword">return</span> target == <span class="number">0</span> ? <span class="number">2</span> : <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> findTargetSumWays(nums,target - nums[i],i - <span class="number">1</span>) +</span><br><span class="line">                findTargetSumWays(nums,target + nums[i],i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div> 
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：O(2^n^)，其中 n 是数组 nums 的长度。回溯需要遍历所有不同的表达式，共有 2^n^种不同的表达式，每种表达式计算结果需要 O(1) 的时间，因此总时间复杂度是 O(2^n^)；</li>
+</ul>
+<ul>
+<li>空间复杂度：O(n)，其中 n 是数组 nums 的长度。空间复杂度主要取决于递归调用的栈空间，栈的深度不超过 n。</li>
+</ul>
+<h3 id="方法二：动态规划"><a href="#方法二：动态规划" class="headerlink" title="方法二：动态规划"></a>方法二：动态规划</h3><p>设neg为添加‘-’号的元素之和，则有sum - neg - neg = target,从而得到neg = (sum - target)/2;问题转化为从nums中选取某些元素，使得其和为neg的方式有多少种？</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            sum += num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//设neg为添加‘-’号的元素之和，则有sum - neg - neg = target,从而得到neg = (sum - target)/2;</span></span><br><span class="line">        <span class="comment">//问题转化为从nums中选取某些元素，使得其和为neg的方式有多少种？</span></span><br><span class="line">        <span class="keyword">if</span> (target &gt; sum || target &lt; -sum || (sum - target) % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> neg = (sum - target)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[neg + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = neg; j &gt;= nums[i];j--)&#123;</span><br><span class="line">                    dp[j] = dp[j] + dp[j - nums[i]];</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[neg];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div> 
+
+<p><strong>复杂度分析：</strong></p>
+<ul>
+<li>时间复杂度：O(n* neg)</li>
+<li>空间复杂度：O(sum - target)</li>
+</ul>
+<hr>
+<h2 id="538-把二叉搜索树转换为累加树"><a href="#538-把二叉搜索树转换为累加树" class="headerlink" title="#538 把二叉搜索树转换为累加树"></a>#538 把二叉搜索树转换为累加树</h2><p>给出二叉 搜索 树的根节点，该树的节点值各不相同，请你将其转换为累加树（Greater Sum Tree），使每个节点 node 的新值等于原树中大于或等于 node.val 的值之和。</p>
+<p>提醒一下，二叉搜索树满足下列约束条件：</p>
+<ul>
+<li>节点的左子树仅包含键 小于 节点键的节点。</li>
+<li>节点的右子树仅包含键 大于 节点键的节点。</li>
+<li>左右子树也必须是二叉搜索树。</li>
+</ul>
+<p>解题思路：反序中序遍历</p>
+<p>反序中序遍历该二叉搜索树，记录过程中的节点值之和，并不断更新当前遍历到的节点的节点值，即可得到题目要求的累加树。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">convertBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            convertBST(root.right);</span><br><span class="line">            sum += root.val;</span><br><span class="line">            root.val = sum;</span><br><span class="line">            convertBST(root.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div> 
+
+<ul>
+<li><p>时间复杂度：O(n)，其中 n 是二叉搜索树的节点数。每一个节点恰好被遍历一次。</p>
+</li>
+<li><p>空间复杂度：O(n)，为递归过程中栈的开销，平均情况下为 O(logn)，最坏情况下树呈现链状，为 O(n)。</p>
+</li>
+</ul>
+
     </div>
 
     
@@ -514,7 +599,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode-top100"><span class="nav-text">leetcode top100</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#437-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-III"><span class="nav-text">#437 路径总和 III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#438-%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D"><span class="nav-text">#438 找到字符串中所有字母异位词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#448-%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-text">#448 找到所有数组中消失的数字</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode-top100"><span class="nav-text">leetcode top100</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#437-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-III"><span class="nav-text">#437 路径总和 III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#438-%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D"><span class="nav-text">#438 找到字符串中所有字母异位词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#448-%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-text">#448 找到所有数组中消失的数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#461-%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB"><span class="nav-text">#461 汉明距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#494-%E7%9B%AE%E6%A0%87%E5%92%8C"><span class="nav-text">#494 目标和</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E9%80%92%E5%BD%92"><span class="nav-text">方法一：递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">方法二：动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#538-%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91"><span class="nav-text">#538 把二叉搜索树转换为累加树</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -530,20 +615,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -578,6 +663,14 @@
             
             
               <li>
+                <a href="/2022/01/12/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/" title="谷粒商城-分布式基础篇" target="_blank">谷粒商城-分布式基础篇</a>
+              </li>
+            
+              <li>
+                <a href="/2022/01/12/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/" title="谷粒商城" target="_blank">谷粒商城</a>
+              </li>
+            
+              <li>
                 <a href="/2021/12/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络" target="_blank">计算机网络</a>
               </li>
             
@@ -587,14 +680,6 @@
             
               <li>
                 <a href="/2021/12/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="深度学习" target="_blank">深度学习</a>
-              </li>
-            
-              <li>
-                <a href="/2021/12/29/java%E5%9F%BA%E7%A1%80/" title="java基础" target="_blank">java基础</a>
-              </li>
-            
-              <li>
-                <a href="/2021/12/26/k8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="k8s快速入门" target="_blank">k8s快速入门</a>
               </li>
             
           </ul>
@@ -901,13 +986,13 @@ if(canvas.getContext){
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">75k</span>
+    <span title="站点总字数">174k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">2:38</span>
 </div>
 
 
