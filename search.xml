@@ -8,7 +8,7 @@
 
 <p><strong>方法一：深度优先搜索</strong></p>
 <ul>
-<li>时间复杂度：O(N^2^)，其中 NN为该二叉树节点的个数。对于每一个节点，求以该节点为起点的路径数目时，则需要遍历以该节点为根节点的子树的所有节点，因此求该路径所花费的最大时间为 O(N)，我们会对每个节点都求一次以该节点为起点的路径数目，因此时间复杂度为 O(N^2^)。</li>
+<li>时间复杂度：O(N^2^)，其中 N为该二叉树节点的个数。对于每一个节点，求以该节点为起点的路径数目时，则需要遍历以该节点为根节点的子树的所有节点，因此求该路径所花费的最大时间为 O(N)，我们会对每个节点都求一次以该节点为起点的路径数目，因此时间复杂度为 O(N^2^)。</li>
 <li>空间复杂度：O(N)，递归需要消耗栈空间</li>
 </ul>
 <div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
@@ -139,6 +139,114 @@
 <li><p>空间复杂度：O(n)，为递归过程中栈的开销，平均情况下为 O(logn)，最坏情况下树呈现链状，为 O(n)。</p>
 </li>
 </ul>
+<h2 id="543-二叉树的直径"><a href="#543-二叉树的直径" class="headerlink" title="#543 二叉树的直径"></a>#543 二叉树的直径</h2><p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
+<p>深度优先搜索</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">     <span class="comment">//定义一个全局变量res，记录整棵树的最大直径</span></span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        process(root);</span><br><span class="line">        <span class="keyword">return</span> res - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">process</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//计算左子树的最大深度</span></span><br><span class="line">        <span class="keyword">int</span> L = process(root.left);</span><br><span class="line">        <span class="comment">//计算右子树的最大深度</span></span><br><span class="line">        <span class="keyword">int</span> R = process(root.right);</span><br><span class="line">        <span class="comment">//更新最大直径</span></span><br><span class="line">        res = Math.max(res,L + R + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> Math.max(L,R) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li>时间复杂度：O(N)，其中 N 为二叉树的节点数，即遍历一棵二叉树的时间复杂度，每个结点只被访问一次。</li>
+</ul>
+<ul>
+<li>空间复杂度：O(Height)，其中 Height 为二叉树的高度。由于递归函数在递归过程中需要为每一层递归函数分配栈空间，所以这里需要额外的空间且该空间取决于递归的深度，而递归的深度显然为二叉树的高度，并且每次递归调用的函数里又只用了常数个变量，所以所需空间复杂度为 O(Height) 。</li>
+</ul>
+<hr>
+<h2 id="560-和为K的子数组"><a href="#560-和为K的子数组" class="headerlink" title="#560 和为K的子数组"></a>#560 和为K的子数组</h2><p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你统计并返回该数组中和为 <code>k</code> 的连续子数组的个数。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 2 * 104</code></li>
+<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
+<li><code>-107 &lt;= k &lt;= 107</code></li>
+</ul>
+<h3 id="方法一：暴力枚举"><a href="#方法一：暴力枚举" class="headerlink" title="方法一：暴力枚举"></a>方法一：暴力枚举</h3><div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> end = <span class="number">0</span>; end &lt; len; end++) &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> start = end; start &gt;= <span class="number">0</span> ; start--) &#123;</span><br><span class="line">                sum += nums[start];</span><br><span class="line">                <span class="keyword">if</span> (sum == k)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li><p>时间复杂度：O(n^2)，其中 n 为数组的长度。枚举子数组开头和结尾需要 O(n^2 ) 的时间，其中求和需要 O(1) 的时间复杂度，因此总时间复杂度为 O(n^2)。</p>
+</li>
+<li><p>空间复杂度：O(1)。只需要常数空间存放若干变量。</p>
+</li>
+</ul>
+<h3 id="方法二：前缀和-哈希表"><a href="#方法二：前缀和-哈希表" class="headerlink" title="方法二：前缀和+哈希表"></a>方法二：前缀和+哈希表</h3><p>使用一个哈希表记录数组nums中以i结尾的前缀和的个数，hashmap中key为前缀和，value为出现的个数。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">	 <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//记录数组nums中以i结尾前缀和为key的个数</span></span><br><span class="line">        HashMap&lt;Integer, Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        hashMap.put(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> pre = <span class="number">0</span>;<span class="comment">//记录当前位置的前缀和</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            pre += nums[i];</span><br><span class="line">            <span class="keyword">if</span> (hashMap.containsKey(pre - k))&#123;</span><br><span class="line">                count += hashMap.get(pre - k);</span><br><span class="line">            &#125;</span><br><span class="line">            hashMap.put(pre,hashMap.getOrDefault(pre,<span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<hr>
+<h2 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="#617 合并二叉树"></a>#617 合并二叉树</h2><blockquote>
+<p>给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点。</p>
+</blockquote>
+<h3 id="方法一：深度优先搜索"><a href="#方法一：深度优先搜索" class="headerlink" title="方法一：深度优先搜索"></a>方法一：深度优先搜索</h3><div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mergeTrees</span><span class="params">(TreeNode root1, TreeNode root2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root1 == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> root2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root2 == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> root1;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode left = mergeTrees(root1.left, root2.left);</span><br><span class="line">        TreeNode right = mergeTrees(root1.right, root2.right);</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(root1.val + root2.val);</span><br><span class="line">        root.left = left;</span><br><span class="line">        root.right = right;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></div>
+<ul>
+<li>时间复杂度：O(min(m,n))，其中 m 和 n 分别是两个二叉树的节点个数。对两个二叉树同时进行深度优先搜索，只有当两个二叉树中的对应节点都不为空时才会对该节点进行显性合并操作，因此被访问到的节点数不会超过较小的二叉树的节点数。</li>
+</ul>
+<ul>
+<li>空间复杂度：O(min(m,n))，其中 m 和 n 分别是两个二叉树的节点个数。空间复杂度取决于递归调用的层数，递归调用的层数不会超过较小的二叉树的最大高度，最坏情况下，二叉树的高度等于节点数。</li>
+</ul>
+<hr>
+<h2 id="581-最短无序连续子数组"><a href="#581-最短无序连续子数组" class="headerlink" title="#581 最短无序连续子数组"></a>#581 最短无序连续子数组</h2><blockquote>
+<p>给你一个整数数组 nums ，你需要找出一个 连续子数组 ，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。</p>
+<p>请你找出符合题意的 最短 子数组，并输出它的长度。</p>
+</blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-105 &lt;= nums[i] &lt;= 105</code></li>
+</ul>
+<h3 id="方法一：排序"><a href="#方法一：排序" class="headerlink" title="方法一：排序"></a>方法一：排序</h3><p>将原数组与排序后的数组进行比较</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findUnsortedSubarray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果数组有序，直接返回0；</span></span><br><span class="line">        <span class="keyword">if</span> (isSorted(nums))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line">        <span class="keyword">int</span>[] numsSort = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        System.arraycopy(nums,<span class="number">0</span>,numsSort,<span class="number">0</span>,len);</span><br><span class="line">        Arrays.sort(numsSort);</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (nums[left] == numsSort[left])&#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> right = len - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (nums[right] == numsSort[right])&#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right - left + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSorted</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &lt; nums[i - <span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>时间复杂度：O(nlogn)，其中 n 为给定数组的长度。我们需要 O(nlogn) 的时间进行排序，以及 O(n) 的时间遍历数组，因此总时间复杂度为 O(n)。</p>
+<p>空间复杂度：O(n)，其中 n 为给定数组的长度。我们需要额外的一个数组保存排序后的数组 numsSorted。</p>
+<h3 id="方法二：一次遍历（将数组分成三段）"><a href="#方法二：一次遍历（将数组分成三段）" class="headerlink" title="方法二：一次遍历（将数组分成三段）"></a>方法二：一次遍历（将数组分成三段）</h3><p>我们可以假设把这个数组分成三段，<code>左段</code>和<code>右段</code>是标准的升序数组，<code>中段</code>数组虽是无序的，但满足最小值大于<code>左段</code>的最大值，最大值小于<code>右段</code>的最小值。</p>
+<p><img src="/2021/12/30/leetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/snipaste_20220117_164246.png"></p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findUnsortedSubarray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line">        <span class="keyword">int</span> max = Integer.MIN_VALUE;</span><br><span class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">int</span> left = -<span class="number">1</span>,right = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="comment">//从左往右遍历，维护最大值，更新右边界</span></span><br><span class="line">            <span class="keyword">if</span> (max &gt; nums[i])&#123;</span><br><span class="line">                right = i;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                max = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//从右往左遍历，维护最小值，更新左边界</span></span><br><span class="line">            <span class="keyword">if</span> (min &lt; nums[len - i - <span class="number">1</span>])&#123;</span><br><span class="line">                left = len - i - <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                min = nums[len - i - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right == -<span class="number">1</span> ? <span class="number">0</span> : right - left + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li>时间复杂度：O*(*n)，其中 n 是给定数组的长度，我们仅需要遍历该数组一次。</li>
+<li>时间复杂度：O(1)，我们只需要常数的空间保存若干变量。</li>
+</ul>
+<hr>
+<h2 id="621-任务调度器"><a href="#621-任务调度器" class="headerlink" title="#621 任务调度器"></a>#621 任务调度器</h2><blockquote>
+<p>给你一个用字符数组 tasks 表示的 CPU 需要执行的任务列表。其中每个字母表示一种不同种类的任务。任务可以以任意顺序执行，并且每个任务都可以在 1 个单位时间内执行完。在任何一个单位时间，CPU 可以完成一个任务，或者处于待命状态。</p>
+<p>然而，两个 相同种类 的任务之间必须有长度为整数 n 的冷却时间，因此至少有连续 n 个单位时间内 CPU 在执行不同的任务，或者在待命状态。</p>
+<p>你需要计算完成所有任务所需要的 最短时间 。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= task.length &lt;= 10^4</code></li>
+<li><code>tasks[i]</code> 是大写英文字母</li>
+<li><code>n</code> 的取值范围为 <code>[0, 100]</code></li>
+</ul>
+</blockquote>
+<p>解题思路：</p>
+<ol>
+<li>不考虑冷却时间需要task长度时间；</li>
+<li>找出任务量最多的若干任务，需要先占坑，剩下的填坑；</li>
+<li>假如不可以把剩下的坑填满，那么就是最多数任务加上他们的冷却时间，否则输出task 总数。</li>
+</ol>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastInterval</span><span class="params">(<span class="keyword">char</span>[] tasks, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">int</span> maxCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tasks.length; i++) &#123;</span><br><span class="line">            count[tasks[i] - <span class="string">&#x27;A&#x27;</span>]++;</span><br><span class="line">            <span class="keyword">if</span> (count[tasks[i] - <span class="string">&#x27;A&#x27;</span>] &gt; maxCount)&#123;</span><br><span class="line">                maxCount = count[tasks[i] - <span class="string">&#x27;A&#x27;</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : count) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == maxCount) maxNum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.max(tasks.length,(n + <span class="number">1</span>) * (maxCount - <span class="number">1</span>) + maxNum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li>时间复杂度：O(n), n为字符数组tasks的长度;</li>
+<li>空间复杂度：O(1);</li>
+</ul>
+<hr>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -553,8 +661,189 @@
 <p><img src="/2021/12/29/java%E5%9F%BA%E7%A1%80/snipaste_20211229_210138.png" alt="按操作对象分类结构图"></p>
 <h3 id="既然有了字节流-为什么还要有字符流"><a href="#既然有了字节流-为什么还要有字符流" class="headerlink" title="既然有了字节流,为什么还要有字符流?"></a>既然有了字节流,为什么还要有字符流?</h3><p>问题本质想问：<strong>不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么 I/O 流操作要分为字节流操作和字符流操作呢？</strong></p>
 <p>回答：字符流是由 Java 虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以， I/O 流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</p>
+<hr>
+<h1 id="重要知识点总结"><a href="#重要知识点总结" class="headerlink" title="重要知识点总结"></a>重要知识点总结</h1><h2 id="代理模式详解："><a href="#代理模式详解：" class="headerlink" title="代理模式详解："></a>代理模式详解：</h2><blockquote>
+<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能</strong>。</p>
+<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
+</blockquote>
+<h3 id="1-静态代理"><a href="#1-静态代理" class="headerlink" title="1.静态代理"></a>1.静态代理</h3><p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（*后面会具体演示代码*），非常不灵活（*比如接口一旦新增加方法，目标对象和代理对象都要进行修改*）且麻烦(*需要对每个目标类都单独写一个代理类*)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
+<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
+<p>静态代理实现步骤:</p>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>创建一个代理类同样实现这个接口</li>
+<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
+</ol>
+<p>静态代理示例如下：</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<p><strong>1.定义发送短信的接口</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SmsService</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">send</span><span class="params">(String message)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.实现发送短信的接口</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsServiceImpl</span> <span class="keyword">implements</span> <span class="title">SmsService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">send</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;send message:&quot;</span> + message);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsProxy</span> <span class="keyword">implements</span> <span class="title">SmsService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> SmsService smsService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SmsProxy</span><span class="params">(SmsService smsService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.smsService = smsService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">send</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用方法之前，我们可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;before method send()&quot;</span>);</span><br><span class="line">        smsService.send(message);</span><br><span class="line">        <span class="comment">//调用方法之后，我们同样可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;after method send()&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.实际使用</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SmsService smsService = <span class="keyword">new</span> SmsServiceImpl();</span><br><span class="line">        SmsProxy smsProxy = <span class="keyword">new</span> SmsProxy(smsService);</span><br><span class="line">        smsProxy.send(<span class="string">&quot;java&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行上述代码之后，控制台打印出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">before method <span class="title">send</span><span class="params">()</span></span></span><br><span class="line"><span class="function">send message:java</span></span><br><span class="line"><span class="function">after method <span class="title">send</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可以输出结果看出，我们已经增加了 <code>SmsServiceImpl</code> 的<code>send()</code>方法。</p>
+
+</div></div>
+
+<hr>
+<h3 id="2-动态代理"><a href="#2-动态代理" class="headerlink" title="2.动态代理"></a>2.动态代理</h3><p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
+<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的。</strong></p>
+<p>说到动态代理，Spring AOP、RPC 框架应该是两个不得不提的，它们的实现都依赖了动态代理。</p>
+<p>动态代理实现方式有很多种，常见的有<strong>JDK动态代理</strong>和<strong>CGLIB动态代理</strong></p>
+<h4 id="2-1-JDK动态代理机制"><a href="#2-1-JDK动态代理机制" class="headerlink" title="2.1 JDK动态代理机制"></a>2.1 JDK动态代理机制</h4><p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心</strong></p>
+<ul>
+<li><strong><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</strong></li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">Object <span class="title">newProxyInstance</span><span class="params">(ClassLoader loader,</span></span></span><br><span class="line"><span class="params"><span class="function">                                      Class&lt;?&gt;[] interfaces,</span></span></span><br><span class="line"><span class="params"><span class="function">                                      InvocationHandler h)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> IllegalArgumentException</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法一共有 3 个参数：</p>
+<ol>
+<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
+<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
+<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
+</ol>
+<ul>
+<li><strong>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当你使用代理对象调用方法的时候实际会调用到这个方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> Throwable</span>;java</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>invoke()</code> 方法有下面三个参数：</p>
+<ol>
+<li><strong>proxy</strong> :动态生成的代理类</li>
+<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
+<li><strong>args</strong> : 当前 method 方法的参数</li>
+</ol>
+<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
+<p><strong>JDK 动态代理类使用步骤</strong></p>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
+<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
+</ol>
+<p><strong>JDK动态代理示例：</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<p><strong>1.定义发送短信的接口</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SmsService</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">send</span><span class="params">(String message)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.实现发送短信的接口</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsServiceImpl</span> <span class="keyword">implements</span> <span class="title">SmsService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">send</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;send message:&quot;</span> + message);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.定义一个 JDK 动态代理类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> shuang.kou</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createTime</span> 2020年05月11日 11:23:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DebugInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代理类中的真实对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DebugInvocationHandler</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        <span class="comment">//调用方法之前，我们可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;before method &quot;</span> + method.getName());</span><br><span class="line">        Object result = method.invoke(target, args);</span><br><span class="line">        <span class="comment">//调用方法之后，我们同样可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;after method &quot;</span> + method.getName());</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
+<p><strong>4.获取代理对象的工厂类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdkProxyFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">getProxy</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(</span><br><span class="line">                target.getClass().getClassLoader(), <span class="comment">// 目标类的类加载</span></span><br><span class="line">                target.getClass().getInterfaces(),  <span class="comment">// 代理需要实现的接口，可指定多个</span></span><br><span class="line">                <span class="keyword">new</span> DebugInvocationHandler(target)   <span class="comment">// 代理对象对应的自定义 InvocationHandler</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
+<p><strong>5.实际使用</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SmsService smsService = (SmsService) JdkProxyFactory.getProxy(<span class="keyword">new</span> SmsServiceImpl());</span><br><span class="line">smsService.send(<span class="string">&quot;java&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行上述代码之后，控制台打印出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">before method send</span><br><span class="line">send message:java</span><br><span class="line">after method send</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<hr>
+<h4 id="2-2-CGLIB-动态代理机制"><a href="#2-2-CGLIB-动态代理机制" class="headerlink" title="2.2 CGLIB 动态代理机制"></a>2.2 CGLIB 动态代理机制</h4><p><strong>JDK 动态代理有一个最致命的问题是其只能代理实现了接口的类。</strong></p>
+<p><strong>为了解决这个问题，我们可以用 CGLIB 动态代理机制来避免。</strong></p>
+<p><a href="https://github.com/cglib/cglib">CGLIB</a>(<em>Code Generation Library</em>)是一个基于<a href="http://www.baeldung.com/java-asm">ASM</a>的字节码生成库，它允许我们<strong>在运行时对字节码进行修改和动态生成</strong>。<strong>CGLIB 通过继承方式实现代理</strong>。很多知名的开源框架都使用到了<a href="https://github.com/cglib/cglib">CGLIB</a>， 例如 <strong>Spring 中的 AOP 模块中：如果目标对象实现了接口，则默认采用 JDK 动态代理，否则采用 CGLIB 动态代理。</strong></p>
+<p><strong>在 CGLIB 动态代理机制中 <code>MethodInterceptor</code> 接口和 <code>Enhancer</code> 类是核心。</strong></p>
+<ul>
+<li><strong>需要自定义 <code>MethodInterceptor</code> 并重写 <code>intercept</code> 方法，<code>intercept</code> 用于拦截增强被代理类的方法。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MethodInterceptor</span></span></span><br><span class="line"><span class="class"><span class="keyword">extends</span> <span class="title">Callback</span></span>&#123;</span><br><span class="line">    <span class="comment">// 拦截被代理类中的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, java.lang.reflect.Method method, Object[] args,</span></span></span><br><span class="line"><span class="params"><span class="function">                               MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>obj</strong> :被代理的对象（需要增强的对象）</li>
+<li><strong>method</strong> :被拦截的方法（需要增强的方法）</li>
+<li><strong>args</strong> :方法入参</li>
+<li><strong>proxy</strong> :用于调用原始方法</li>
+</ol>
+<ul>
+<li>通过 <code>Enhancer</code>类来动态获取被代理类，当代理类调用方法的时候，实际调用的是 <code>MethodInterceptor</code> 中的 <code>intercept</code> 方法。**</li>
+</ul>
+<p><strong>CGLIB 动态代理类使用步骤:</strong></p>
+<ol>
+<li>定义一个类；</li>
+<li>自定义 <code>MethodInterceptor</code> 并重写 <code>intercept</code> 方法，<code>intercept</code> 用于拦截增强被代理类的方法，和 JDK 动态代理中的 <code>invoke</code> 方法类似；</li>
+<li>通过 <code>Enhancer</code> 类的 <code>create()</code>创建代理类；</li>
+</ol>
+<p><strong>CGLIB动态代理示例：</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<p>不同于 JDK 动态代理不需要额外的依赖。<a href="https://github.com/cglib/cglib">CGLIB</a>(<em>Code Generation Library</em>) 实际是属于一个开源项目，如果你要使用它的话，需要手动添加相关依赖。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>1.实现一个使用阿里云发送短信的类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> github.javaguide.dynamicProxy.cglibDynamicProxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AliSmsService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">send</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;send message:&quot;</span> + message);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.自定义 <code>MethodInterceptor</code>（方法拦截器）</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.MethodInterceptor;</span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.MethodProxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义MethodInterceptor</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DebugMethodInterceptor</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> o           被代理对象（需要增强的对象）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> method      被拦截的方法（需要增强的方法）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args        方法入参</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> methodProxy 用于调用原始方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//调用方法之前，我们可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;before method &quot;</span> + method.getName());</span><br><span class="line">        Object object = methodProxy.invokeSuper(o, args);</span><br><span class="line">        <span class="comment">//调用方法之后，我们同样可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;after method &quot;</span> + method.getName());</span><br><span class="line">        <span class="keyword">return</span> object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.获取代理类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.Enhancer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CglibProxyFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">getProxy</span><span class="params">(Class&lt;?&gt; clazz)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建动态代理增强类</span></span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        <span class="comment">// 设置类加载器</span></span><br><span class="line">        enhancer.setClassLoader(clazz.getClassLoader());</span><br><span class="line">        <span class="comment">// 设置被代理类</span></span><br><span class="line">        enhancer.setSuperclass(clazz);</span><br><span class="line">        <span class="comment">// 设置方法拦截器</span></span><br><span class="line">        enhancer.setCallback(<span class="keyword">new</span> DebugMethodInterceptor());</span><br><span class="line">        <span class="comment">// 创建代理类</span></span><br><span class="line">        <span class="keyword">return</span> enhancer.create();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.实际使用</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AliSmsService aliSmsService = (AliSmsService) CglibProxyFactory.getProxy(AliSmsService.class);</span><br><span class="line">aliSmsService.send(<span class="string">&quot;java&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行上述代码之后，控制台打印出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">before method send</span><br><span class="line">send message:java</span><br><span class="line">after method send</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<hr>
+<h4 id="JDK-动态代理和-CGLIB-动态代理对比"><a href="#JDK-动态代理和-CGLIB-动态代理对比" class="headerlink" title="JDK 动态代理和 CGLIB 动态代理对比"></a>JDK 动态代理和 CGLIB 动态代理对比</h4><ol>
+<li><strong>JDK 动态代理只能代理实现了接口的类或者直接代理接口，而 CGLIB 可以代理未实现任何接口的类。</strong> 另外， CGLIB 动态代理是通过生成一个被代理类的子类来拦截被代理类的方法调用，因此<strong>不能代理声明为 final 类型的类和方法。</strong></li>
+<li>就二者的效率来说，大部分情况都是 JDK 动态代理更优秀，随着 JDK 版本的升级，这个优势更加明显。</li>
+</ol>
+<h3 id="静态代理和动态代理的对比"><a href="#静态代理和动态代理的对比" class="headerlink" title="静态代理和动态代理的对比"></a>静态代理和动态代理的对比</h3><ol>
+<li><strong>灵活性</strong> ：动态代理更加灵活，不需要必须实现接口，可以直接代理实现类，并且可以不需要针对每个目标类都创建一个代理类。另外，静态代理中，接口一旦新增加方法，目标对象和代理对象都要进行修改，这是非常麻烦的！</li>
+<li><strong>JVM 层面</strong> ：静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。而动态代理是在运行时动态生成类字节码，并加载到 JVM 中的。</li>
+</ol>
 <p>参考：<a href="https://github.com/Snailclimb/JavaGuide/blob/main/docs/java/basis/java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93.md#java-%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%9B%E5%AD%97%E6%AE%B5%E4%B8%8D%E6%83%B3%E8%BF%9B%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8C%96%E6%80%8E%E4%B9%88%E5%8A%9E">JavaGuide/java基础知识总结.md at main · Snailclimb/JavaGuide (github.com)</a></p>
-]]></content>
+<h2 id="反射详解"><a href="#反射详解" class="headerlink" title="反射详解"></a>反射详解</h2><p><strong>反射赋予了我们在运行时分析类以及执行类中方法的能力，    通过反射可以获取任意一个类的所有属性和方法，还可以调用这些方法和属性。</strong></p>
+<h3 id="反射机制的优缺点"><a href="#反射机制的优缺点" class="headerlink" title="反射机制的优缺点:"></a>反射机制的优缺点:</h3><p><strong>优点</strong> ： 可以让咱们的代码更加灵活、为各种框架提供开箱即用的功能提供了便利</p>
+<p><strong>缺点</strong> ：让我们在运行时有了分析操作类的能力，这同样也增加了安全问题。比如可以无视泛型参数的安全检查（泛型参数的安全检查发生在编译时）。另外，反射的性能也要稍差点，不过，对于框架来说实际是影响不大的。相关阅读：<a href="https://stackoverflow.com/questions/1392351/java-reflection-why-is-it-so-slow">Java Reflection: Why is it so slow?</a></p>
+<h3 id="获取-Class-对象的四种方式"><a href="#获取-Class-对象的四种方式" class="headerlink" title="获取 Class 对象的四种方式"></a>获取 Class 对象的四种方式</h3><div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<p>如果我们动态获取到这些信息，我们需要依靠 Class 对象。Class 类对象将一个类的方法、变量等信息告诉运行的程序。Java 提供了四种方式获取 Class 对象:</p>
+<p><strong>1.知道具体类的情况下可以使用：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class alunbarClass = TargetObject.class;</span><br></pre></td></tr></table></figure>
+
+<p>但是我们一般是不知道具体类的，基本都是通过遍历包下面的类来获取 Class 对象，通过此方式获取 Class 对象不会进行初始化</p>
+<p><strong>2.通过 <code>Class.forName()</code>传入类的路径获取：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class alunbarClass1 = Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.通过对象实例<code>instance.getClass()</code>获取：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">TargetObject o = <span class="keyword">new</span> TargetObject();</span><br><span class="line">Class alunbarClass2 = o.getClass();</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.通过类加载器<code>xxxClassLoader.loadClass()</code>传入类路径获取:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class clazz = ClassLoader.loadClass(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通过类加载器获取 Class 对象不会进行初始化，意味着不进行包括初始化等一些列步骤，静态块和静态对象不会得到执行</p>
+
+</div></div>
+
+<h3 id="反射的一些基本操作"><a href="#反射的一些基本操作" class="headerlink" title="反射的一些基本操作"></a>反射的一些基本操作</h3><div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<p>1.创建一个我们要使用反射操作的类 <code>TargetObject</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.javaguide;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TargetObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String value;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TargetObject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        value = <span class="string">&quot;JavaGuide&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">publicMethod</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I love &quot;</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">privateMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;value is &quot;</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.使用反射操作这个类的方法以及参数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.javaguide;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchFieldException </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取TargetObject类的Class对象并且创建TargetObject类实例</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Class&lt;?&gt; tagetClass = Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br><span class="line">        TargetObject targetObject = (TargetObject) tagetClass.newInstance();</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取所有类中所有定义的方法</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Method[] methods = tagetClass.getDeclaredMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">            System.out.println(method.getName());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取指定方法并调用</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Method publicMethod = tagetClass.getDeclaredMethod(<span class="string">&quot;publicMethod&quot;</span>,</span><br><span class="line">                String.class);</span><br><span class="line"></span><br><span class="line">        publicMethod.invoke(targetObject, <span class="string">&quot;JavaGuide&quot;</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取指定参数并对参数进行修改</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Field field = tagetClass.getDeclaredField(<span class="string">&quot;value&quot;</span>);</span><br><span class="line">        <span class="comment">//为了对类中的参数进行修改我们取消安全检查</span></span><br><span class="line">        field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        field.set(targetObject, <span class="string">&quot;JavaGuide&quot;</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 调用 private 方法</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Method privateMethod = tagetClass.getDeclaredMethod(<span class="string">&quot;privateMethod&quot;</span>);</span><br><span class="line">        <span class="comment">//为了调用private方法我们取消安全检查</span></span><br><span class="line">        privateMethod.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        privateMethod.invoke(targetObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出内容：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">publicMethod</span><br><span class="line">privateMethod</span><br><span class="line">I love JavaGuide</span><br><span class="line">value is JavaGuide</span><br></pre></td></tr></table></figure>
+
+</div></div>]]></content>
       <categories>
         <category>java</category>
       </categories>
