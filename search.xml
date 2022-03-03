@@ -315,14 +315,179 @@
 
 <p>时间复杂度 O(N) ： 遍历数组使用 O(N) ，HashSet 添加与查找元素皆为 O(1) 。<br>空间复杂度 O(N) ： HashSet 占用 O(N) 大小的额外空间。</p>
 <h3 id="方法二：原地交换"><a href="#方法二：原地交换" class="headerlink" title="方法二：原地交换"></a>方法二：原地交换</h3><p>可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = i）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums.length)&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == i)&#123;</span><br><span class="line">                i++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//找到一个重复值并返回</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] == nums[nums[i]]) <span class="keyword">return</span> nums[i];</span><br><span class="line">            <span class="comment">//原地交换</span></span><br><span class="line">            <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">            nums[i] = nums[nums[i]];</span><br><span class="line">            nums[temp] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
 
 <p>时间复杂度 O(N) ： 遍历数组使用 O(N) ，每轮遍历的判断和交换操作使用 O(1) 。<br>空间复杂度 O(1) ： 使用常数复杂度的额外空间。</p>
 <hr>
 <h2 id="04-二维数组中的查找"><a href="#04-二维数组中的查找" class="headerlink" title="04.二维数组中的查找"></a>04.二维数组中的查找</h2><blockquote>
 <p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
 </blockquote>
-]]></content>
+<p><strong>限制：</strong></p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">0 </span>&lt;= n &lt;= <span class="number">1000</span></span><br><span class="line"><span class="symbol">0 </span>&lt;= m &lt;= <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+
+<p>题解：由于给定的二维数组具备每行从左到右递增以及每列从上到下递增的特点，当访问到一个元素时，可以排除数组中的部分元素。</p>
+<p>从二维数组的右上角开始查找。如果当前元素等于目标值，则返回 true。如果当前元素大于目标值，则移到左边一列。如果当前元素小于目标值，则移到下边一行。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findNumberIn2DArray</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (matrix == <span class="keyword">null</span> || matrix.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//n为行数，m为列数</span></span><br><span class="line">        <span class="keyword">int</span> n = matrix.length, m = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>,j = m - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//从右上角往左下角遍历</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; n &amp;&amp; j &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//找到目标，直接返回</span></span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] &gt; target)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//未找到</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>时间复杂度：O(n+m)。访问到的下标的行最多增加 n 次，列最多减少 m 次，因此循环体最多执行 n + m 次。<br>空间复杂度：O(1)。</p>
+<hr>
+<h2 id="05-替换空格"><a href="#05-替换空格" class="headerlink" title="05.替换空格"></a>05.替换空格</h2><blockquote>
+<p>请实现一个函数，把字符串 <code>s</code> 中的每个空格替换成”%20”。</p>
+<p>0 &lt;= s 的长度 &lt;= 10000</p>
+</blockquote>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		StringBuilder res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s.toCharArray()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                res.append(<span class="string">&quot;%20&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                res.append(c);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>时间复杂度:O(n);</p>
+<p>空间复杂度:O(n);</p>
+<hr>
+<h2 id="06-从尾到头打印链表"><a href="#06-从尾到头打印链表" class="headerlink" title="06.从尾到头打印链表"></a>06.从尾到头打印链表</h2><blockquote>
+<p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
+<p>0 &lt;= 链表长度 &lt;= 10000</p>
+</blockquote>
+<p>题解: 栈的特点是后进先出，即最后压入栈的元素最先弹出。考虑到栈的这一特点，使用栈将链表元素顺序倒置。从链表的头节点开始，依次将每个节点压入栈内，然后依次弹出栈内的元素并存储到数组中。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] reversePrint(ListNode head) &#123;</span><br><span class="line">  		 <span class="keyword">if</span> (head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="comment">//入栈</span></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>)&#123;</span><br><span class="line">            stack.push(head.val);</span><br><span class="line">            head =head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> len = stack.size();</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="comment">//出栈</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            res[i] = stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p>时间复杂度：O(n)。正向遍历一遍链表，然后从栈弹出全部节点，等于又反向遍历一遍链表。<br>空间复杂度：O(n)。额外使用一个栈存储链表中的每个节点。</p>
+<hr>
+<h2 id="07-重建二叉树"><a href="#07-重建二叉树" class="headerlink" title="07.重建二叉树"></a>07.重建二叉树</h2><blockquote>
+<p>输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。</p>
+<p>假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
+<p>0 &lt;= 节点个数 &lt;= 5000</p>
+</blockquote>
+<p>题解：在中序遍历中定位到根节点，可以分别知道左子树和右子树中的节点数目。由于同一颗子树的前序遍历和中序遍历的长度显然是相同的，因此可以对应到前序遍历的结果中，对上述形式中的所有左右括号进行定位。</p>
+<p>这样一来，就知道了左子树的前序遍历和中序遍历结果，以及右子树的前序遍历和中序遍历结果，就可以递归地对构造出左子树和右子树，再将这两颗子树接到根节点的左右位置。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = preorder.length;</span><br><span class="line">        TreeNode root = buildTree(preorder, <span class="number">0</span>, len - <span class="number">1</span>, inorder, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] preorder,<span class="keyword">int</span> preStart,<span class="keyword">int</span> preEnd,<span class="keyword">int</span>[] inorder,<span class="keyword">int</span> inStart,<span class="keyword">int</span> inEnd)</span></span>&#123;</span><br><span class="line">        <span class="comment">//边界条件</span></span><br><span class="line">        <span class="keyword">if</span> (preStart &gt; preEnd || inStart &gt; inEnd) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//当前根节点</span></span><br><span class="line">        TreeNode currentRootNode = <span class="keyword">new</span> TreeNode(preorder[preStart]);</span><br><span class="line">        <span class="comment">//找出当前根节点在中序遍历中的索引</span></span><br><span class="line">        <span class="keyword">int</span> i = getIndexOfInorder(inorder, inStart, inEnd, preorder[preStart]);</span><br><span class="line">        <span class="comment">//递归左子树</span></span><br><span class="line">        TreeNode leftNode = buildTree(preorder, preStart + <span class="number">1</span>, preStart + i - inStart, inorder, inStart, i - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//递归右子树</span></span><br><span class="line">        TreeNode rightNode = buildTree(preorder, preStart + i - inStart + <span class="number">1</span>, preEnd, inorder, i + <span class="number">1</span>, inEnd);</span><br><span class="line">        <span class="comment">//连接左右子树</span></span><br><span class="line">        currentRootNode.left = leftNode;</span><br><span class="line">        currentRootNode.right = rightNode;</span><br><span class="line">        <span class="keyword">return</span> currentRootNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//找出当前根节点在中序遍历中的索引（这一步还可以优化，利用hashmap在常数时间复杂度内得到索引值）</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getIndexOfInorder</span><span class="params">(<span class="keyword">int</span>[] inorder,<span class="keyword">int</span> inStart,<span class="keyword">int</span> inEnd,<span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = inStart; i &lt;= inEnd; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[i] == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li><p>时间复杂度：O(n),其中 n是树中的节点个数。</p>
+</li>
+<li><p>空间复杂度：O(m),其中m为树的高度。</p>
+</li>
+</ul>
+<hr>
+<h2 id="09-用两个栈实现队列"><a href="#09-用两个栈实现队列" class="headerlink" title="09.用两个栈实现队列"></a>09.用两个栈实现队列</h2><blockquote>
+<p>用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 )</p>
+</blockquote>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CQueue</span> </span>&#123;</span><br><span class="line">    <span class="comment">//元素从此栈入</span></span><br><span class="line">    Stack&lt;Integer&gt; stackIn;</span><br><span class="line">    <span class="comment">//元素从此栈出</span></span><br><span class="line">    Stack&lt;Integer&gt; stackOut;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CQueue</span><span class="params">()</span></span>&#123;</span><br><span class="line">        stackIn = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stackOut = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendTail</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        stackIn.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteHead</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!stackOut.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> stackOut.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (stackIn.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!stackIn.isEmpty())&#123;</span><br><span class="line">            stackOut.push(stackIn.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stackOut.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your CQueue object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * CQueue obj = new CQueue();</span></span><br><span class="line"><span class="comment"> * obj.appendTail(value);</span></span><br><span class="line"><span class="comment"> * int param_2 = obj.deleteHead();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li><p>时间复杂度：对于插入和删除操作，时间复杂度均为 O(1)。插入不多说，对于删除操作，虽然看起来是 O(n) 的时间复杂度，但是仔细考虑下每个元素只会「至多被插入和弹出 stack2 一次」，因此均摊下来每个元素被删除的时间复杂度仍为 O(1)。</p>
+</li>
+<li><p>空间复杂度：O(n)。需要使用两个栈存储已有的元素。</p>
+</li>
+</ul>
+<hr>
+<h2 id="10-1斐波那契额数列"><a href="#10-1斐波那契额数列" class="headerlink" title="10.1斐波那契额数列"></a>10.1斐波那契额数列</h2><blockquote>
+<p>写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。斐波那契数列的定义如下：</p>
+<p>F(0) = 0,   F(1) = 1<br>F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.<br>斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。</p>
+<p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p>
+<ul>
+<li><code>0 &lt;= n &lt;= 100</code></li>
+</ul>
+</blockquote>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">//方法一：递归</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; fib = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        fib.add(<span class="number">0</span>);</span><br><span class="line">        fib.add(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            fib.add(i,(fib.get(i - <span class="number">1</span>) + fib.get(i - <span class="number">2</span>))% (<span class="number">1000000007</span>));</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> fib.get(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//方法二：动态规划</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">            dp[i] = (dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>]) % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<hr>
+<h2 id="11-旋转数组的最小数字"><a href="#11-旋转数组的最小数字" class="headerlink" title="11.旋转数组的最小数字"></a>11.旋转数组的最小数字</h2><blockquote>
+<p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。<br>给你一个可能存在 重复 元素值的数组 numbers ，它原来是一个升序排列的数组，并按上述情形进行了一次旋转。请返回旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一次旋转，该数组的最小值为1。  </p>
+</blockquote>
+<p>题解：排序数组的查找问题首先考虑使用 <strong>二分法</strong> 解决，其可将 <strong>遍历法</strong> 的 <strong>线性级别</strong> 时间复杂度降低至 <strong>对数级别</strong> 。本题要找的旋转数组的最小值即旋转点</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minArray</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = numbers.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right)&#123;</span><br><span class="line">            mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (numbers[mid] &gt; numbers[right])&#123;</span><br><span class="line">                <span class="comment">//旋转点在右半部分</span></span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &lt; numbers[right])&#123;</span><br><span class="line">                <span class="comment">//旋转点在左半部分</span></span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//无法判断旋转点位置</span></span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numbers[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<hr>
+<h2 id="12-矩阵中的路径"><a href="#12-矩阵中的路径" class="headerlink" title="12.矩阵中的路径"></a>12.矩阵中的路径</h2><blockquote>
+<p>给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
+<ul>
+<li><code>1 &lt;= board.length &lt;= 200</code></li>
+<li><code>1 &lt;= board[i].length &lt;= 200</code></li>
+<li><code>board</code> 和 <code>word</code> 仅由大小写英文字母组成</li>
+</ul>
+</blockquote>
+<p>题解：本问题是典型的矩阵搜索问题，可使用 深度优先搜索（DFS）+ 剪枝 解决。</p>
+<p>深度优先搜索： 可以理解为暴力法遍历矩阵中所有字符串可能性。DFS 通过递归，先朝一个方向搜到底，再回溯至上个节点，沿另一个方向搜索，以此类推。<br>剪枝： 在搜索中，遇到 这条路不可能和目标字符串匹配成功 的情况（例如：此矩阵元素和目标字符不同、此元素已被访问），则应立即返回，称之为 可行性剪枝 。</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">exist</span><span class="params">(<span class="keyword">char</span>[][] board, String word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = word.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; board[<span class="number">0</span>].length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dfs(board,chars,i,j,<span class="number">0</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">char</span>[] word, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//搜索越界或者当前字符不匹配，直接返回false</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; <span class="number">0</span> || i &gt;= board.length || j &lt; <span class="number">0</span> || j &gt;= board[<span class="number">0</span>].length || board[i][j] != word[k]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//匹配的字符置为空，防止重复匹配</span></span><br><span class="line">        board[i][j] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        <span class="comment">//全部字符匹配成功，返回true</span></span><br><span class="line">        <span class="keyword">if</span> (k == word.length - <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//递归匹配下一个字符</span></span><br><span class="line">        <span class="keyword">boolean</span> res = dfs(board, word, i + <span class="number">1</span>, j, k + <span class="number">1</span>) || dfs(board, word, i, j + <span class="number">1</span>, k + <span class="number">1</span>) ||</span><br><span class="line">                dfs(board, word, i - <span class="number">1</span>, j, k + <span class="number">1</span>) || dfs(board, word, i, j - <span class="number">1</span>, k + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//回溯，恢复现场</span></span><br><span class="line">        board[i][j] = word[k];</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li>时间复杂度 O(3^K^MN)： 最差情况下，需要遍历矩阵中长度为 K 字符串的所有方案，时间复杂度为 O(3^K^)；矩阵中共有 MN 个起点，时间复杂度为 O(MN) 。<br>方案数计算： 设字符串长度为 K ，搜索中每个字符有上、下、左、右四个方向可以选择，舍弃回头（上个字符）的方向，剩下 33种选择，因此方案数的复杂度为 O(3^K^) 。</li>
+<li>空间复杂度 O(K) ： 搜索过程中的递归深度不超过 K ，因此系统因函数调用累计使用的栈空间占用 O(K) （因为函数返回后，系统调用的栈空间会释放）。最坏情况下 K = MN ，递归深度为 MN ，此时系统栈使用 O(MN) 的额外空间。</li>
+</ul>
+<hr>
+<h2 id="13-机器人的运动范围"><a href="#13-机器人的运动范围" class="headerlink" title="13.机器人的运动范围"></a>13.机器人的运动范围</h2><blockquote>
+<p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
+<ul>
+<li><code>1 &lt;= n,m &lt;= 100</code></li>
+<li><code>0 &lt;= k &lt;= 20</code></li>
+</ul>
+</blockquote>
+<h3 id="方法一：DFS深度优先遍历"><a href="#方法一：DFS深度优先遍历" class="headerlink" title="方法一：DFS深度优先遍历"></a>方法一：DFS深度优先遍历</h3><div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m,n,k;</span><br><span class="line">    <span class="keyword">boolean</span>[][] visited;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.m = m;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">        <span class="keyword">this</span>.k = k;</span><br><span class="line">        <span class="keyword">this</span>.visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">        <span class="keyword">return</span> dfs(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="comment">//不满足条件，返回0；</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= m || j &gt;= n || getSum(i) + getSum(j) &gt; k || visited[i][j]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//默认为fasle,搜素过后置为true</span></span><br><span class="line">        visited[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + dfs(i,j + <span class="number">1</span>) + dfs(i + <span class="number">1</span>,j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//计算数位</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            s += x % <span class="number">10</span>;</span><br><span class="line">            x = x / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h3 id="方法二：BFS广度优先遍历"><a href="#方法二：BFS广度优先遍历" class="headerlink" title="方法二：BFS广度优先遍历"></a>方法二：BFS广度优先遍历</h3><p>利用队列实现广度优先遍历</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">       Queue&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">       queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;);</span><br><span class="line">       <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">boolean</span>[][] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">       <span class="keyword">while</span> (!queue.isEmpty())&#123;</span><br><span class="line">           <span class="keyword">int</span>[] ints = queue.poll();</span><br><span class="line">           <span class="keyword">int</span> i = ints[<span class="number">0</span>];</span><br><span class="line">           <span class="keyword">int</span> j = ints[<span class="number">1</span>];</span><br><span class="line">           <span class="keyword">int</span> si = getSum(i);</span><br><span class="line">           <span class="keyword">int</span> sj = getSum(j);</span><br><span class="line">           <span class="keyword">if</span> (i &gt;= m || j &gt;= n || si + sj &gt; k || visited[i][j]) <span class="keyword">continue</span>;</span><br><span class="line">           ans++;</span><br><span class="line">           visited[i][j] = <span class="keyword">true</span>;</span><br><span class="line">           queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i + <span class="number">1</span>,j&#125;);</span><br><span class="line">           queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,j + <span class="number">1</span>&#125;);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">//计算数位</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            s += x % <span class="number">10</span>;</span><br><span class="line">            x = x / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li>时间复杂度：O(mn)</li>
+<li>空间复杂度：O(mn)</li>
+</ul>
+<hr>
+<h2 id="14-1剪绳子"><a href="#14-1剪绳子" class="headerlink" title="14.1剪绳子"></a>14.1剪绳子</h2><blockquote>
+<p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]<em>k[1]</em>…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18</p>
+<ul>
+<li><code>2 &lt;= n &lt;= 58</code></li>
+</ul>
+</blockquote>
+<p>题解：由数学推导可得：</p>
+<ul>
+<li>当所有绳段长度相等时，乘积最大</li>
+<li>最优的绳段长度为3</li>
+</ul>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cuttingRope</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  		<span class="keyword">if</span>(n &lt;= <span class="number">3</span>) <span class="keyword">return</span> n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> a = n / <span class="number">3</span>, b = n % <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span>(b == <span class="number">0</span>) <span class="keyword">return</span> (<span class="keyword">int</span>)Math.pow(<span class="number">3</span>, a);</span><br><span class="line">        <span class="keyword">if</span>(b == <span class="number">1</span>) <span class="keyword">return</span> (<span class="keyword">int</span>)Math.pow(<span class="number">3</span>, a - <span class="number">1</span>) * <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)Math.pow(<span class="number">3</span>, a) * <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<ul>
+<li>时间复杂度 O(1)： 仅有求整、求余、次方运算。</li>
+<li>空间复杂度O(1)</li>
+</ul>
+<p>进阶：答案需要取模1e9+7</p>
+<div><div class="fold_hider"><div class="close hider_title">展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cuttingRope</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt; <span class="number">4</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> n - <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">4</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> n;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">long</span> res = <span class="number">1</span>;</span><br><span class="line">            <span class="comment">//循环取余</span></span><br><span class="line">            <span class="keyword">while</span>(n &gt; <span class="number">4</span>)&#123;</span><br><span class="line">                res *= <span class="number">3</span>;</span><br><span class="line">                res %= <span class="number">1000000007</span>;</span><br><span class="line">                n -= <span class="number">3</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 最终剩下来的肯定是2,3,4</span></span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">int</span>) (res * n % <span class="number">1000000007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -1507,6 +1672,814 @@
       </categories>
       <tags>
         <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java容器详解</title>
+    <url>/2021/09/28/java%E5%AE%B9%E5%99%A8%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="Java容器概述"><a href="#Java容器概述" class="headerlink" title="Java容器概述"></a>Java容器概述</h1><p>Java集合分为两大阵营：<strong>Collection</strong>和<strong>Map</strong></p>
+<p><strong>Collection</strong>：主要是单个元素的集合，由List、Queue、Set三个接口区分不同的集合特征，然后由下面的具体的类来实现对应的功能。</p>
+<p><strong>Map</strong>：有一组键值对的存储形式来保存，可以用键对象来查找值。</p>
+<p><img src="/2021/09/28/java%E5%AE%B9%E5%99%A8%E8%AF%A6%E8%A7%A3/snipaste_20220228_195120.png" alt="Java集合框架"></p>
+<h2 id="集合框架底层数据结构总结："><a href="#集合框架底层数据结构总结：" class="headerlink" title="集合框架底层数据结构总结："></a>集合框架底层数据结构总结：</h2><h3 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a><strong>Collection</strong></h3><h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><ul>
+<li><code>Arraylist</code>： <code>Object[]</code> 数组</li>
+<li><code>Vector</code>：<code>Object[]</code> 数组</li>
+<li><code>LinkedList</code>： 双向链表(JDK1.6 之前为循环链表，JDK1.7 取消了循环)</li>
+</ul>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><ul>
+<li><code>HashSet</code>(无序，唯一): 基于 <code>HashMap</code> 实现的，底层采用 <code>HashMap</code> 来保存元素</li>
+<li><code>LinkedHashSet</code>: <code>LinkedHashSet</code> 是 <code>HashSet</code> 的子类，并且其内部是通过 <code>LinkedHashMap</code> 来实现的。有点类似于我们之前说的 <code>LinkedHashMap</code> 其内部是基于 <code>HashMap</code> 实现一样，不过还是有一点点区别的</li>
+<li><code>TreeSet</code>(有序，唯一): 红黑树(自平衡的排序二叉树)</li>
+</ul>
+<h4 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h4><ul>
+<li><code>PriorityQueue</code>: <code>Object[]</code> 数组来实现二叉堆</li>
+<li><code>ArrayQueue</code>: <code>Object[]</code> 数组 + 双指针</li>
+</ul>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
+<li><code>HashMap</code>： JDK1.8 之前 <code>HashMap</code> 由数组+链表组成的，数组是 <code>HashMap</code> 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间</li>
+<li><code>LinkedHashMap</code>： <code>LinkedHashMap</code> 继承自 <code>HashMap</code>，所以它的底层仍然是基于拉链式散列结构即由数组和链表或红黑树组成。另外，<code>LinkedHashMap</code> 在上面结构的基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。详细可以查看：<a href="https://www.imooc.com/article/22931">《LinkedHashMap 源码详细分析（JDK1.8）》  (opens new window)</a></li>
+<li><code>Hashtable</code>： 数组+链表组成的，数组是 <code>Hashtable</code> 的主体，链表则是主要为了解决哈希冲突而存在的</li>
+<li><code>TreeMap</code>： 红黑树（自平衡的排序二叉树）</li>
+</ul>
+<hr>
+<h1 id="Collection-1"><a href="#Collection-1" class="headerlink" title="Collection"></a>Collection</h1><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><p>ArrayList、LinkedList和Vector都实现了List接口。</p>
+<p>其中ArrayList是List的主要实现类，Vector是List的古老实现类，他们两者底层都使用<code>Object[]</code>存储，区别在于ArrayList是线程不安全的，而Vector是线程安全的。</p>
+<p>与前两者不同，LinkedList底层使用的是双向链表数据结构，它也是线程不安全的。</p>
+<h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><p><strong>无序性和不可重复性：</strong></p>
+<p>1、什么是无序性？无序性不等于随机性 ，无序性是指存储的数据在底层数组中并非按照数组索引的顺序添加 ，而是根据数据的哈希值决定的。</p>
+<p>2、什么是不可重复性？不可重复性是指添加的元素按照 equals()判断时 ，返回 false，需要同时重写 equals()方法和 HashCode()方法。</p>
+<h3 id="HashSet、LinkedHashSet-和-TreeSet-三者的异同"><a href="#HashSet、LinkedHashSet-和-TreeSet-三者的异同" class="headerlink" title="HashSet、LinkedHashSet 和 TreeSet 三者的异同"></a>HashSet、LinkedHashSet 和 TreeSet 三者的异同</h3><ul>
+<li><p><code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code> 都是 <code>Set</code> 接口的实现类，都能保证元素唯一，并且都不是线程安全的。</p>
+</li>
+<li><p><code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code> 的主要区别在于底层数据结构不同。<code>HashSet</code> 的底层数据结构是哈希表（基于 <code>HashMap</code> 实现）。<code>LinkedHashSet</code> 的底层数据结构是链表和哈希表，元素的插入和取出顺序满足 FIFO。<code>TreeSet</code> 底层数据结构是红黑树，元素是有序的，排序的方式有自然排序和定制排序。</p>
+</li>
+<li><p>底层数据结构不同又导致这三者的应用场景不同。<code>HashSet</code> 用于不需要保证元素插入和取出顺序的场景，<code>LinkedHashSet</code> 用于保证元素的插入和取出顺序满足 FIFO 的场景，<code>TreeSet</code> 用于支持对元素自定义排序规则的场景。</p>
+</li>
+</ul>
+<h2 id="Queue-1"><a href="#Queue-1" class="headerlink" title="Queue"></a>Queue</h2><p><strong>Queue与Deque的区别：</strong></p>
+<p><code>Queue</code> 是单端队列，只能从一端插入元素，另一端删除元素，实现上一般遵循 <strong>先进先出（FIFO）</strong> 规则。</p>
+<p><code>Queue</code> 扩展了 <code>Collection</code> 的接口，根据 <strong>因为容量问题而导致操作失败后处理方式的不同</strong> 可以分为两类方法: 一种在操作失败后会抛出异常，另一种则会返回特殊值。</p>
+<table>
+<thead>
+<tr>
+<th><code>Queue</code> 接口</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入队尾</td>
+<td>add(E e)</td>
+<td>offer(E e)</td>
+</tr>
+<tr>
+<td>删除队首</td>
+<td>remove()</td>
+<td>poll()</td>
+</tr>
+<tr>
+<td>查询队首元素</td>
+<td>element()</td>
+<td>peek()</td>
+</tr>
+</tbody></table>
+<p><code>Deque</code> 是双端队列，在队列的两端均可以插入或删除元素。</p>
+<p><code>Deque</code> 扩展了 <code>Queue</code> 的接口, 增加了在队首和队尾进行插入和删除的方法，同样根据失败后处理方式的不同分为两类：</p>
+<table>
+<thead>
+<tr>
+<th><code>Deque</code> 接口</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入队首</td>
+<td>addFirst(E e)</td>
+<td>offerFirst(E e)</td>
+</tr>
+<tr>
+<td>插入队尾</td>
+<td>addLast(E e)</td>
+<td>offerLast(E e)</td>
+</tr>
+<tr>
+<td>删除队首</td>
+<td>removeFirst()</td>
+<td>pollFirst()</td>
+</tr>
+<tr>
+<td>删除队尾</td>
+<td>removeLast()</td>
+<td>pollLast()</td>
+</tr>
+<tr>
+<td>查询队首元素</td>
+<td>getFirst()</td>
+<td>peekFirst()</td>
+</tr>
+<tr>
+<td>查询队尾元素</td>
+<td>getLast()</td>
+<td>peekLast()</td>
+</tr>
+</tbody></table>
+<p>事实上，<code>Deque</code> 还提供有 <code>push()</code> 和 <code>pop()</code> 等其他方法，可用于模拟栈。</p>
+<h1 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h1><p>HashSet是基于HashMap实现的，它们是基于以下方式实现唯一性的：</p>
+<p>当把对象加入<code>HashSet</code>时，<code>HashSet</code> 会先计算对象的<code>hashcode</code>值来判断对象加入的位置，同时也会与其他加入的对象的 <code>hashcode</code> 值作比较，如果没有相符的 <code>hashcode</code>，<code>HashSet</code> 会假设对象没有重复出现。但是如果发现有相同 <code>hashcode</code> 值的对象，这时会调用<code>equals()</code>方法来检查 <code>hashcode</code> 相等的对象是否真的相同。如果两者相同，<code>HashSet</code> 就不会让加入操作成功。</p>
+<p><strong><code>hashCode()</code>与 <code>equals()</code> ：</strong></p>
+<ol>
+<li>如果两个对象相等，则 <code>hashcode</code> 一定也是相同的</li>
+<li>两个对象相等,对两个 <code>equals()</code> 方法返回 true</li>
+<li>两个对象有相同的 <code>hashcode</code> 值，它们也不一定是相等的</li>
+<li>综上，<code>equals()</code> 方法被覆盖过，则 <code>hashCode()</code> 方法也必须被覆盖</li>
+<li><code>hashCode()</code>的默认行为是对堆上的对象产生独特值。如果没有重写 <code>hashCode()</code>，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）。</li>
+</ol>
+<p><strong>==与 equals 的区别</strong></p>
+<p>对于基本类型来说，== 比较的是值是否相等；</p>
+<p>对于引用类型来说，== 比较的是两个引用是否指向同一个对象地址（两者在内存中存放的地址（堆内存地址）是否指向同一个地方）；</p>
+<p>对于引用类型（包括包装类型）来说，equals 如果没有被重写，对比它们的地址是否相等；如果 equals()方法被重写（例如 String），则比较的是地址里的内容。</p>
+<h3 id="HashMap-的底层实现"><a href="#HashMap-的底层实现" class="headerlink" title="HashMap 的底层实现"></a><strong>HashMap 的底层实现</strong></h3><p><strong>JDK1.8 之前</strong>：</p>
+<p>JDK1.8 之前 <code>HashMap</code> 底层是 <strong>数组和链表</strong> 结合在一起使用也就是 <strong>链表散列</strong>。<strong>HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过 (n - 1) &amp; hash 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。</strong></p>
+<p>所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。</p>
+<p><strong>JDK1.8之后</strong>：</p>
+<p>相比于之前的版本， JDK1.8 之后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间。</p>
+<h3 id="HashMap-的长度为什么是-2-的幂次方"><a href="#HashMap-的长度为什么是-2-的幂次方" class="headerlink" title="HashMap 的长度为什么是 2 的幂次方"></a>HashMap 的长度为什么是 2 的幂次方</h3><p>为了能让 HashMap 存取高效，尽量较少碰撞，也就是要尽量把数据分配均匀。我们上面也讲到了过了，Hash 值的范围值-2147483648 到 2147483647，前后加起来大概 40 亿的映射空间，只要哈希函数映射得比较均匀松散，一般应用是很难出现碰撞的。但问题是一个 40 亿长度的数组，内存是放不下的。所以这个散列值是不能直接拿来用的。用之前还要先做对数组的长度取模运算，得到的余数才能用来要存放的位置也就是对应的数组下标。这个数组下标的计算方法是“ <code>(n - 1) &amp; hash</code>”。（n 代表数组长度）。这也就解释了 HashMap 的长度为什么是 2 的幂次方。</p>
+<p><strong>这个算法应该如何设计呢？</strong></p>
+<p>我们首先可能会想到采用%取余的操作来实现。但是，重点来了：<strong>“取余(%)操作中如果除数是 2 的幂次则等价于与其除数减一的与(&amp;)操作（也就是说 hash%length==hash&amp;(length-1)的前提是 length 是 2 的 n 次方；）。”</strong> 并且 采用二进制位操作 &amp;，相对于%能够提高运算效率，这就解释了 HashMap 的长度为什么是 2 的幂次方。</p>
+<h3 id="HashMap-几种常见的遍历方式"><a href="#HashMap-几种常见的遍历方式" class="headerlink" title="HashMap 几种常见的遍历方式"></a>HashMap 几种常见的遍历方式</h3><p>HashMap <strong>遍历从大的方向来说，可分为以下 4 类</strong>：</p>
+<ol>
+<li>迭代器（Iterator）方式遍历；</li>
+<li>For Each 方式遍历；</li>
+<li>Lambda 表达式遍历（JDK 1.8+）;</li>
+<li>Streams API 遍历（JDK 1.8+）。</li>
+</ol>
+<p>但每种类型下又有不同的实现方式，因此具体的遍历方式又可以分为以下 7 种：</p>
+<h4 id="1-迭代器-EntrySet"><a href="#1-迭代器-EntrySet" class="headerlink" title="1.迭代器 EntrySet"></a>1.迭代器 EntrySet</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Map.Entry&lt;Integer, String&gt; entry = iterator.next();</span><br><span class="line">            System.out.println(entry.getKey());</span><br><span class="line">            System.out.println(entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h4 id="2-迭代器-KeySet"><a href="#2-迭代器-KeySet" class="headerlink" title="2.迭代器 KeySet"></a>2.迭代器 KeySet</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        Iterator&lt;Integer&gt; iterator = map.keySet().iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Integer key = iterator.next();</span><br><span class="line">            System.out.println(key);</span><br><span class="line">            System.out.println(map.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;java</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h4 id="3-ForEach-EntrySet"><a href="#3-ForEach-EntrySet" class="headerlink" title="3.ForEach EntrySet"></a>3.ForEach EntrySet</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);java</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">            System.out.println(entry.getKey());</span><br><span class="line">            System.out.println(entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h4 id="4-ForEach-KeySet"><a href="#4-ForEach-KeySet" class="headerlink" title="4.ForEach KeySet"></a>4.ForEach KeySet</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        <span class="keyword">for</span> (Integer key : map.keySet()) &#123;</span><br><span class="line">            System.out.println(key);java</span><br><span class="line">            System.out.println(map.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h4 id="5-Lambda"><a href="#5-Lambda" class="headerlink" title="5.Lambda"></a>5.Lambda</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        map.forEach((key, value) -&gt; &#123;</span><br><span class="line">            System.out.println(key);</span><br><span class="line">            System.out.println(value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h4 id="6-Streams-API-单线程"><a href="#6-Streams-API-单线程" class="headerlink" title="6.Streams API 单线程"></a>6.Streams API 单线程</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        map.entrySet().stream().forEach((entry) -&gt; &#123;</span><br><span class="line">            System.out.println(entry.getKey());</span><br><span class="line">            System.out.println(entry.getValue());</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h4 id="7-Streams-API-多线程"><a href="#7-Streams-API-多线程" class="headerlink" title="7.Streams API 多线程"></a>7.Streams API 多线程</h4><div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建并赋值 HashMap</span></span><br><span class="line">        Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="number">1</span>, <span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        map.put(<span class="number">2</span>, <span class="string">&quot;JDK&quot;</span>);</span><br><span class="line">        map.put(<span class="number">3</span>, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">4</span>, <span class="string">&quot;MyBatis framework&quot;</span>);</span><br><span class="line">        map.put(<span class="number">5</span>, <span class="string">&quot;Java中文社群&quot;</span>);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        map.entrySet().parallelStream().forEach((entry) -&gt; &#123;</span><br><span class="line">            System.out.println(entry.getKey());</span><br><span class="line">            System.out.println(entry.getValue());</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<p><strong>应该尽量使用迭代器（Iterator）来遍历 <code>EntrySet</code> 的遍历方式来操作 Map 集合</strong>，<strong>既安全又高效</strong>。</p>
+<h3 id="HashMap-和-Hashtable-的区别"><a href="#HashMap-和-Hashtable-的区别" class="headerlink" title="HashMap 和 Hashtable 的区别"></a><strong>HashMap 和 Hashtable 的区别</strong></h3><ol>
+<li><strong>线程是否安全：</strong> <code>HashMap</code> 是非线程安全的，<code>Hashtable</code> 是线程安全的,因为 <code>Hashtable</code> 内部的方法基本都经过<code>synchronized</code> 修饰。（如果你要保证线程安全的话就使用 <code>ConcurrentHashMap</code> 吧！）；</li>
+<li><strong>效率：</strong> 因为线程安全的问题，<code>HashMap</code> 要比 <code>Hashtable</code> 效率高一点。另外，<code>Hashtable</code> 基本被淘汰，不要在代码中使用它；</li>
+<li><strong>对 Null key 和 Null value 的支持：</strong> <code>HashMap</code> 可以存储 null 的 key 和 value，但 null 作为键只能有一个，null 作为值可以有多个；Hashtable 不允许有 null 键和 null 值，否则会抛出 <code>NullPointerException</code>。</li>
+<li><strong>初始容量大小和每次扩充容量大小的不同 ：</strong> ① 创建时如果不指定容量初始值，<code>Hashtable</code> 默认的初始大小为 11，之后每次扩充，容量变为原来的 2n+1。<code>HashMap</code> 默认的初始化大小为 16。之后每次扩充，容量变为原来的 2 倍。② 创建时如果给定了容量初始值，那么 Hashtable 会直接使用你给定的大小，而 <code>HashMap</code> 会将其扩充为 2 的幂次方大小。也就是说 <code>HashMap</code> 总是使用 2 的幂作为哈希表的大小。</li>
+<li><strong>底层数据结构：</strong> JDK1.8 以后的 <code>HashMap</code> 在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间。Hashtable 没有这样的机制。</li>
+</ol>
+<p>另外，与HashMap相比，TreeMap底层使用红黑树实现，<strong>多了对集合中的元素根据键排序的能力以及对集合内元素的搜索的能力。</strong></p>
+<h3 id="ConcurrentHashMap-和-Hashtable-的区别"><a href="#ConcurrentHashMap-和-Hashtable-的区别" class="headerlink" title="ConcurrentHashMap 和 Hashtable 的区别"></a>ConcurrentHashMap 和 Hashtable 的区别</h3><p><code>ConcurrentHashMap</code> 和 <code>Hashtable</code> 的区别主要体现在实现线程安全的方式上不同。</p>
+<ul>
+<li><strong>底层数据结构：</strong> JDK1.7 的 <code>ConcurrentHashMap</code> 底层采用 <strong>分段的数组+链表</strong> 实现，JDK1.8 采用的数据结构跟 <code>HashMap1.8</code> 的结构一样，数组+链表/红黑二叉树。<code>Hashtable</code> 和 JDK1.8 之前的 <code>HashMap</code> 的底层数据结构类似都是采用 <strong>数组+链表</strong> 的形式，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的；</li>
+<li><strong>实现线程安全的方式（重要）：</strong> ① <strong>在 JDK1.7 的时候，<code>ConcurrentHashMap</code>（分段锁）</strong> 对整个桶数组进行了分割分段(<code>Segment</code>)，每一把锁只锁容器其中一部分数据，多线程访问容器里不同数据段的数据，就不会存在锁竞争，提高并发访问率。 <strong>到了 JDK1.8 的时候已经摒弃了 <code>Segment</code> 的概念，而是直接用 <code>Node</code> 数组+链表+红黑树的数据结构来实现，并发控制使用 <code>synchronized</code> 和 CAS 来操作。（JDK1.6 以后 对 <code>synchronized</code> 锁做了很多优化）</strong> 整个看起来就像是优化过且线程安全的 <code>HashMap</code>，虽然在 JDK1.8 中还能看到 <code>Segment</code> 的数据结构，但是已经简化了属性，只是为了兼容旧版本；② <strong><code>Hashtable</code>(同一把锁)</strong> :使用 <code>synchronized</code> 来保证线程安全，效率非常低下。当一个线程访问同步方法时，其他线程也访问同步方法，可能会进入阻塞或轮询状态，如使用 put 添加元素，另一个线程不能使用 put 添加元素，也不能使用 get，竞争会越来越激烈效率越低。</li>
+</ul>
+<p><strong>两者的对比图：</strong></p>
+<p><img src="/2021/09/28/java%E5%AE%B9%E5%99%A8%E8%AF%A6%E8%A7%A3/snipaste_20220228_213431.png" alt="HashTable全表锁"></p>
+<p><strong>JDK1.7 的 ConcurrentHashMap：</strong></p>
+<p><img src="/2021/09/28/java%E5%AE%B9%E5%99%A8%E8%AF%A6%E8%A7%A3/snipaste_20220228_213546.png" alt="ConcurrentHashMap分段锁"></p>
+<p><strong>JDK1.8 的 ConcurrentHashMap：</strong></p>
+<p><img src="/2021/09/28/java%E5%AE%B9%E5%99%A8%E8%AF%A6%E8%A7%A3/snipaste_20220228_220058.png" alt="java8 ConcurrentHashMap"></p>
+<p>JDK1.8 的 <code>ConcurrentHashMap</code> 不再是 <strong>Segment 数组 + HashEntry 数组 + 链表</strong>，而是 <strong>Node 数组 + 链表 / 红黑树</strong>。不过，Node 只能用于链表的情况，红黑树的情况需要使用 **<code>TreeNode</code>**。当冲突链表达到一定长度时，链表会转换成红黑树。</p>
+<h3 id="ConcurrentHashMap-线程安全的具体实现方式-底层具体实现"><a href="#ConcurrentHashMap-线程安全的具体实现方式-底层具体实现" class="headerlink" title="ConcurrentHashMap 线程安全的具体实现方式/底层具体实现"></a>ConcurrentHashMap 线程安全的具体实现方式/底层具体实现</h3><h4 id="JDK1-7（上面有示意图）"><a href="#JDK1-7（上面有示意图）" class="headerlink" title="JDK1.7（上面有示意图）"></a>JDK1.7（上面有示意图）</h4><p>首先将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。</p>
+<p><strong><code>ConcurrentHashMap</code> 是由 <code>Segment</code> 数组结构和 <code>HashEntry</code> 数组结构组成</strong>。</p>
+<p>Segment 实现了 <code>ReentrantLock</code>,所以 <code>Segment</code> 是一种可重入锁，扮演锁的角色。<code>HashEntry</code> 用于存储键值对数据。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Segment</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">ReentrantLock</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个 <code>ConcurrentHashMap</code> 里包含一个 <code>Segment</code> 数组。<code>Segment</code> 的结构和 <code>HashMap</code> 类似，是一种数组和链表结构，一个 <code>Segment</code> 包含一个 <code>HashEntry</code> 数组，每个 <code>HashEntry</code> 是一个链表结构的元素，每个 <code>Segment</code> 守护着一个 <code>HashEntry</code> 数组里的元素，当对 <code>HashEntry</code> 数组的数据进行修改时，必须首先获得对应的 <code>Segment</code> 的锁。</p>
+<h4 id="JDK1-8-（上面有示意图）"><a href="#JDK1-8-（上面有示意图）" class="headerlink" title="JDK1.8 （上面有示意图）"></a>JDK1.8 （上面有示意图）</h4><p><code>ConcurrentHashMap</code> 取消了 <code>Segment</code> 分段锁，采用 <strong>CAS 和 <code>synchronized</code></strong> 来保证并发安全。数据结构跟 HashMap1.8 的结构类似，数组+链表/红黑二叉树。Java 8 在链表长度超过一定阈值时将链表（寻址时间复杂度为 O(N)）转换为红黑树（寻址时间复杂度为 O(log(N))。</p>
+<p><strong><code>synchronized</code> 只锁定当前链表或红黑二叉树的首节点，这样只要 hash 不冲突，就不会产生并发，效率又提升 N 倍。</strong></p>
+<p>[java集合使用注意事项总结](<a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项总结 | JavaGuide</a>)</p>
+<hr>
+<p>参考链接：<a href="https://javaguide.cn/java/collection/java-collection-questions-01/">https://javaguide.cn/java/collection/java-collection-questions-01/</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>juc并发之CAS机制</title>
+    <url>/2021/09/25/juc%E5%B9%B6%E5%8F%91%E4%B9%8BCAS%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="什么是CAS机制"><a href="#什么是CAS机制" class="headerlink" title="什么是CAS机制?"></a>什么是CAS机制?</h1><p><strong>CAS机制是一种数据更新的方式</strong>。在具体讲什么是CAS机制之前，我们先来聊下在多线程环境下，对共享变量进行数据更新的两种模式：悲观锁模式和乐观锁模式。</p>
+<ul>
+<li><p><strong>悲观锁</strong>：在更新数据的时候大概率会有其他线程去争夺共享资源，所以悲观锁的做法是：第一个获取资源的线程会将资源锁定起来，其他没争夺到资源的线程只能进入阻塞队列，等第一个获取资源的线程释放锁之后，这些线程才能有机会重新争夺资源。synchronized就是java中悲观锁的典型实现，synchronized使用起来非常简单方便，但是会使没争抢到资源的线程进入阻塞状态，线程在阻塞状态和Runnable状态之间切换效率较低（比较慢）。比如你的更新操作其实是非常快的，这种情况下你还用synchronized将其他线程都锁住了，线程从Blocked状态切换回Runnable华的时间可能比你的更新操作的时间还要长。</p>
+</li>
+<li><p><strong>乐观锁</strong>:在更新数据的时候其他线程争抢这个共享变量的概率非常小，所以更新数据的时候不会对共享数据加锁。但是在正式更新数据之前会检查数据是否被其他线程改变过，如果未被其他线程改变过就将共享变量更新成最新值，如果发现共享变量已经被其他线程更新过了，就重试，直到成功为止。CAS机制就是乐观锁的典型实现。</p>
+</li>
+</ul>
+<p> <strong><code>CAS</code>全称<code>compare and swap</code>——比较并替换</strong>，它是并发条件下修改数据的一种机制，包含三个操作数：</p>
+<blockquote>
+<ul>
+<li>需要修改的数据的内存地址（V）；</li>
+<li>对这个数据的旧预期值（A）；</li>
+<li>需要将它修改为的值（B）；</li>
+</ul>
+</blockquote>
+<p>  CAS的操作步骤如下：</p>
+<blockquote>
+<ol>
+<li>修改前记录数据的内存地址V；</li>
+<li>读取数据的当前的值，记录为A；</li>
+<li>修改数据的值变为B；</li>
+<li>查看地址V下的值是否仍然为A，若为A，则用B替换它；若地址V下的值不为A，表示在自己修改的过程中，其他的线程对数据进行了修改，则不更新变量的值，而是重新从步骤2开始执行，这被称为<strong>自旋</strong>；</li>
+</ol>
+</blockquote>
+<p>  通过以上四个步骤对内存中的数据进行修改，就可以保证数据修改的原子性。<code>CAS</code>是乐观锁的一种实现，所以这里介绍的步骤和乐观锁的定义差不多，还是很好理解的。</p>
+<p><img src="/2021/09/25/juc%E5%B9%B6%E5%8F%91%E4%B9%8BCAS%E6%9C%BA%E5%88%B6/CAS%E6%9C%BA%E5%88%B6.png" alt="CAS机制"></p>
+<p>如上图中，主存中保存V值，线程中要使用V值要先从主存中读取V值到线程的工作内存A中，然后计算后变成B值，最后再把B值写回到内存V值中。多个线程共用V值都是如此操作。CAS的核心是在将B值写入到V之前要比较A值和V值是否相同，如果不相同证明此时V值已经被其他线程改变，重新将V值赋给A，并重新计算得到B，如果相同，则将B值赋给V。</p>
+<p>值得注意的是CAS机制中的这步步骤是原子性的（从指令层面提供的原子操作），所以CAS机制可以解决多线程并发编程对共享变量读写的原子性问题。</p>
+<hr>
+<h1 id="CAS机制的ABA问题"><a href="#CAS机制的ABA问题" class="headerlink" title="CAS机制的ABA问题"></a>CAS机制的ABA问题</h1><p>  <code>CAS</code>机制虽然简单，但是也存在一些缺陷，其中比较典型的就是<code>ABA</code>问题。什么是<code>ABA</code>问题，我简单介绍一下：</p>
+<ol>
+<li>假设有三个线程<code>T1</code>、<code>T2</code>和<code>T3</code>，它们都要对一个变量<code>num</code>的值进行修改，且使用的都是<code>CAS</code>机制进行同步，假设<code>num</code>的初始值为<code>100</code>；</li>
+<li>线程<code>T1</code>首先读取了<code>num</code>的值，将它记录为旧预期<code>A1 = 100</code>，然后它想要将<code>num</code>的值修改为<code>80</code>，记录<code>B2 = 80</code>，在执行<code>num = B2</code>前，线程发生了切换，切换到线程<code>T2</code>；</li>
+<li>假设<code>T2</code>毫无阻碍地修改了<code>num</code>的值，将它从<code>100</code>修改为<code>80</code>，然后线程再度切换，<code>T3</code>开始执行；</li>
+<li><code>T3</code>也是毫无阻碍地修改了<code>num</code>，将它从<code>80</code>重新修改为<code>100</code>，线程再次切换回<code>T1</code>；</li>
+<li><code>T1</code>从上次运行的断点恢复，也就是准备用<code>B1</code>的值覆盖<code>num</code>，但是由于<code>CAS</code>机制，它需要先检测<code>num</code>的值是否等于它记录的预期值<code>A1</code>，然后它发现<code>A1 = num = 100</code>，认为<code>num</code>没有被修改过，于是用<code>B1</code>覆盖了<code>num</code>；</li>
+</ol>
+<p>  上面这种情况就是<code>CAS</code>的<code>ABA</code>问题：一个变量被修改，但是又被改了回去，在<code>CAS</code>机制中，将无法察觉这种错误的现象。在线程<code>T1</code>被中断的过程中，<code>num</code>的值被修改，按照<code>CAS</code>的原则，<code>T1</code>应该放弃对<code>num</code>的修改，从头开始执行。<br>  对于<code>ABA</code>问题的解决方案也非常简单，那就是再添加一个变量——版本号。每个变量都加上一个版本号，在它被修改时，也同步修改版本号，而<code>CAS</code>操作在修改前记录版本号，若在最后更新变量时，记录的版本号与当前版本号一致，表示没有被修改，可直接更新。</p>
+<hr>
+<h1 id="CAS的优缺点以及适用场景"><a href="#CAS的优缺点以及适用场景" class="headerlink" title="CAS的优缺点以及适用场景"></a>CAS的优缺点以及适用场景</h1><p> <strong>（1）优点</strong></p>
+<ul>
+<li>可以保证变量操作的原子性；</li>
+<li>并发量不是很高的情况下，使用CAS机制比使用锁机制效率更高；</li>
+<li>在线程对共享资源占用时间较短的情况下，使用CAS机制效率也会较高。</li>
+</ul>
+<p> <strong>（2）缺点</strong></p>
+<ul>
+<li> <strong>ABA问题</strong></li>
+</ul>
+<p>  CAS在操作的时候会检查变量的值是否被更改过，如果没有则更新值，但是带来一个问题，最开始的值是A，接着变成B，最后又变成了A。经过检查这个值确实没有修改过，因为最后的值还是A，但是实际上这个值确实已经被修改过了。为了解决这个问题，在每次进行操作的时候加上一个版本号，每次操作的就是两个值，一个版本号和某个值，A——&gt;B——&gt;A问题就变成了1A——&gt;2B——&gt;3A。在jdk中提供了AtomicStampedReference类解决ABA问题，用Pair这个内部类实现，包含两个属性，分别代表版本号和引用，在compareAndSet中先对当前引用进行检查，再对版本号标志进行检查，只有全部相等才更新值。</p>
+<ul>
+<li><p><strong>可能会消耗较高的CPU</strong><br>看起来CAS比锁的效率高，从阻塞机制变成了非阻塞机制，减少了线程之间等待的时间。每个方法不能绝对的比另一个好，在线程之间竞争程度大的时候，如果使用CAS，每次都有很多的线程在竞争，也就是说CAS机制不能更新成功。这种情况下CAS机制会一直重试，这样就会比较耗费CPU。因此可以看出，如果线程之间竞争程度小，使用CAS是一个很好的选择；但是如果竞争很大，使用锁可能是个更好的选择。在并发量非常高的环境中，如果仍然想通过原子类来更新的话，可以使用AtomicLong的替代类：LongAdder。</p>
+</li>
+<li><p><strong>不能保证代码块的原子性</strong><br>Java中的CAS机制只能保证共享变量操作的原子性，而不能保证代码块的原子性。</p>
+</li>
+</ul>
+<p> <strong>（3）适用场景</strong></p>
+<p>  由上面分析的优缺点可以看出，<code>CAS</code>适用于并发冲突发生频率较低的场合，而对于并发冲突较频繁的场合，<code>CAS</code>由于不断重试，反倒会降低效率。</p>
+<ul>
+<li>使用一个变量统计网站的访问量；</li>
+<li>Atomic类操作；</li>
+<li>数据库乐观锁更新。</li>
+</ul>
+<p><strong>总结</strong></p>
+<p>  <code>CAS</code>是一种在并发下实现原子操作的机制，但是只能用来保证一个变量的原子性，适用于并发冲突频率较低的场合。</p>
+<hr>
+<p><strong>参考：</strong></p>
+<ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/101430930">并发编程的灵魂：CAS机制详解 - 知乎 (zhihu.com)</a></p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s/f9PYMnpAgS1gAQYPDuCq-w">https://mp.weixin.qq.com/s/f9PYMnpAgS1gAQYPDuCq-w</a></p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s/nRnQKhiSUrDKu3mz3vItWg">https://mp.weixin.qq.com/s/nRnQKhiSUrDKu3mz3vItWg</a></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>CAS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IO模型</title>
+    <url>/2021/09/01/IO%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<h1 id="IO概述"><a href="#IO概述" class="headerlink" title="IO概述"></a>IO概述</h1><h2 id="I-O是什么"><a href="#I-O是什么" class="headerlink" title="I/O是什么?"></a>I/O是什么?</h2><p>I/O（<strong>I</strong>nput/<strong>O</strong>utpu） 即<strong>输入／输出</strong> 。</p>
+<p>输入设备（比如键盘）和输出设备（比如显示器）都属于外部设备。网卡、硬盘这种既可以属于输入设备，也可以属于输出设备。</p>
+<p>输入设备向计算机输入数据，输出设备接收计算机输出的数据。<strong>从计算机结构的视角来看的话， I/O 描述了计算机系统与外部设备之间通信的过程。</strong></p>
+<p><strong>从应用程序的角度来解读I/O“：</strong></p>
+<p>为了保证操作系统的稳定性和安全性，<strong>一个进程的地址空间</strong>划分为 <strong>用户空间（User space）</strong> 和 <strong>内核空间（Kernel space ）</strong> 。</p>
+<p>像我们平常运行的应用程序都是运行在用户空间，只有内核空间才能进行系统态级别的资源有关的操作，比如<strong>文件管理、进程通信、内存管理</strong>等等。也就是说，<strong>我们想要进行 IO 操作，一定是要依赖内核空间的能力。</strong></p>
+<p>并且，用户空间的程序不能直接访问内核空间。</p>
+<p><strong>进程切换</strong></p>
+<p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。 <strong>进程切换很消耗资源</strong>。</p>
+<p><strong>进程阻塞</strong></p>
+<p>正在执行的进程，由于期待的某些事件未发生，如请求系统资源失败、等待某种操作的完成、新数据尚未到达或无新工作做等，则由系统自动执行阻塞原语(Block)，使自己由运行状态变为阻塞状态。可见，进程的阻塞是进程自身的一种主动行为，也因此只有处于运行态的进程（获得CPU），才可能将其转为阻塞状态。<strong>当进程进入阻塞状态，是不占用CPU资源的</strong>。</p>
+<p><strong>缓存 I/O</strong></p>
+<p>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，<strong>数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间</strong>。</p>
+<p>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<p>当想要执行 IO 操作时，由于没有执行这些操作的权限，只能发起<strong>系统调用</strong>请求操作系统帮忙完成。</p>
+<p>因此，用户进程想要执行 IO 操作的话，必须通过 <strong>系统调用</strong> 来间接访问内核空间</p>
+<p>我们在平常开发过程中接触最多的就是 <strong>磁盘 IO（读写文件）</strong> 和 <strong>网络 IO（网络请求和响应）</strong>。</p>
+<p><strong>从应用程序的视角来看的话，我们的应用程序对操作系统的内核发起 IO 调用（系统调用），操作系统负责的内核执行具体的 IO 操作。也就是说，我们的应用程序实际上只是发起了 IO 操作的调用而已，具体 IO 的执行是由操作系统的内核来完成的。</strong></p>
+<p>当应用程序发起 I/O 调用后，会经历两个步骤：</p>
+<ol>
+<li><strong>内核等待 I/O 设备准备好数据</strong></li>
+<li><strong>内核将数据从内核空间拷贝到用户空间。</strong></li>
+</ol>
+<h2 id="有哪些常见的-IO-模型"><a href="#有哪些常见的-IO-模型" class="headerlink" title="有哪些常见的 IO 模型?"></a>有哪些常见的 IO 模型?</h2><p>UNIX 系统下， IO 模型一共有 5 种： <strong>同步阻塞 I/O</strong>、<strong>同步非阻塞 I/O</strong>、<strong>I/O 多路复用</strong>、<strong>信号驱动 I/O</strong> 和<strong>异步 I/O</strong>。这也是我们经常提到的 5 种 IO 模型。</p>
+<h2 id="同步、异步、阻塞与非阻塞的重点概念区分"><a href="#同步、异步、阻塞与非阻塞的重点概念区分" class="headerlink" title="同步、异步、阻塞与非阻塞的重点概念区分"></a>同步、异步、阻塞与非阻塞的重点概念区分</h2><p><strong>同步和异步</strong>的概念描述的是<strong>用户线程与内核的交互方式</strong>：同步是指用户线程发起IO请求后需要等待或者轮询内核IO操作完成后才能继续执行；而异步是指用户线程发起IO请求后仍继续执行，当内核IO操作完成后会通知用户线程，或者调用用户线程注册的回调函数。</p>
+<p><strong>阻塞和非阻塞</strong>的概念描述的是<strong>用户线程调用内核IO操作的方式</strong>：阻塞是指IO操作需要彻底完成后才返回到用户空间；而非阻塞是指IO操作被调用后立即返回给用户一个状态值，无需等到IO操作彻底完成</p>
+<p><strong>同步和异步</strong>、<strong>阻塞和非阻塞</strong>这两对儿概念，是两个维度的概念，大家不要混淆。</p>
+<ul>
+<li>同步才区分阻塞和非阻塞</li>
+<li>异步则一定是非阻塞的，不存在直接的<code>异步非阻塞</code>方式</li>
+</ul>
+<h1 id="Java-中-3种常见-IO-模型"><a href="#Java-中-3种常见-IO-模型" class="headerlink" title="Java 中 3种常见 IO 模型"></a>Java 中 3种常见 IO 模型</h1><h3 id="BIO-Blocking-I-O"><a href="#BIO-Blocking-I-O" class="headerlink" title="BIO (Blocking I/O)"></a>BIO (Blocking I/O)</h3><p><strong>BIO 属于同步阻塞 IO 模型</strong> 。</p>
+<p>同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到内核把数据拷贝到用户空间。</p>
+<p><img src="/2021/09/01/IO%E6%A8%A1%E5%9E%8B/%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9EIO%E6%A8%A1%E5%9E%8B.png" alt="同步阻塞IO模型"></p>
+<p>在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型来应对更高的并发量。</p>
+<h3 id="NIO-Non-blocking-New-I-O"><a href="#NIO-Non-blocking-New-I-O" class="headerlink" title="NIO (Non-blocking/New I/O)"></a>NIO (Non-blocking/New I/O)</h3><p>Java 中的 NIO 于 Java 1.4 中引入，对应 <code>java.nio</code> 包，提供了 <code>Channel</code> , <code>Selector</code>，<code>Buffer</code> 等抽象。NIO 中的 N 可以理解为 Non-blocking，不单纯是 New。它是支持面向缓冲的，基于通道的 I/O 操作方法。 对于高负载、高并发的（网络）应用，应使用 NIO 。</p>
+<p>Java 中的 NIO 可以看作是 <strong>I/O 多路复用模型</strong>。也有很多人认为，Java 中的 NIO 属于同步非阻塞 IO 模型。</p>
+<p>跟着我的思路往下看看，相信你会得到答案！</p>
+<p>我们先来看看 <strong>同步非阻塞 IO 模型</strong>。</p>
+<p><img src="/2021/09/01/IO%E6%A8%A1%E5%9E%8B/%E5%90%8C%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9EIO%E6%A8%A1%E5%9E%8B.png" alt="同步非阻塞IO模型"></p>
+<p>用户线程每次发起IO请求后可以立即返回，等待数据从内核空间拷贝到用户空间的这段时间里，线程依然是阻塞的，直到在内核把数据拷贝到用户空间。</p>
+<p>相比于同步阻塞 IO 模型，同步非阻塞 IO 模型确实有了很大改进。通过轮询操作，避免了一直阻塞。</p>
+<p>但是，这种 IO 模型同样存在问题：<strong>应用程序不断进行 I/O 系统调用轮询数据是否已经准备好的过程是十分消耗 CPU 资源的。</strong></p>
+<p>这个时候，<strong>I/O 多路复用模型</strong> 就上场了。</p>
+<p><img src="/2021/09/01/IO%E6%A8%A1%E5%9E%8B/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8.png" alt="IO多路复用"></p>
+<p>IO 多路复用模型中，线程首先发起 select 调用，询问内核数据是否准备就绪，等内核把数据准备好了，用户线程再发起 read 调用。read 调用的过程（数据从内核空间 -&gt; 用户空间）还是阻塞的。</p>
+<ul>
+<li><p><strong>select 调用</strong> ：内核提供的系统调用，它支持一次查询多个系统调用的可用状态。几乎所有的操作系统都支持。</p>
+</li>
+<li><p><strong>epoll 调用</strong> ：linux 2.6 内核，属于 select 调用的增强版本，优化了 IO 的执行效率。</p>
+</li>
+</ul>
+<p><strong>IO 多路复用模型，通过减少无效的系统调用，减少了对 CPU 资源的消耗。</strong></p>
+<p>Java 中的 NIO ，有一个非常重要的<strong>选择器 ( Selector )</strong> 的概念，也可以被称为 <strong>多路复用器</strong>。通过它，只需要一个线程便可以管理多个客户端连接。当客户端数据到了之后，才会为其服务。</p>
+<p><img src="/2021/09/01/IO%E6%A8%A1%E5%9E%8B/Selector%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8.png" alt="Selector多路复用器"></p>
+<h3 id="AIO-Asynchronous-I-O"><a href="#AIO-Asynchronous-I-O" class="headerlink" title="AIO (Asynchronous I/O)"></a>AIO (Asynchronous I/O)</h3><p>AIO 也就是 NIO 2。Java 7 中引入了 NIO 的改进版 NIO 2,它是异步 IO 模型。</p>
+<p>异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。</p>
+<p><img src="/2021/09/01/IO%E6%A8%A1%E5%9E%8B/AIO.png" alt="AIO"></p>
+<p>目前来说 AIO 的应用还不是很广泛。Netty 之前也尝试使用过 AIO，不过又放弃了。这是因为，Netty 使用了 AIO 之后，在 Linux 系统上的性能并没有多少提升。</p>
+<p>最后，来一张图，简单总结一下 Java 中的 BIO、NIO、AIO。</p>
+<p><img src="/2021/09/01/IO%E6%A8%A1%E5%9E%8B/%E5%90%84%E7%B1%BBIO%E6%80%BB%E7%BB%93.png" alt="各类IO总结"></p>
+<p>参考：<a href="https://javaguide.cn/java/basis/io/#aio-asynchronous-i-o">IO模型详解 | JavaGuide</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>IO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>redis重要知识点总结</title>
+    <url>/2021/07/25/redis%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="Redis概述"><a href="#Redis概述" class="headerlink" title="Redis概述"></a>Redis概述</h1><p>简单来说 <strong>Redis 就是一个使用 C 语言开发的数据库</strong>，不过与传统数据库不同的是 <strong>Redis 的数据是存在内存中的</strong> ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。</p>
+<p>另外，<strong>Redis 除了做缓存之外，也经常用来做分布式锁，甚至是消息队列。</strong></p>
+<p><strong>Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua 脚本、多种集群方案。</strong></p>
+<h2 id="Redis特点："><a href="#Redis特点：" class="headerlink" title="Redis特点："></a><strong>Redis特点：</strong></h2><p>Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。</p>
+<p>Redis不仅仅支持简单的key-value类型的数据，同时还提供String，list，set，zset，hash等数据结构的存储。</p>
+<p>Redis支持数据的备份，即master-slave模式的数据备份。</p>
+<p>性能极高 – Redis能读的速度是110000次/s,写的速度是81000次/s 。</p>
+<p>原子 – Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行。</p>
+<p>丰富的特性 – Redis还支持 publish/subscribe, 通知, 设置key有效期等等特性。</p>
+<h2 id="Redis-和-Memcached-的区别和共同点"><a href="#Redis-和-Memcached-的区别和共同点" class="headerlink" title="Redis 和 Memcached 的区别和共同点"></a>Redis 和 Memcached 的区别和共同点</h2><p>现在公司一般都是用 Redis 来实现缓存，而且 Redis 自身也越来越强大了！不过，了解 Redis 和 Memcached 的区别和共同点，有助于我们在做相应的技术选型的时候，能够做到有理有据！</p>
+<p><strong>共同点</strong> ：</p>
+<ol>
+<li>都是基于内存的数据库，一般都用来当做缓存使用。</li>
+<li>都有过期策略。</li>
+<li>两者的性能都非常高。</li>
+</ol>
+<p><strong>区别</strong> ：</p>
+<ol>
+<li><strong>Redis 支持更丰富的数据类型（支持更复杂的应用场景）</strong>。Redis 不仅仅支持简单的 k/v 类型的数据，同时还提供 list，set，zset，hash 等数据结构的存储。Memcached 只支持最简单的 k/v 数据类型。</li>
+<li><strong>Redis 支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用,而 Memcached 把数据全部存在内存之中。</strong></li>
+<li><strong>Redis 有灾难恢复机制。</strong> 因为可以把缓存中的数据持久化到磁盘上。</li>
+<li><strong>Redis 在服务器内存使用完之后，可以将不用的数据放到磁盘上。但是，Memcached 在服务器内存使用完之后，就会直接报异常。</strong></li>
+<li><strong>Memcached 没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据；但是 Redis 目前是原生支持 cluster 模式的。</strong></li>
+<li><strong>Memcached 是多线程，非阻塞 IO 复用的网络模型；Redis 使用单线程的多路 IO 复用模型。</strong> （Redis 6.0 引入了多线程 IO ）</li>
+<li><strong>Redis 支持发布订阅模型、Lua 脚本、事务等功能，而 Memcached 不支持。并且，Redis 支持更多的编程语言。</strong></li>
+<li><strong>Memcached 过期数据的删除策略只用了惰性删除，而 Redis 同时使用了惰性删除与定期删除。</strong></li>
+</ol>
+<p>相信看了上面的对比之后，我们已经没有什么理由可以选择使用 Memcached 来作为自己项目的分布式缓存了。</p>
+<h2 id="为什么要用-Redis做缓存？"><a href="#为什么要用-Redis做缓存？" class="headerlink" title="为什么要用 Redis做缓存？"></a>为什么要用 Redis做缓存？</h2><p><strong>高性能</strong> ：</p>
+<p>假如用户第一次访问数据库中的某些数据的话，这个过程是比较慢，毕竟是从硬盘中读取的。但是，如果说，用户访问的数据属于高频数据并且不会经常改变的话，那么我们就可以很放心地将该用户访问的数据存在缓存中。</p>
+<p><strong>这样有什么好处呢？</strong> 那就是保证用户下一次再访问这些数据的时候就可以直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当快。</p>
+<p>不过，要保持数据库和缓存中的数据的一致性。 如果数据库中的对应数据改变的之后，同步改变缓存中相应的数据即可！</p>
+<p><strong>高并发：</strong></p>
+<p>一般像 MySQL 这类的数据库的 QPS 大概都在 1w 左右（4 核 8g） ，但是使用 Redis 缓存之后很容易达到 10w+，甚至最高能达到 30w+（就单机 redis 的情况，redis 集群的话会更高）。</p>
+<blockquote>
+<p>QPS（Query Per Second）：服务器每秒可以执行的查询次数；</p>
+</blockquote>
+<p>由此可见，直接操作缓存能够承受的数据库请求数量是远远大于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样用户的一部分请求会直接到缓存这里而不用经过数据库。进而，我们也就提高了系统整体的并发。</p>
+<p>redis除了做缓存，还能实现以下功能：</p>
+<ul>
+<li><strong>分布式锁</strong> ： 通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。相关阅读：<a href="https://mp.weixin.qq.com/s/CbnPRfvq4m1sqo2uKI6qQw">《分布式锁中的王者方案 - Redisson》  (opens new window)</a>。</li>
+<li><strong>限流</strong> ：一般是通过 Redis + Lua 脚本的方式来实现限流。相关阅读：<a href="https://mp.weixin.qq.com/s/kyFAWH3mVNJvurQDt4vchA">《我司用了 6 年的 Redis 分布式限流器，可以说是非常厉害了！》  (opens new window)</a>。</li>
+<li><strong>消息队列</strong> ：Redis 自带的 list 数据结构可以作为一个简单的队列使用。Redis5.0 中增加的 Stream 类型的数据结构更加适合用来做消息队列。它比较类似于 Kafka，有主题和消费组的概念，支持消息持久化以及 ACK 机制。</li>
+<li><strong>复杂业务场景</strong> ：通过 Redis 以及 Redis 扩展（比如 Redisson）提供的数据结构，我们可以很方便地完成很多复杂的业务场景比如通过 bitmap 统计活跃用户、通过 sorted set 维护排行榜。</li>
+<li>……</li>
+</ul>
+<h1 id="Redis常用五大数据类型"><a href="#Redis常用五大数据类型" class="headerlink" title="Redis常用五大数据类型"></a>Redis常用五大数据类型</h1><h2 id="Redis字符串（String）"><a href="#Redis字符串（String）" class="headerlink" title="Redis字符串（String）"></a>Redis字符串（String）</h2><p>String是Redis最基本的类型，你可以理解成与Memcached一模一样的类型，一个key对应一个value。</p>
+<p>String类型是二进制安全的。意味着Redis的string可以包含任何数据。比如jpg图片或者序列化的对象。</p>
+<p>String类型是Redis最基本的数据类型，一个Redis中字符串value最多可以是512M</p>
+<ol>
+<li><strong>常用命令：</strong> <code>set,get,strlen,exists,decr,incr,setex</code> 等等。</li>
+<li><strong>应用场景：</strong> 一般常用在需要计数的场景，比如用户的访问次数、热点文章的点赞转发数量等等。</li>
+</ol>
+<p><strong>Redis字符串类型的使用：</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<p><strong>普通字符串的基本操作：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> key value <span class="comment">#设置 key-value 类型的值</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get key <span class="comment"># 根据 key 获得对应的 value</span></span><br><span class="line"><span class="string">&quot;value&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; exists key  <span class="comment"># 判断某个 key 是否存在</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; strlen key <span class="comment"># 返回 key 所储存的字符串值的长度。</span></span><br><span class="line">(<span class="built_in">integer</span>) 5</span><br><span class="line">127.0.0.1:6379&gt; del key <span class="comment"># 删除某个 key 对应的值</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; get key</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+
+<p><strong>批量设置</strong> :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mset key1 value1 key2 value2 <span class="comment"># 批量设置 key-value 类型的值</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; mget key1 key2 <span class="comment"># 批量获取多个 key 对应的 value</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>计数器（字符串的内容为整数的时候可以使用）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> number 1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; incr number <span class="comment"># 将 key 中储存的数字值增一</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line"><span class="string">&quot;2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; decr number <span class="comment"># 将 key 中储存的数字值减一</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line"><span class="string">&quot;1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>过期（默认为永不过期）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; expire key  60 <span class="comment"># 数据在 60s 后过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; setex key 60 value <span class="comment"># 数据在 60s 后过期 (setex:[set] + [ex]pire)</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; ttl key <span class="comment"># 查看数据还有多久过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 56</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h2 id="Redis列表（List）"><a href="#Redis列表（List）" class="headerlink" title="Redis列表（List）"></a>Redis列表（List）</h2><p>单键多值</p>
+<p>Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。它的底层实际是个双向链表，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。</p>
+<ol>
+<li><strong>常用命令:</strong> <code>rpush,lpop,lpush,rpop,lrange,llen</code> 等。</li>
+<li><strong>应用场景:</strong> 发布与订阅或者说消息队列、慢查询。</li>
+</ol>
+<p><strong>List基本使用：</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<p><strong>通过 <code>rpush/lpop</code> 实现队列：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList value1 <span class="comment"># 向 list 的头部（右边）添加元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; rpush myList value2 value3 <span class="comment"># 向list的头部（最右边）添加多个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; lpop myList <span class="comment"># 将 list的尾部(最左边)元素取出</span></span><br><span class="line"><span class="string">&quot;value1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 1 <span class="comment"># 查看对应下标的list列表， 0 为 start,1为 end</span></span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line">2) <span class="string">&quot;value3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1 <span class="comment"># 查看列表中的所有元素，-1表示倒数第一</span></span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line">2) <span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>通过 <code>rpush/rpop</code> 实现栈：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList2 value1 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; rpop myList2 <span class="comment"># 将 list的头部(最右边)元素取出</span></span><br><span class="line"><span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>通过 <code>lrange</code> 查看对应下标范围的列表元素：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList value1 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 1 <span class="comment"># 查看对应下标的list列表， 0 为 start,1为 end</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1 <span class="comment"># 查看列表中的所有元素，-1表示倒数第一</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">3) <span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>lrange</code> 命令，你可以基于 list 实现分页查询，性能非常高！</p>
+<p><strong>通过 <code>llen</code> 查看链表长度：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; llen myList</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h2 id="Redis哈希表（Hash）"><a href="#Redis哈希表（Hash）" class="headerlink" title="Redis哈希表（Hash）"></a>Redis哈希表（Hash）</h2><p><strong>介绍</strong> ：hash 类似于 JDK1.8 前的 HashMap，内部实现也差不多(数组 + 链表)。不过，Redis 的 hash 做了更多优化。另外，hash 是一个 string 类型的 field 和 value 的映射表，<strong>特别适合用于存储对象</strong>，后续操作的时候，你可以直接仅仅修改这个对象中的某个字段的值。 比如我们可以 hash 数据结构来存储用户信息，商品信息等等。</p>
+<p><strong>常用命令：</strong> <code>hset,hmset,hexists,hget,hgetall,hkeys,hvals</code> 等。</p>
+<p><strong>应用场景:</strong> 系统中对象数据的存储。</p>
+<p><strong>Redis Hash简单使用：</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmset userInfoKey name <span class="string">&quot;guide&quot;</span> description <span class="string">&quot;dev&quot;</span> age <span class="string">&quot;24&quot;</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hexists userInfoKey name <span class="comment"># 查看 key 对应的 value中指定的字段是否存在。</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey name <span class="comment"># 获取存储在哈希表中指定字段的值。</span></span><br><span class="line"><span class="string">&quot;guide&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey age</span><br><span class="line"><span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hgetall userInfoKey <span class="comment"># 获取在哈希表中指定 key 的所有字段和值</span></span><br><span class="line">1) <span class="string">&quot;name&quot;</span></span><br><span class="line">2) <span class="string">&quot;guide&quot;</span></span><br><span class="line">3) <span class="string">&quot;description&quot;</span></span><br><span class="line">4) <span class="string">&quot;dev&quot;</span></span><br><span class="line">5) <span class="string">&quot;age&quot;</span></span><br><span class="line">6) <span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hkeys userInfoKey <span class="comment"># 获取 key 列表</span></span><br><span class="line">1) <span class="string">&quot;name&quot;</span></span><br><span class="line">2) <span class="string">&quot;description&quot;</span></span><br><span class="line">3) <span class="string">&quot;age&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hvals userInfoKey <span class="comment"># 获取 value 列表</span></span><br><span class="line">1) <span class="string">&quot;guide&quot;</span></span><br><span class="line">2) <span class="string">&quot;dev&quot;</span></span><br><span class="line">3) <span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hset userInfoKey name <span class="string">&quot;GuideGeGe&quot;</span> <span class="comment"># 修改某个字段对应的值</span></span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey name</span><br><span class="line"><span class="string">&quot;GuideGeGe&quot;</span></span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h2 id="Redis集合-Set"><a href="#Redis集合-Set" class="headerlink" title="Redis集合(Set)"></a>Redis集合(Set)</h2><p>Redis set对外提供的功能与list类似是一个列表的功能，特殊之处在于set是可以<strong>自动排重</strong>的，当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在一个set集合内的重要接口，这个也是list所不能提供的。</p>
+<p>Redis的Set是string类型的无序集合。它底层其实是一个value为null的hash表，所以添加，删除，查找的复杂度都是O(1)。</p>
+<ol>
+<li><strong>常用命令：</strong> <code>sadd,spop,smembers,sismember,scard,sinterstore,sunion</code> 等。</li>
+<li><strong>应用场景:</strong> 需要存放的数据不能重复以及需要获取多个数据源交集和并集等场景</li>
+</ol>
+<p>Set基本使用：</p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd mySet value1 value2 <span class="comment"># 添加元素进去</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sadd mySet value1 <span class="comment"># 不允许有重复元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br><span class="line">127.0.0.1:6379&gt; smembers mySet <span class="comment"># 查看 set 中所有的元素</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; scard mySet <span class="comment"># 查看 set 的长度</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sismember mySet value1 <span class="comment"># 检查某个元素是否存在set 中，只能接收单个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd mySet2 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sinterstore mySet3 mySet mySet2 <span class="comment"># 获取 mySet 和 mySet2 的交集并存放在 mySet3 中</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers mySet3</span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h2 id="Redis有序集合Zset-sorted-set"><a href="#Redis有序集合Zset-sorted-set" class="headerlink" title="Redis有序集合Zset(sorted set)"></a>Redis有序集合Zset(sorted set)</h2><p>Redis有序集合zset与普通集合set非常相似，是一个没有重复元素的字符串集合。</p>
+<p>不同之处是有序集合的每个成员都关联了一个评分（score）,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。集合的成员是唯一的，但是评分可以是重复了 。</p>
+<p>因为元素是有序的, 所以你也可以很快的根据评分（score）或者次序（position）来获取一个范围的元素。</p>
+<p>访问有序集合的中间元素也是非常快的,因此你能够使用有序集合作为一个没有重复成员的智能列表。</p>
+<p><strong>常用命令：</strong> <code>zadd,zcard,zscore,zrange,zrevrange,zrem</code> 等。</p>
+<p><strong>应用场景：</strong> 需要对数据根据某个权重进行排序的场景。比如在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维度的消息排行榜）等信息。</p>
+<p><strong>Zset基本使用：</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击展开/关闭</div></div><div class="fold">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd myZset 3.0 value1 <span class="comment"># 添加元素到 sorted set 中 3.0 为权重</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd myZset 2.0 value2 1.0 value3 <span class="comment"># 一次添加多个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; zcard myZset <span class="comment"># 查看 sorted set 中的元素数量</span></span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; zscore myZset value1 <span class="comment"># 查看某个 value 的权重</span></span><br><span class="line"><span class="string">&quot;3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrange  myZset 0 -1 <span class="comment"># 顺序输出某个范围区间的元素，0 -1 表示输出所有元素</span></span><br><span class="line">1) <span class="string">&quot;value3&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">3) <span class="string">&quot;value1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrange  myZset 0 1 <span class="comment"># 顺序输出某个范围区间的元素，0 为 start  1 为 stop</span></span><br><span class="line">1) <span class="string">&quot;value3&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrevrange  myZset 0 1 <span class="comment"># 逆序输出某个范围区间的元素，0 为 start  1 为 stop</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
+
+</div></div>
+
+<h2 id="Redis-bigkey"><a href="#Redis-bigkey" class="headerlink" title="Redis bigkey"></a>Redis bigkey</h2><p>什么是 bigkey？</p>
+<p>简单来说，如果一个 key 对应的 value 所占用的内存比较大，那这个 key 就可以看作是 bigkey。具体多大才算大呢？有一个不是特别精确的参考标准：string 类型的 value 超过 10 kb，复合类型的 value 包含的元素超过 5000 个（对于复合类型的 value 来说，不一定包含的元素越多，占用的内存就越多）。</p>
+<p> bigkey 有什么危害？</p>
+<p>除了会消耗更多的内存空间，bigkey 对性能也会有比较大的影响。</p>
+<p>因此，我们应该尽量避免写入 bigkey！</p>
+<p>如何发现 bigkey？</p>
+<p><strong>1、使用 Redis 自带的 <code>--bigkeys</code> 参数来查找。</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># redis-cli -p 6379 --bigkeys</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Scanning the entire keyspace to find biggest keys as well as</span></span><br><span class="line"><span class="comment"># average sizes per key type.  You can use -i 0.1 to sleep 0.1 sec</span></span><br><span class="line"><span class="comment"># per 100 SCAN commands (not usually needed).</span></span><br><span class="line"></span><br><span class="line">[00.00%] Biggest string found so far <span class="string">&#x27;&quot;ballcat:oauth:refresh_auth:f6cdb384-9a9d-4f2f-af01-dc3f28057c20&quot;&#x27;</span> with 4437 bytes</span><br><span class="line">[00.00%] Biggest list   found so far <span class="string">&#x27;&quot;my-list&quot;&#x27;</span> with 17 items</span><br><span class="line"></span><br><span class="line">-------- summary -------</span><br><span class="line"></span><br><span class="line">Sampled 5 keys <span class="keyword">in</span> the keyspace!</span><br><span class="line">Total key length <span class="keyword">in</span> bytes is 264 (avg len 52.80)</span><br><span class="line"></span><br><span class="line">Biggest   list found <span class="string">&#x27;&quot;my-list&quot;&#x27;</span> has 17 items</span><br><span class="line">Biggest string found <span class="string">&#x27;&quot;ballcat:oauth:refresh_auth:f6cdb384-9a9d-4f2f-af01-dc3f28057c20&quot;&#x27;</span> has 4437 bytes</span><br><span class="line"></span><br><span class="line">1 lists with 17 items (20.00% of keys, avg size 17.00)</span><br><span class="line">0 hashs with 0 fields (00.00% of keys, avg size 0.00)</span><br><span class="line">4 strings with 4831 bytes (80.00% of keys, avg size 1207.75)</span><br><span class="line">0 streams with 0 entries (00.00% of keys, avg size 0.00)</span><br><span class="line">0 sets with 0 members (00.00% of keys, avg size 0.00)</span><br><span class="line">0 zsets with 0 members (00.00% of keys, avg size 0.00</span><br></pre></td></tr></table></figure>
+
+<p>从这个命令的运行结果，我们可以看出：这个命令会扫描(Scan) Redis 中的所有 key ，会对 Redis 的性能有一点影响。并且，这种方式只能找出每种数据结构 top 1 bigkey（占用内存最大的 string 数据类型，包含元素最多的复合数据类型）。</p>
+<p><strong>2、分析 RDB 文件</strong></p>
+<p>通过分析 RDB 文件来找出 big key。这种方案的前提是你的 Redis 采用的是 RDB 持久化。</p>
+<p>网上有现成的代码/工具可以直接拿来使用：</p>
+<ul>
+<li><a href="https://github.com/sripathikrishnan/redis-rdb-tools">redis-rdb-tools  (opens new window)</a> ：Python 语言写的用来分析 Redis 的 RDB 快照文件用的工具</li>
+<li><a href="https://github.com/weiyanwei412/rdb_bigkeys">rdb_bigkeys  (opens new window)</a> : Go 语言写的用来分析 Redis 的 RDB 快照文件用的工具，性能更好。</li>
+</ul>
+<h1 id="Redis-单线程模型详解"><a href="#Redis-单线程模型详解" class="headerlink" title="Redis 单线程模型详解"></a>Redis 单线程模型详解</h1><p><strong>Redis 基于 Reactor 模式来设计开发了自己的一套高效的事件处理模型</strong> （Netty 的线程模型也基于 Reactor 模式，Reactor 模式不愧是高性能 IO 的基石），这套事件处理模型对应的是 Redis 中的文件事件处理器（file event handler）。由于文件事件处理器（file event handler）是单线程方式运行的，所以我们一般都说 Redis 是单线程模型。</p>
+<p><strong>既然是单线程，那怎么监听大量的客户端连接呢？</strong></p>
+<p>Redis 通过<strong>IO 多路复用程序</strong> 来监听来自客户端的大量连接（或者说是监听多个 socket），它会将感兴趣的事件及类型（读、写）注册到内核中并监听每个事件是否发生。</p>
+<p>这样的好处非常明显： <strong>I/O 多路复用技术的使用让 Redis 不需要额外创建多余的线程来监听客户端的大量连接，降低了资源的消耗</strong>（和 NIO 中的 <code>Selector</code> 组件很像）。</p>
+<p>另外， Redis 服务器是一个事件驱动程序，服务器需要处理两类事件：<strong>1. 文件事件; 2. 时间事件。</strong></p>
+<p>时间事件不需要多花时间了解，我们接触最多的还是 <strong>文件事件</strong>（客户端进行读取写入等操作，涉及一系列网络通信）。</p>
+<p>《Redis 设计与实现》有一段话是如是介绍文件事件的，我觉得写得挺不错。</p>
+<blockquote>
+<p>Redis 基于 Reactor 模式开发了自己的网络事件处理器：<strong>这个处理器被称为文件事件处理器（file event handler）。文件事件处理器使用 I/O 多路复用（multiplexing</strong>）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</p>
+<p>当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关 闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。</p>
+<p><strong>虽然文件事件处理器以单线程方式运行，但通过使用 I/O 多路复用程序来监听多个套接字</strong>，文件事件处理器既实现了高性能的网络通信模型，又可以很好地与 Redis 服务器中其他同样以单线程方式运行的模块进行对接，这保持了 Redis 内部单线程设计的简单性。</p>
+</blockquote>
+<p>可以看出，文件事件处理器（file event handler）主要是包含 4 个部分：</p>
+<ul>
+<li>多个 socket（客户端连接）</li>
+<li>IO 多路复用程序（支持多个客户端连接的关键）</li>
+<li>文件事件分派器（将 socket 关联到相应的事件处理器）</li>
+<li>事件处理器（连接应答处理器、命令请求处理器、命令回复处理器）</li>
+</ul>
+<p><strong>Redis使用单线程的好处：</strong></p>
+<ol>
+<li>单线程编程容易并且更容易维护；</li>
+<li>Redis 的性能瓶颈不在 CPU ，主要在内存和网络；</li>
+<li>多线程就会存在死锁、线程上下文切换等问题，甚至会影响性能</li>
+</ol>
+<p><strong>Redis6.0 引入多线程主要是为了提高网络 IO 读写性能</strong>，因为这个算是 Redis 中的一个性能瓶颈（Redis 的瓶颈主要受限于内存和网络）。</p>
+<p>Redis 选择使用单线程模型处理客户端的请求主要还是因为 CPU 不是 Redis 服务器的瓶颈，所以使用多线程模型带来的性能提升并不能抵消它带来的开发成本和维护成本，系统的性能瓶颈也主要在网络 I/O 操作上；而 Redis 引入多线程操作也是出于性能上的考虑，对于一些大键值对的删除操作，通过多线程非阻塞地释放内存空间也能减少对 Redis 主线程阻塞的时间，提高执行的效率。</p>
+<p>虽然，Redis6.0 引入了多线程，但是 Redis 的多线程只是在网络数据的读写这类耗时操作上使用了，执行命令仍然是单线程顺序执行。因此，你也不需要担心线程安全问题。</p>
+<p>Redis6.0 的多线程默认是禁用的，只使用主线程。如需开启需要修改 redis 配置文件 <code>redis.conf</code> ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">io-threads-do-reads yes</span><br></pre></td></tr></table></figure>
+
+<p>开启多线程后，还需要设置线程数，否则是不生效的。同样需要修改 redis 配置文件 <code>redis.conf</code> :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">io-threads 4 <span class="comment">#官网建议4核的机器建议设置为2或3个线程，8核的建议设置为6个线程</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Redis-缓存数据过期时间"><a href="#Redis-缓存数据过期时间" class="headerlink" title="Redis 缓存数据过期时间"></a>Redis 缓存数据过期时间</h1><h2 id="设置过期时间的作用"><a href="#设置过期时间的作用" class="headerlink" title="设置过期时间的作用"></a>设置过期时间的作用</h2><p>一般情况下，我们设置保存的缓存数据的时候都会设置一个过期时间。为什么呢？</p>
+<p>因为内存是有限的，如果缓存中的所有数据都是一直保存的话，分分钟直接 Out of memory。</p>
+<p>Redis 自带了给缓存数据设置过期时间的功能，比如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; exp key 60 <span class="comment"># 数据在 60s 后过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; setex key 60 value <span class="comment"># 数据在 60s 后过期 (setex:[set] + [ex]pire)</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; ttl key <span class="comment"># 查看数据还有多久过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 56</span><br></pre></td></tr></table></figure>
+
+<p>注意：**Redis 中除了字符串类型有自己独有设置过期时间的命令 <code>setex</code> 外，其他方法都需要依靠 <code>expire</code> 命令来设置过期时间 。另外， <code>persist</code> 命令可以移除一个键的过期时间。 **</p>
+<p><strong>过期时间除了有助于缓解内存的消耗，还有什么其他用么？</strong></p>
+<p>很多时候，我们的业务场景就是需要某个数据只在某一时间段内存在，比如我们的短信验证码可能只在 1 分钟内有效，用户登录的 token 可能只在 1 天内有效。</p>
+<p>如果使用传统的数据库来处理的话，一般都是自己判断过期，这样更麻烦并且性能要差很多。</p>
+<h2 id="Redis是如何判断数据是否过期？"><a href="#Redis是如何判断数据是否过期？" class="headerlink" title="Redis是如何判断数据是否过期？"></a><strong>Redis是如何判断数据是否过期？</strong></h2><p>Redis 通过一个叫做过期字典（可以看作是 hash 表）来保存数据过期的时间。过期字典的键指向 Redis 数据库中的某个 key(键)，过期字典的值是一个 long long 类型的整数，这个整数保存了 key 所指向的数据库键的过期时间（毫秒精度的 UNIX 时间戳）。</p>
+<h2 id="Redis过期数据删除策略"><a href="#Redis过期数据删除策略" class="headerlink" title="Redis过期数据删除策略"></a>Redis过期数据删除策略</h2><p>如果假设你设置了一批 key 只能存活 1 分钟，那么 1 分钟后，Redis 是怎么对这批 key 进行删除的呢？</p>
+<p>常用的过期数据的删除策略就两个（重要！自己造缓存轮子的时候需要格外考虑的东西）：</p>
+<ol>
+<li><strong>惰性删除</strong> ：只会在取出 key 的时候才对数据进行过期检查。这样对 CPU 最友好，但是可能会造成太多过期 key 没有被删除。</li>
+<li><strong>定期删除</strong> ： 每隔一段时间抽取一批 key 执行删除过期 key 操作。并且，Redis 底层会通过限制删除操作执行的时长和频率来减少删除操作对 CPU 时间的影响。</li>
+</ol>
+<p>定期删除对内存更加友好，惰性删除对 CPU 更加友好。两者各有千秋，所以 Redis 采用的是 <strong>定期删除+惰性/懒汉式删除</strong> 。</p>
+<p>但是，仅仅通过给 key 设置过期时间还是有问题的。因为还是可能存在定期删除和惰性删除漏掉了很多过期 key 的情况。这样就导致大量过期 key 堆积在内存里，然后就 Out of memory 了。</p>
+<p>怎么解决这个问题呢？答案就是：<strong>Redis 内存淘汰机制。</strong></p>
+<h1 id="Redis-内存淘汰机制"><a href="#Redis-内存淘汰机制" class="headerlink" title="Redis 内存淘汰机制"></a>Redis 内存淘汰机制</h1><p>Redis 提供 6 种数据淘汰策略：</p>
+<ol>
+<li><p><strong>volatile-lru（least recently used）</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</p>
+</li>
+<li><p><strong>volatile-ttl</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰</p>
+</li>
+<li><p><strong>volatile-random</strong>：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</p>
+</li>
+<li><p><strong>allkeys-lru（least recently used）</strong>：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）</p>
+</li>
+<li><p><strong>allkeys-random</strong>：从数据集（server.db[i].dict）中任意选择数据淘汰</p>
+</li>
+<li><h1 id="no-eviction：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！"><a href="#no-eviction：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！" class="headerlink" title="no-eviction：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！"></a><strong>no-eviction</strong>：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！</h1></li>
+</ol>
+<p>4.0 版本后增加以下两种：</p>
+<ol>
+<li><strong>volatile-lfu（least frequently used）</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选最不经常使用的数据淘汰</li>
+<li><strong>allkeys-lfu（least frequently used）</strong>：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key</li>
+</ol>
+<h1 id="Redis-持久化机制"><a href="#Redis-持久化机制" class="headerlink" title="Redis 持久化机制"></a>Redis 持久化机制</h1><p>很多时候我们需要持久化数据也就是将内存中的数据写入到硬盘里面，大部分原因是为了之后重用数据（比如重启机器、机器故障之后恢复数据），或者是为了防止系统故障而将数据备份到一个远程位置。</p>
+<p>Redis 不同于 Memcached 的很重要一点就是，Redis 支持持久化，而且支持两种不同的持久化操作。<strong>Redis 的一种持久化方式叫快照（snapshotting，RDB），另一种方式是只追加文件（append-only file, AOF）</strong>。</p>
+<h3 id="快照（snapshotting）持久化（RDB）"><a href="#快照（snapshotting）持久化（RDB）" class="headerlink" title="快照（snapshotting）持久化（RDB）"></a>快照（snapshotting）持久化（RDB）</h3><p>Redis 可以通过创建快照来获得存储在内存里面的数据在某个时间点上的副本。Redis 创建快照之后，可以对快照进行备份，可以将快照复制到其他服务器从而创建具有相同数据的服务器副本（Redis 主从结构，主要用来提高 Redis 性能），还可以将快照留在原地以便重启服务器的时候使用。</p>
+<p>快照持久化是 Redis 默认采用的持久化方式，在 Redis.conf 配置文件中默认有此下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">save 900 1           #在900秒(15分钟)之后，如果至少有1个key发生变化，Redis就会自动触发BGSAVE命令创建快照。</span><br><span class="line"></span><br><span class="line">save 300 10          #在300秒(5分钟)之后，如果至少有10个key发生变化，Redis就会自动触发BGSAVE命令创建快照。</span><br><span class="line"></span><br><span class="line">save 60 10000        #在60秒(1分钟)之后，如果至少有10000个key发生变化，Redis就会自动触发BGSAVE命令创建快照。</span><br></pre></td></tr></table></figure>
+
+<h3 id="AOF（append-only-file）持久化"><a href="#AOF（append-only-file）持久化" class="headerlink" title="AOF（append-only file）持久化"></a>AOF（append-only file）持久化</h3><p>与快照持久化相比，AOF 持久化的实时性更好，因此已成为主流的持久化方案。默认情况下 Redis 没有开启 AOF（append only file）方式的持久化，可以通过 appendonly 参数开启：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
+
+<p>1</p>
+<p>开启 AOF 持久化后每执行一条会更改 Redis 中的数据的命令，Redis 就会将该命令写入到内存缓存 <code>server.aof_buf</code> 中，然后再根据 <code>appendfsync</code> 配置来决定何时将其同步到硬盘中的 AOF 文件。</p>
+<p>AOF 文件的保存位置和 RDB 文件的位置相同，都是通过 dir 参数设置的，默认的文件名是 <code>appendonly.aof</code>。</p>
+<p>在 Redis 的配置文件中存在三种不同的 AOF 持久化方式，它们分别是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">appendfsync always    #每次有数据修改发生时都会写入AOF文件,这样会严重降低Redis的速度</span><br><span class="line">appendfsync everysec  #每秒钟同步一次，显式地将多个写命令同步到硬盘</span><br><span class="line">appendfsync no        #让操作系统决定何时进行同步</span><br></pre></td></tr></table></figure>
+
+<p>为了兼顾数据和写入性能，用户可以考虑 <code>appendfsync everysec</code> 选项 ，让 Redis 每秒同步一次 AOF 文件，Redis 性能几乎没受到任何影响。而且这样即使出现系统崩溃，用户最多只会丢失一秒之内产生的数据。当硬盘忙于执行写入操作的时候，Redis 还会优雅的放慢自己的速度以便适应硬盘的最大写入速度。</p>
+<p><strong>AOF 重写</strong></p>
+<p>AOF 重写可以产生一个新的 AOF 文件，这个新的 AOF 文件和原有的 AOF 文件所保存的数据库状态一样，但体积更小。</p>
+<p>AOF 重写是一个有歧义的名字，该功能是通过读取数据库中的键值对来实现的，程序无须对现有 AOF 文件进行任何读入、分析或者写入操作。</p>
+<p>在执行 BGREWRITEAOF 命令时，Redis 服务器会维护一个 AOF 重写缓冲区，该缓冲区会在子进程创建新 AOF 文件期间，记录服务器执行的所有写命令。当子进程完成创建新 AOF 文件的工作之后，服务器会将重写缓冲区中的所有内容追加到新 AOF 文件的末尾，使得新的 AOF 文件保存的数据库状态与现有的数据库状态一致。最后，服务器用新的 AOF 文件替换旧的 AOF 文件，以此来完成 AOF 文件重写操作。</p>
+<p><strong>拓展：Redis 4.0 对于持久化机制的优化</strong></p>
+<p>Redis 4.0 开始支持 RDB 和 AOF 的混合持久化（默认关闭，可以通过配置项 <code>aof-use-rdb-preamble</code> 开启）。</p>
+<p>如果把混合持久化打开，AOF 重写的时候就直接把 RDB 的内容写到 AOF 文件开头。这样做的好处是可以结合 RDB 和 AOF 的优点, 快速加载同时避免丢失过多的数据。当然缺点也是有的， AOF 里面的 RDB 部分是压缩格式不再是 AOF 格式，可读性较差。</p>
+<blockquote>
+<p>RDB的优点：简称“3更”</p>
+<p>1.体积更小：相同的数据量rdb数据比aof的小，因为rdb是紧凑型文件</p>
+<p>2.恢复更快：因为rdb是数据的快照，基本上就是数据的复制，不用重新读取再写入内存</p>
+<p>3.性能更高:父进程在保存rdb时候只需要fork一个子进程，无需父进程的进行其他io操作，也保证了服务器的性能。</p>
+<p>缺点：</p>
+<p>1.故障丢失:因为rdb是全量的，我们一般是使用shell脚本实现30分钟或者1小时或者每天对redis进行rdb备份，（注，也可以是用自带的策略），但是最少也要5分钟进行一次的备份，所以当服务死掉后，最少也要丢失5分钟的数据。</p>
+<p>2.耐久性差:相对aof的异步策略来说，因为rdb的复制是全量的，即使是fork的子进程来进行备份，当数据量很大的时候对磁盘的消耗也是不可忽视的，尤其在访问量很高的时候，fork的时间也会延长，导致cpu吃紧，耐久性相对较差。</p>
+</blockquote>
+<blockquote>
+<p>aof的优点</p>
+<p>1.数据保证：我们可以设置fsync策略，一般默认是everysec，也可以设置每次写入追加，所以即使服务死掉了，咱们也最多丢失一秒数据</p>
+<p>2.自动缩小：当aof文件大小到达一定程度的时候，后台会自动的去执行aof重写，此过程不会影响主进程，重写完成后，新的写入将会写到新的aof中，旧的就会被删除掉。但是此条如果拿出来对比rdb的话还是没有必要算成优点，只是官网显示成优点而已。</p>
+<p>缺点呢：和rdb相反嘛，毕竟只有两种。</p>
+<p>1.性能相对较差：它的操作模式决定了它会对redis的性能有所损耗</p>
+<p>2.体积相对更大：尽管是将aof文件重写了，但是毕竟是操作过程和操作结果仍然有很大的差别，体积也毋庸置疑的更大。</p>
+<p>3.恢复速度更慢：</p>
+</blockquote>
+<p><strong>总结：</strong></p>
+<p>redis有两种持久化方式，aof和rdb，aof相当于日志记录操作命令，rdb相当于数据的快照。安全性来讲由于aof的记录能够精确到秒级追加甚至逐条追加，而rdb只能是全量复制，aof明显高于rdb。但是从性能来讲rdb就略胜一筹，rdb是redis性能最大化的体现，它不用每秒监控是否有数据写入，当达到触发条件后就自动fork一个子进程进行全量更新，速度也很快。容灾回复方面rdb更是能够快速的恢复数据，而aof需要读取再写入，相对慢了很多。</p>
+<h1 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h1><h2 id="Redis事务基本概念"><a href="#Redis事务基本概念" class="headerlink" title="Redis事务基本概念"></a>Redis事务基本概念</h2><p>Redis 可以通过 <strong><code>MULTI</code>，<code>EXEC</code>，<code>DISCARD</code> 和 <code>WATCH</code></strong> 等命令来实现事务(transaction)功能。</p>
+<p>Redis开启一个事务后，若出现语法错误，均连坐，所有指令都不执行；</p>
+<p>若出现的是运行时错误，正确的命令都会执行，错误的命令返回错误。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">&gt; SET USER <span class="string">&quot;Guide哥&quot;</span></span><br><span class="line">QUEUED</span><br><span class="line">&gt; GET USER</span><br><span class="line">QUEUED</span><br><span class="line">&gt; EXEC</span><br><span class="line">1) OK</span><br><span class="line">2) <span class="string">&quot;Guide哥&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 MULTI命令后可以输入多个命令。Redis 不会立即执行这些命令，而是将它们放到队列，当调用了 EXEC命令将执行所有命令。</p>
+<p>这个过程是这样的：</p>
+<ol>
+<li>开始事务（<code>MULTI</code>）。</li>
+<li>命令入队(批量操作 Redis 的命令，先进先出（FIFO）的顺序执行)。</li>
+<li>执行事务(<code>EXEC</code>)。</li>
+</ol>
+<p>也可以通过 DISCARD 命令取消一个事务，它会清空事务队列中保存的所有命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">&gt; SET USER <span class="string">&quot;Guide哥&quot;</span></span><br><span class="line">QUEUED</span><br><span class="line">&gt; GET USER</span><br><span class="line">QUEUED</span><br><span class="line">&gt; DISCARD</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>WATCH 命令用于监听指定的键，当调用 <code>EXEC</code> 命令执行事务时，如果一个被 <code>WATCH</code> 命令监视的键被修改的话，整个事务都不会执行，直接返回失败。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; WATCH USER</span><br><span class="line">OK</span><br><span class="line">&gt; MULTI</span><br><span class="line">&gt; SET USER <span class="string">&quot;Guide哥&quot;</span></span><br><span class="line">OK</span><br><span class="line">&gt; GET USER</span><br><span class="line">Guide哥</span><br><span class="line">&gt; EXEC</span><br><span class="line">ERR EXEC without MULTI</span><br></pre></td></tr></table></figure>
+
+<p>但是，Redis 的事务和我们平时理解的关系型数据库的事务不同。我们知道事务具有四大特性： <strong>1. 原子性</strong>，<strong>2. 隔离性</strong>，<strong>3. 持久性</strong>，<strong>4. 一致性</strong>。</p>
+<ol>
+<li><strong>原子性（Atomicity）：</strong> 事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用；</li>
+<li><strong>隔离性（Isolation）：</strong> 并发访问数据库时，一个用户的事务不被其他事务所干扰，各并发事务之间数据库是独立的；</li>
+<li><strong>持久性（Durability）：</strong> 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影响。</li>
+<li><strong>一致性（Consistency）：</strong> 执行事务前后，数据保持一致，多个事务对同一个数据读取的结果是相同的；</li>
+</ol>
+<p><strong>Redis 是不支持 roll back 的，因而不满足原子性的（而且不满足持久性）。</strong></p>
+<p>Redis 官网也解释了自己为啥不支持回滚。简单来说就是 Redis 开发者们觉得没必要支持回滚，这样更简单便捷并且性能更好。Redis 开发者觉得即使命令执行错误也应该在开发过程中就被发现而不是生产过程中。</p>
+<h2 id="Redis事务与Mysql事务的区别"><a href="#Redis事务与Mysql事务的区别" class="headerlink" title="Redis事务与Mysql事务的区别"></a>Redis事务与Mysql事务的区别</h2><h3 id="事务命令"><a href="#事务命令" class="headerlink" title="事务命令"></a>事务命令</h3><p><strong>mysql：</strong></p>
+<ul>
+<li>Begin:显式的开启一个事务；</li>
+<li>Commit：提交事务，将对数据库进行的所有的修改变成永久性的；</li>
+<li>Rollback：结束用户的事务，并撤销现在正在进行的未提交的修改；</li>
+</ul>
+<p><strong>redis：</strong></p>
+<ul>
+<li>Multi：标记事务的开始；</li>
+<li>Exec：执行事务的commands队列；</li>
+<li>Discard：结束事务，并清除commands队列；</li>
+</ul>
+<h3 id="默认状态"><a href="#默认状态" class="headerlink" title="默认状态"></a>默认状态</h3><p><strong>mysql：</strong></p>
+<ul>
+<li>mysql会<strong>默认开启</strong>一个事务，且缺省设置是自动提交，即每成功执行一次sql，一个事务就会马上commit，所以不能rollback；</li>
+<li>默认情况下如上所述，但是非默认情况下，<strong>可以rollback</strong>；</li>
+</ul>
+<p><strong>redis：</strong></p>
+<ul>
+<li>redis<strong>默认不会开启</strong>事务，即command会立即执行，而不会排队，并<strong>不支持rollback</strong>；</li>
+</ul>
+<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p><strong>mysql（包含两种方式）：</strong></p>
+<ol>
+<li>用Begin、Rollback、commit显式开启并控制一个 新的 Transaction；</li>
+<li>执行命令 set autocommit=0，用来禁止当前会话自动commit，控制 默认开启的事务；</li>
+</ol>
+<p><strong>redis：</strong></p>
+<ol>
+<li>用multi、exec、discard，显式开启并控制一个Transaction。（注意：这里没有强调 “新的” ，因为默认是不会开启事务的）。</li>
+</ol>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p><strong>mysql：</strong></p>
+<ul>
+<li>mysql实现事务，是基于<strong>undo/redo日志</strong>；</li>
+<li><code>undo</code>记录**<code>修改前</code><strong>状态，</strong><code>rollback</code><strong>基于</strong>undo**日志实现；</li>
+<li><code>redo</code>记录**<code>修改后</code><strong>的状态，</strong><code>commit</code><strong>基于</strong>redo**日志实现；</li>
+<li>在mysql中无论是否开启事务，<strong>sql都会被立即执行并返回执行结果</strong>，只是**<code>事务开启</code><strong>后<code>执行后的状态</code>只是记录在<code>redo日志</code>，执行<code>commit</code>之后，数据才会被</strong><code>写入磁盘；</code>**</li>
+</ul>
+<p>如： int insertSelective = serviceOrderMapper.insertSelective(s); </p>
+<p>上述代码，insertSelective 将会被立即赋值（无论是否开启事务，只是结果或<strong>未被</strong>写入磁盘）：</p>
+<p>redis:</p>
+<ul>
+<li>redis实现事务，是基于<code>commands队列</code></li>
+<li>如果<strong>没有开启</strong>事务，command将会被立即执行并返回执行结果，并且<strong>直接写入磁盘</strong>；</li>
+<li>如果<strong>事务开启</strong>，command不会被立即执行，而是<strong>排入队列</strong>，并返回**<code>排队状态</code><strong>（具体依赖于客户端（例如：spring-data-redis）自身实现）。调用</strong><code>exec</code><strong>才会执行</strong><code>commands队列；</code>**</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">boolean</span> a = redisTemplate.opsForZSet().add(<span class="string">&quot;generalService&quot;</span>,orderId,System.currentTimeMillis());</span><br></pre></td></tr></table></figure>
+
+<p>可以将 Redis 中的事务就理解为 ：<strong>Redis 事务提供了一种将多个命令请求打包的功能。然后，再按顺序执行打包的所有命令，并且不会被中途打断。</strong></p>
+<h3 id="Redis-可以做消息队列么？"><a href="#Redis-可以做消息队列么？" class="headerlink" title="Redis 可以做消息队列么？"></a>Redis 可以做消息队列么？</h3><p>Redis 5.0 新增加的一个数据结构 <code>Stream</code> 可以用来做消息队列，<code>Stream</code> 支持：</p>
+<ul>
+<li>发布 / 订阅模式</li>
+<li>按照消费者组进行消费</li>
+<li>消息持久化（ RDB 和 AOF）</li>
+</ul>
+<p>不过，和专业的消息队列相比，还是有很多欠缺的地方比如消息丢失和堆积问题不好解决。</p>
+<p>我们通常建议是不需要使用 Redis 来做消息队列的，你完全可以选择市面上比较成熟的一些消息队列比如 RocketMQ、Kafka。</p>
+<h1 id="Redis缓存存在的几个问题"><a href="#Redis缓存存在的几个问题" class="headerlink" title="Redis缓存存在的几个问题"></a>Redis缓存存在的几个问题</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><p>缓存穿透说简单点就是大量请求的 key 根本不存在于缓存中，导致请求直接到了数据库上，根本没有经过缓存这一层。举个例子：某个黑客故意制造我们缓存中不存在的 key 发起大量请求，导致大量请求落到数据库。</p>
+<p><strong>解决办法：</strong></p>
+<p><strong>1）缓存无效 key</strong></p>
+<p>如果缓存和数据库都查不到某个 key 的数据就写一个到 Redis 中去并设置过期时间，具体命令如下： <code>SET key value EX 10086</code> 。这种方式可以解决请求的 key 变化不频繁的情况，如果黑客恶意攻击，每次构建不同的请求 key，会导致 Redis 中缓存大量无效的 key 。很明显，这种方案并不能从根本上解决此问题。如果非要用这种方式来解决穿透问题的话，尽量将无效的 key 的过期时间设置短一点比如 1 分钟。</p>
+<p>另外，这里多说一嘴，一般情况下我们是这样设计 key 的： <code>表名:列名:主键名:主键值</code> 。</p>
+<p>如果用 Java 代码展示的话，差不多是下面这样的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getObjectInclNullById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 从缓存中获取数据</span></span><br><span class="line">    Object cacheValue = cache.get(id);</span><br><span class="line">    <span class="comment">// 缓存为空</span></span><br><span class="line">    <span class="keyword">if</span> (cacheValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 从数据库中获取</span></span><br><span class="line">        Object storageValue = storage.get(key);</span><br><span class="line">        <span class="comment">// 缓存空对象</span></span><br><span class="line">        cache.set(key, storageValue);</span><br><span class="line">        <span class="comment">// 如果存储数据为空，需要设置一个过期时间(300秒)</span></span><br><span class="line">        <span class="keyword">if</span> (storageValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 必须设置过期时间，否则有被攻击的风险</span></span><br><span class="line">            cache.expire(key, <span class="number">60</span> * <span class="number">5</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> storageValue;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cacheValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2）布隆过滤器</strong></p>
+<p>布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们需要的就是判断 key 是否合法，有没有感觉布隆过滤器就是我们想要找的那个“人”。</p>
+<p>具体是这样做的：把所有可能存在的请求的值都存放在布隆过滤器中，当用户请求过来，先判断用户发来的请求的值是否存在于布隆过滤器中。不存在的话，直接返回请求参数错误信息给客户端，存在的话才会走下面的流程。</p>
+<p>但是，需要注意的是布隆过滤器可能会存在误判的情况。总结来说就是： <strong>布隆过滤器说某个元素存在，小概率会误判。布隆过滤器说某个元素不在，那么这个元素一定不在。</strong></p>
+<p><em>为什么会出现误判的情况呢? 我们还要从布隆过滤器的原理来说！</em></p>
+<p>我们先来看一下，<strong>当一个元素加入布隆过滤器中的时候，会进行哪些操作：</strong></p>
+<ol>
+<li>使用布隆过滤器中的哈希函数对元素值进行计算，得到哈希值（有几个哈希函数得到几个哈希值）。</li>
+<li>根据得到的哈希值，在位数组中把对应下标的值置为 1。</li>
+</ol>
+<p>我们再来看一下，<strong>当我们需要判断一个元素是否存在于布隆过滤器的时候，会进行哪些操作：</strong></p>
+<ol>
+<li>对给定元素再次进行相同的哈希计算；</li>
+<li>得到值之后判断位数组中的每个元素是否都为 1，如果值都为 1，那么说明这个值在布隆过滤器中，如果存在一个值不为 1，说明该元素不在布隆过滤器中。</li>
+</ol>
+<p>然后，一定会出现这样一种情况：<strong>不同的字符串可能哈希出来的位置相同。</strong> （可以适当增加位数组大小或者调整我们的哈希函数来降低概率）</p>
+<p>更多关于布隆过滤器的内容可以看我的这篇原创：<a href="https://javaguide.cn/cs-basics/data-structure/bloom-filter/">《不了解布隆过滤器？一文给你整的明明白白！》  (opens new window)</a> ，强烈推荐，个人感觉网上应该找不到总结的这么明明白白的文章了</p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p><strong>缓存在同一时间大面积的失效，后面的请求都直接落到了数据库上，造成数据库短时间内承受大量请求。</strong> 这就好比雪崩一样，摧枯拉朽之势，数据库的压力可想而知，可能直接就被这么多请求弄宕机了。</p>
+<p>举个例子：系统的缓存模块出了问题比如宕机导致不可用。造成系统的所有访问，都要走数据库。</p>
+<p>还有一种缓存雪崩的场景是：<strong>有一些被大量访问数据（热点缓存）在某一时刻大面积失效，导致对应的请求直接落到了数据库上。</strong> 这样的情况，有下面几种解决办法：</p>
+<p>举个例子 ：秒杀开始 12 个小时之前，我们统一存放了一批商品到 Redis 中，设置的缓存过期时间也是 12 个小时，那么秒杀开始的时候，这些秒杀的商品的访问直接就失效了。导致的情况就是，相应的请求直接就落到了数据库上，就像雪崩一样可怕。</p>
+<p><strong>解决办法：</strong></p>
+<p><strong>针对 Redis 服务不可用的情况：</strong></p>
+<ol>
+<li>采用 Redis 集群，避免单机出现问题整个缓存服务都没办法使用。</li>
+<li>限流，避免同时处理大量的请求。</li>
+</ol>
+<p><strong>针对热点缓存失效的情况：</strong></p>
+<ol>
+<li>设置不同的失效时间比如随机设置缓存的失效时间。</li>
+<li>缓存永不失效。</li>
+</ol>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><p> 对于一些设置了过期时间的 key，如果这些 key 可能会在某些时间点被超高并发地访问， 是一种非常“热点”的数据。这个时候，需要考虑一个问题：如果这个 key 在大量请求同时进来前正好失效，那么所 有对这个 key 的数据查询都落到 db，我们称为缓存击穿。</p>
+<p> 解决办法： 加锁</p>
+<h2 id="缓存数据一致性"><a href="#缓存数据一致性" class="headerlink" title="缓存数据一致性"></a>缓存数据一致性</h2><ul>
+<li><p>双写模式：进行插入操作之后，我们把该条数据取出来同时保存到redis缓存中去，这样再次查询缓存的时候我们也可以看到新的数据</p>
+</li>
+<li><p>失效模式：更新数据库时清理缓存</p>
+</li>
+</ul>
+<p>上述两种方法在高并发场景下还是会出现不一致的问题</p>
+<p>改进方法：</p>
+<ul>
+<li>分布式读写锁：读数据等待写数据整个操作完成</li>
+<li>使用cannal</li>
+</ul>
+<p><img src="/2021/07/25/redis%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/Cannal.png" alt="Cannal"></p>
+<h1 id="3种常用的缓存读写模式"><a href="#3种常用的缓存读写模式" class="headerlink" title="3种常用的缓存读写模式"></a>3种常用的缓存读写模式</h1><h3 id="旁路缓存模式"><a href="#旁路缓存模式" class="headerlink" title="旁路缓存模式"></a>旁路缓存模式</h3><p><strong>Cache Aside Pattern 是我们平时使用比较多的一个缓存读写模式，比较适合读请求比较多的场景。</strong></p>
+<p>Cache Aside Pattern 中服务端需要同时维系 DB 和 cache，并且是以 DB 的结果为准。</p>
+<p>下面我们来看一下这个策略模式下的缓存读写步骤。</p>
+<p><strong>写</strong> ：</p>
+<ul>
+<li>先更新 DB</li>
+<li>然后直接删除 cache 。</li>
+</ul>
+<p>简单画了一张图帮助大家理解写的步骤。</p>
+<p>![Cache Aside Pattern](redis重要知识点总结/Cache Aside Pattern.png)</p>
+<p><strong>读</strong> :</p>
+<ul>
+<li>从 cache 中读取数据，读取到就直接返回</li>
+<li>cache中读取不到的话，就从 DB 中读取数据返回</li>
+<li>再把数据放到 cache 中。</li>
+</ul>
+<p>![Cache Aside Pattern 读](redis重要知识点总结/Cache Aside Pattern 读.png)</p>
+<p>缺点：</p>
+<p><strong>缺陷1：首次请求数据一定不在 cache 的问题</strong></p>
+<p>解决办法：可以将热点数据可以提前放入cache 中。</p>
+<p><strong>缺陷2：写操作比较频繁的话导致cache中的数据会被频繁被删除，这样会影响缓存命中率 。</strong></p>
+<p>解决办法：</p>
+<ul>
+<li>数据库和缓存数据强一致场景 ：更新DB的时候同样更新cache，不过我们需要加一个锁/分布式锁来保证更新cache的时候不存在线程安全问题。</li>
+<li>可以短暂地允许数据库和缓存数据不一致的场景 ：更新DB的时候同样更新cache，但是给缓存加一个比较短的过期时间，这样的话就可以保证即使数据不一致的话影响也比较小。</li>
+</ul>
+<h3 id="Read-Write-Through-Pattern（读写穿透）"><a href="#Read-Write-Through-Pattern（读写穿透）" class="headerlink" title="Read/Write Through Pattern（读写穿透）"></a>Read/Write Through Pattern（读写穿透）</h3><p>Read/Write Through Pattern 中服务端把 cache 视为主要数据存储，从中读取数据并将数据写入其中。cache 服务负责将此数据读取和写入 DB，从而减轻了应用程序的职责。</p>
+<p>这种缓存读写策略小伙伴们应该也发现了在平时在开发过程中非常少见。抛去性能方面的影响，大概率是因为我们经常使用的分布式缓存 Redis 并没有提供 cache 将数据写入DB的功能。</p>
+<h3 id="Write-Behind-Pattern（异步缓存写入）"><a href="#Write-Behind-Pattern（异步缓存写入）" class="headerlink" title="Write Behind Pattern（异步缓存写入）"></a>Write Behind Pattern（异步缓存写入）</h3><p>Write Behind Pattern 和 Read/Write Through Pattern 很相似，两者都是由 cache 服务来负责 cache 和 DB 的读写。</p>
+<p>但是，两个又有很大的不同：<strong>Read/Write Through 是同步更新 cache 和 DB，而 Write Behind Caching 则是只更新缓存，不直接更新 DB，而是改为异步批量的方式来更新 DB。</strong></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
