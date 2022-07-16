@@ -6,7 +6,7 @@
   <link href="http://zengc0905.github.io/atom.xml" rel="self"/>
   
   <link href="http://zengc0905.github.io/"/>
-  <updated>2022-06-10T08:29:40.669Z</updated>
+  <updated>2022-06-29T02:23:34.258Z</updated>
   <id>http://zengc0905.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://zengc0905.github.io/2022/04/30/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8/"/>
     <id>http://zengc0905.github.io/2022/04/30/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8/</id>
     <published>2022-04-30T06:25:19.000Z</published>
-    <updated>2022-06-10T08:29:40.669Z</updated>
+    <updated>2022-06-29T02:23:34.258Z</updated>
     
     
     <summary type="html">程序员面试金典刷题笔记</summary>
@@ -32,6 +32,25 @@
     
     
     <category term="LeetCode" scheme="http://zengc0905.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Netty学习笔记</title>
+    <link href="http://zengc0905.github.io/2022/04/15/Netty%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zengc0905.github.io/2022/04/15/Netty%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2022-04-15T05:05:15.000Z</published>
+    <updated>2022-06-16T06:50:20.814Z</updated>
+    
+    
+    <summary type="html">Netty是由JBOSS提供的一个java开源框架，现为 Github上的独立项目。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。</summary>
+    
+    
+    
+    <category term="java" scheme="http://zengc0905.github.io/categories/java/"/>
+    
+    
+    <category term="Netty" scheme="http://zengc0905.github.io/tags/Netty/"/>
     
   </entry>
   
